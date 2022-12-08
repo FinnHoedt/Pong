@@ -1,0 +1,58 @@
+/*
+* Klasse, aus der das Game gestartet wird und alle Objekte erstellt werden.
+*
+*@author MIB-D
+*@version 1.0
+*/
+
+public class Pong extends BasicGame{
+
+    /**
+    *Die update-Methode wird verwendet, um den internen Zustand eines Objekts zu aktualisieren.
+    *Dies kann das Modifizieren von Instanzvariablen, das Durchführen von Berechnungen oder andere Aufgaben beinhalten,
+    *die erforderlich sind, um das Objekt in einem konsistenten Zustand zu halten.
+    *@param dt Die seit dem letzten Update verstrichene Zeit in Sekunden
+    */
+    public void update(double dt);
+
+
+    /**
+    *Diese Methode interpoliiert den Spielstatus zwischen dem vorherigen und aktuellen
+    *Update, um Inkonsistenzen oder "Jitter" in der Animation des Spiels zu glaetten.
+    *@param alpha Der Interpolationsfaktor, ein Wert zwischen 0 und 1, der den Prozentsatz des Weges
+    *             zwischen dem vorherigen und aktuellen Update darstellt.
+    */
+    public void interpolate(double alpha);
+
+    /**
+    *
+    *Diese Methode initialisiert das Spiel und richtet den initialen Spielstatus
+    *und alle benoetigten Ressources ein.
+    */
+    public void initialize();
+
+
+    /**
+    *Diese Methode rendert den aktuellen Spielstatus auf den Bildschrim.
+    *@param g Der Grafikkontext, der verwendet wird, um das Spiel zu rendern. Dieser kann
+    */
+    public void render(Graphics2D g);
+
+}
+
+
+/**
+*Interface for GameObjects
+*/
+public class GameObject {
+
+}
+
+/**
+*Interface for GameObjects
+*/
+public class Ball implements GameObject {
+
+}
+
+
