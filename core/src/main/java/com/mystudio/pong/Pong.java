@@ -1,6 +1,7 @@
 package com.mystudio.pong;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import org.mini2Dx.core.game.BasicGame;
@@ -10,6 +11,8 @@ public class Pong extends BasicGame {
 	public static final String GAME_IDENTIFIER = "com.mystudio.pong";
 
 	private Texture texture;
+
+
 	
 	@Override
     public void initialise() {
@@ -18,7 +21,7 @@ public class Pong extends BasicGame {
     
     @Override
     public void update(float delta) {
-    
+
     }
     
     @Override
@@ -29,5 +32,7 @@ public class Pong extends BasicGame {
     @Override
     public void render(Graphics g) {
 		g.drawTexture(texture, 0f, 0f);
+        g.setColor(Color.CORAL);
+        g.fillRect(10,10,10,10);
     }
 }
