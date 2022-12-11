@@ -1,38 +1,21 @@
 package com.mystudio.pong;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import org.mini2Dx.core.game.BasicGame;
-import org.mini2Dx.core.graphics.Graphics;
 
-public class Pong extends BasicGame {
+import org.mini2Dx.core.game.ScreenBasedGame;
+
+
+public class Pong extends ScreenBasedGame {
 	public static final String GAME_IDENTIFIER = "com.mystudio.pong";
-
-	private Texture texture;
-
-
-	
 	@Override
     public void initialise() {
-    	texture = new Texture("mini2Dx.png");
+    	this.addScreen(new MainScreen());
+        this.addScreen(new OptionScreen());
+        this.addScreen(new GameScreen());
     }
-    
-    @Override
-    public void update(float delta) {
 
-    }
-    
     @Override
-    public void interpolate(float alpha) {
-    
+    public int getInitialScreenId() {
+        return MainScreen.ID;
     }
-    
-    @Override
-    public void render(Graphics g) {
-		g.drawTexture(texture, 0f, 0f);
-        g.setColor(Color.CORAL);
-        g.fillRect(10,10,10,10);
-    }
+
 }

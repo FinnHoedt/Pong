@@ -1,11 +1,33 @@
-/*
-* Klasse, aus der das Game gestartet wird und alle Objekte erstellt werden.
+/**
+* Initialisiert alle Screens des Games und startet den ersten Screen des Spieles.
 *
 *@author MIB-D
 *@version 1.0
 */
-public class Pong extends BasicScreenGame{
+public class Pong extends ScreenBasedGame {
+	/**
+    *Diese Methode initialisiert das Spiel und richtet den initialen Spielstatus
+    *und alle benoetigten Ressources ein.
+    */
+	@Override
+    public void initialise();
 
+    /**
+    *Gibt die ID des ersten Screens wieder.
+    *@return int ID des ersten Screens
+    */
+    @Override
+    public int getInitialScreenId();
+}
+
+
+
+/**
+*Interface for GameObjects
+*@author MIB-D
+*@version 1.0\
+*/
+public class GameObject {
     /**
     *Die update-Methode wird verwendet, um den internen Zustand eines Objekts zu aktualisieren.
     *Dies kann das Modifizieren von Instanzvariablen, das Durchführen von Berechnungen oder andere Aufgaben beinhalten,
@@ -39,19 +61,54 @@ public class Pong extends BasicScreenGame{
 
 }
 
+/**
+*Spielball und enhaelt Methoden, um Score und PowerUps zuzuordnen.
+*/
+public class Ball extends GameObject {}
 
 /**
-*Basisklasse fuer GameObjects
+*Oberklasse der jeweiligen Platformen
 */
-public class GameObject {
-
-}
+public class Platform extends GameObject {}
 
 /**
-*Spielball und behinhaltet Funktionen, um Tore und PowerUps zuzuordnen.
+*Rechte Platform und implementiert die Steuerung mit W und S
 */
-public class Ball extends GameObject {
+public class RightPlaform extends Platform {}
 
-}
+/**
+*Linke Platform und implementiert die Steuerung mit Pfeil-Oben und Pfeil-Unten
+*/
+public class LeftPlatform extends Platform {}
+
+/**
+*Oberklasse der jeweiligen PowerUps
+*/
+public class PowerUp extends GameObject {}
+
+/**
+*Implementiert das PowerUp BallSplit, bei dem der Ball in zwei kleinere Baelle gesplittet wird.
+*/
+public class BallSplit extends PowerUp {}
+
+/**
+*Implementiert das PowerUp BiggerPlatform, bei dem die Plattform, die zuletzt den Ball beruehrt hat, eine
+*groessere Plattform bekommt.
+*/
+public class BiggerPlatform extends PowerUp {}
+
+/**
+*Implementiert das PowerUp Flash, bei dem die Geschwindigkeit des Balls erhoeht wird.
+*/
+public class Flash extends extends PowerUp {}
+
+/**
+*Realisiert das zaehlen und das darstellen des Scores
+*/
+public class Score extends GameObject {}
+
+
+
+
 
 
