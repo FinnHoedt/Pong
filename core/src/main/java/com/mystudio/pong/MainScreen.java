@@ -5,9 +5,12 @@ import org.mini2Dx.core.game.GameContainer;
 import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.screen.BasicGameScreen;
 import org.mini2Dx.core.screen.ScreenManager;
+import org.mini2Dx.ui.element.Button;
 
 public class MainScreen extends BasicGameScreen {
     public static int ID = 1;
+
+    public Button startButton;
 
     @Override
     public void initialise(GameContainer gc) {
