@@ -4,8 +4,7 @@
 *@author MIB-D
 *@version 1.0
 */
-
-public class Pong extends BasicGame{
+public class Pong extends BasicScreenGame{
 
     /**
     *Die update-Methode wird verwendet, um den internen Zustand eines Objekts zu aktualisieren.
@@ -42,16 +41,16 @@ public class Pong extends BasicGame{
 
 
 /**
-*Interface for GameObjects
+*Basisklasse fuer GameObjects
 */
 public class GameObject {
 
 }
 
 /**
-*Interface for GameObjects
+*Spielball und behinhaltet Funktionen, um Tore und PowerUps zuzuordnen.
 */
-public class Ball implements GameObject {
+public class Ball extends GameObject {
 
 }
 
