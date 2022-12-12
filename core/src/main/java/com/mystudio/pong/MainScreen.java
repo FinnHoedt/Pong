@@ -1,11 +1,11 @@
 package com.mystudio.pong;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.ClasspathFileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g3d.Model;
 import org.mini2Dx.core.assets.FallbackFileHandleResolver;
 import org.mini2Dx.core.game.GameContainer;
 import org.mini2Dx.core.graphics.Graphics;
@@ -14,13 +14,9 @@ import org.mini2Dx.core.screen.ScreenManager;
 import org.mini2Dx.ui.UiContainer;
 import org.mini2Dx.ui.UiThemeLoader;
 import org.mini2Dx.ui.element.Button;
-import org.mini2Dx.ui.element.Label;
-import org.mini2Dx.ui.element.Navigatable;
-import org.mini2Dx.ui.element.TextButton;
-import org.mini2Dx.ui.navigation.VerticalUiNavigation;
+import org.mini2Dx.ui.element.TextBox;
 import org.mini2Dx.ui.style.UiTheme;
 
-import java.awt.*;
 
 public class MainScreen extends BasicGameScreen {
     public static int ID = 1;
@@ -30,7 +26,8 @@ public class MainScreen extends BasicGameScreen {
 
     private Button startButton;
     private Button settingsButton;
-    private VerticalUiNavigation navigation;
+
+    private TextBox text;
 
 
     @Override
@@ -47,19 +44,23 @@ public class MainScreen extends BasicGameScreen {
 
         startButton = new Button(10,10,20,20);
 
-        settingsButton = new Button(10,10,20,20);
+        settingsButton = new Button(10,50,20,20);
+
+        text = new TextBox(10,100,20,20);
+
+        text.setValue("Test");
 
         uiContainer.add(startButton);
 
         uiContainer.add(settingsButton);
 
-        navigation.add(startButton);
+        uiContainer.add(text);
 
+        uiContainer.setFlexLayout("flex-column:xs-4c md-3x xl-1c");
 
-        uiContainer.setXY(20,20);
+        Gdx.input.setInputProcessor(uiContainer);
 
-
-
+        uiContainer.setXY(200,200);
     }
 
     @Override
@@ -81,6 +82,9 @@ public class MainScreen extends BasicGameScreen {
 
     @Override
     public void render(GameContainer gc, Graphics g) {
+        g.setColor(Color.CORAL);
+        g.fillRect(20,10,200,200);
+        g.setColor(Color.WHITE);
         uiContainer.render(g);
     }
 
