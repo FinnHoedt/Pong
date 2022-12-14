@@ -1,5 +1,6 @@
 package com.mystudio.pong;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.ClasspathFileHandleResolver;
@@ -12,8 +13,16 @@ import org.mini2Dx.core.screen.BasicGameScreen;
 import org.mini2Dx.core.screen.ScreenManager;
 import org.mini2Dx.ui.UiContainer;
 import org.mini2Dx.ui.UiThemeLoader;
+import org.mini2Dx.ui.element.Hoverable;
 import org.mini2Dx.ui.element.TextBox;
+import org.mini2Dx.ui.element.TextButton;
+import org.mini2Dx.ui.element.Visibility;
+import org.mini2Dx.ui.event.ActionEvent;
+import org.mini2Dx.ui.listener.ActionListener;
+import org.mini2Dx.ui.listener.HoverListener;
 import org.mini2Dx.ui.style.UiTheme;
+
+import java.awt.event.MouseEvent;
 
 
 public class MainScreen extends BasicGameScreen {
@@ -21,11 +30,17 @@ public class MainScreen extends BasicGameScreen {
 
     private AssetManager assetManager;
     private UiContainer uiContainer;
-    private TextBox text;
+    private TextButton startButton;
+
+    private TextButton settingsButton;
+
+    private ActionEvent actionEvent;
 
 
     @Override
     public void initialise(GameContainer gc) {
+        Gdx.graphics.setWindowedMode(1200, 580);
+
         FileHandleResolver fileHandleResolver = new FallbackFileHandleResolver(new ClasspathFileHandleResolver(), new InternalFileHandleResolver());
 
         assetManager = new AssetManager(fileHandleResolver);
@@ -36,11 +51,25 @@ public class MainScreen extends BasicGameScreen {
 
         uiContainer = new UiContainer(gc, assetManager);
 
-        text = new TextBox(20,20,20,20);
+        startButton = new TextButton(500,200,200,35);
 
-        text.setValue("Test");
+        settingsButton = new TextButton(500,250,200,35);
 
-        uiContainer.add(text);
+        startButton.setText("START");
+
+        settingsButton.setText("SETTINGS");
+
+        startButton.setVisibility(Visibility.VISIBLE);
+
+        startButton.setEnabled(true);
+
+        settingsButton.setVisibility(Visibility.VISIBLE);
+
+        uiContainer.add(startButton);
+
+        uiContainer.add(settingsButton);
+
+        actionEvent = new ActionEvent();
     }
 
     @Override
@@ -52,6 +81,7 @@ public class MainScreen extends BasicGameScreen {
             UiContainer.setTheme(assetManager.get(UiTheme.DEFAULT_THEME_FILENAME, UiTheme.class));
         }
         uiContainer.update(delta);
+
 
     }
 
