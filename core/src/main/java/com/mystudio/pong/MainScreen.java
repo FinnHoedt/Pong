@@ -5,7 +5,6 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.ClasspathFileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
-import com.badlogic.gdx.graphics.Color;
 import org.mini2Dx.core.assets.FallbackFileHandleResolver;
 import org.mini2Dx.core.game.GameContainer;
 import org.mini2Dx.core.graphics.Graphics;
@@ -13,28 +12,17 @@ import org.mini2Dx.core.screen.BasicGameScreen;
 import org.mini2Dx.core.screen.ScreenManager;
 import org.mini2Dx.ui.UiContainer;
 import org.mini2Dx.ui.UiThemeLoader;
-import org.mini2Dx.ui.element.Hoverable;
-import org.mini2Dx.ui.element.TextBox;
 import org.mini2Dx.ui.element.TextButton;
 import org.mini2Dx.ui.element.Visibility;
-import org.mini2Dx.ui.event.ActionEvent;
-import org.mini2Dx.ui.listener.ActionListener;
-import org.mini2Dx.ui.listener.HoverListener;
 import org.mini2Dx.ui.style.UiTheme;
 
-import java.awt.event.MouseEvent;
+
 
 
 public class MainScreen extends BasicGameScreen {
     public static int ID = 1;
-
     private AssetManager assetManager;
     private UiContainer uiContainer;
-    private TextButton startButton;
-
-    private TextButton settingsButton;
-
-    private ActionEvent actionEvent;
 
 
     @Override
@@ -51,9 +39,9 @@ public class MainScreen extends BasicGameScreen {
 
         uiContainer = new UiContainer(gc, assetManager);
 
-        startButton = new TextButton(500,200,200,35);
+        TextButton startButton = new TextButton(500, 200, 200, 35);
 
-        settingsButton = new TextButton(500,250,200,35);
+        TextButton settingsButton = new TextButton(500, 250, 200, 35);
 
         startButton.setText("START");
 
@@ -69,7 +57,6 @@ public class MainScreen extends BasicGameScreen {
 
         uiContainer.add(settingsButton);
 
-        actionEvent = new ActionEvent();
     }
 
     @Override
@@ -81,8 +68,6 @@ public class MainScreen extends BasicGameScreen {
             UiContainer.setTheme(assetManager.get(UiTheme.DEFAULT_THEME_FILENAME, UiTheme.class));
         }
         uiContainer.update(delta);
-
-
     }
 
     @Override
