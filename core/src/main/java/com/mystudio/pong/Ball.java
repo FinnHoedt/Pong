@@ -13,6 +13,7 @@ import org.mini2Dx.core.graphics.Sprite;
 import org.mini2Dx.core.screen.BasicGameScreen;
 
 public class Ball implements GameObject{
+    private static final String KEY_ = "SPACE";
     private CollisionPoint point;
     private CollisionBox ballCollisions, testCollisions;
     private Sprite sprite;
@@ -57,8 +58,10 @@ public class Ball implements GameObject{
     }
 
     public void ballStart(){
-        if(Gdx.input.isButtonPressed(Input.Keys.SPACE)) {
-            gameStart = true;
+        if(!gameStart) {
+            if(Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+                gameStart = true;
+            }
         }
         if(gameStart) {
             calcNewPos();
@@ -66,10 +69,10 @@ public class Ball implements GameObject{
     }
 
     public void ballCollisionsTest(){
-        if(point.getY() + ballHeight/2 > 600 || point.getY() + ballHeight/2 <= 0){
+        if(point.getY() + ballHeight/2 >= 1080*0.5 || point.getY() + ballHeight/2 <= 0){
             ballDirection = -1*ballDirection;
         }
-        if(point.getX() + ballHeight/2 > 600 || point.getX() + ballHeight/2 <= 0){
+        if(point.getX() + ballWidth/2 >= 1920*0.5 || point.getX() + ballWidth/2 <= 0){
             ballSpeed = -1 * ballSpeed;
         }
 
