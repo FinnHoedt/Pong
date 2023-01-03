@@ -18,6 +18,6 @@ public class Pong extends ScreenBasedGame {
 
     @Override
     public int getInitialScreenId() {
-        return MainScreen.ID;
+        return GameScreen.ID;
     }
 }
