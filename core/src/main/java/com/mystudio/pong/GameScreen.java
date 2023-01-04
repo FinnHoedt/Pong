@@ -7,10 +7,11 @@ import org.mini2Dx.core.screen.ScreenManager;
 
 public class GameScreen extends BasicGameScreen {
     public static int ID = 3;
-    Ball ball = new Ball();
+    Ball ball;
     @Override
     public void initialise(GameContainer gc) {
-
+        ball = new Ball();
+        ball.initialise();
     }
 
     @Override

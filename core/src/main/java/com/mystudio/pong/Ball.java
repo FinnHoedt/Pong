@@ -20,22 +20,22 @@ public class Ball implements GameObject{
     private float ballPosX, ballPosY, ballDirection, ballPlusX, ballPlusY, ballSpeed, ballHeight, ballWidth;
     boolean gameStart = false;
     public Ball() {
+
+
+    }
+    @Override
+    public void initialise() {
         ballPosX = 400;
         ballPosY = 400;
         ballHeight = 10;
         ballWidth = 10;
-        ballSpeed = 4;
-        ballDirection = 2f;
+        ballSpeed = -4;
+        ballDirection = 0f;
         point = new CollisionPoint();
         point.set(ballPosX, ballPosY);
         ballCollisions = new CollisionBox(point.getRenderX(), point.getRenderY(), ballWidth, ballHeight);
         sprite = new Sprite(new Texture(Gdx.files.internal("pongBall.png")));
         collisionTest();
-
-    }
-    @Override
-    public void initialise() {
-
     }
 
     @Override
@@ -69,10 +69,10 @@ public class Ball implements GameObject{
     }
 
     public void ballCollisionsTest(){
-        if(point.getY() + ballHeight/2 >= 1080*0.5 || point.getY() + ballHeight/2 <= 0){
+        if(point.getY() + ballHeight/2 >= Gdx.graphics.getHeight() || point.getY() + ballHeight/2 <= 0){
             ballDirection = -1*ballDirection;
         }
-        if(point.getX() + ballWidth/2 >= 1920*0.5 || point.getX() + ballWidth/2 <= 0){
+        if(point.getX() + ballWidth/2 >= Gdx.graphics.getWidth() || point.getX() + ballWidth/2 <= 0){
             ballSpeed = -1 * ballSpeed;
         }
 
