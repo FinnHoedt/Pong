@@ -5,15 +5,22 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.ClasspathFileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import org.mini2Dx.core.assets.FallbackFileHandleResolver;
 import org.mini2Dx.core.game.GameContainer;
 import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.screen.BasicGameScreen;
 import org.mini2Dx.core.screen.ScreenManager;
+import org.mini2Dx.ui.InputSource;
 import org.mini2Dx.ui.UiContainer;
 import org.mini2Dx.ui.UiThemeLoader;
+import org.mini2Dx.ui.element.Hoverable;
 import org.mini2Dx.ui.element.TextButton;
 import org.mini2Dx.ui.element.Visibility;
+import org.mini2Dx.ui.event.ActionEvent;
+import org.mini2Dx.ui.listener.ActionListener;
+import org.mini2Dx.ui.listener.HoverListener;
+import org.mini2Dx.ui.render.ActionableRenderNode;
 import org.mini2Dx.ui.style.UiTheme;
 
 
@@ -23,6 +30,12 @@ public class MainScreen extends BasicGameScreen {
     public static int ID = 1;
     private AssetManager assetManager;
     private UiContainer uiContainer;
+    private TextButton startButton;
+    private TextButton settingsButton;
+    private TextButton quitButton;
+    private ActionListener buttonPress;
+
+    private HoverListener buttonHover;
 
 
     @Override
@@ -39,23 +52,7 @@ public class MainScreen extends BasicGameScreen {
 
         uiContainer = new UiContainer(gc, assetManager);
 
-        TextButton startButton = new TextButton(500, 200, 200, 35);
-
-        TextButton settingsButton = new TextButton(500, 250, 200, 35);
-
-        startButton.setText("START");
-
-        settingsButton.setText("SETTINGS");
-
-        startButton.setVisibility(Visibility.VISIBLE);
-
-        startButton.setEnabled(true);
-
-        settingsButton.setVisibility(Visibility.VISIBLE);
-
-        uiContainer.add(startButton);
-
-        uiContainer.add(settingsButton);
+        uiSetup(uiContainer);
 
     }
 
@@ -84,4 +81,43 @@ public class MainScreen extends BasicGameScreen {
     public int getId() {
         return ID;
     }
+
+    private void uiSetup(UiContainer uiContainer) {
+        startButton = new TextButton(500, 200, 200, 35);
+
+        settingsButton = new TextButton(500, 250, 200, 35);
+
+        quitButton = new TextButton(500,300,200,35);
+
+        startButton.setText("START");
+
+        settingsButton.setText("SETTINGS");
+
+        quitButton.setText("Quit");
+
+        startButton.setVisibility(Visibility.VISIBLE);
+
+        settingsButton.setVisibility(Visibility.VISIBLE);
+
+        quitButton.setVisibility(Visibility.VISIBLE);
+
+        uiContainer.add(startButton);
+
+        uiContainer.add(settingsButton);
+
+        uiContainer.add(quitButton);
+
+        startButton.addActionListener(buttonPress);
+
+        startButton.addHoverListener(buttonHover);
+
+
+    }
+
+
 }
+
+
+
+
+
