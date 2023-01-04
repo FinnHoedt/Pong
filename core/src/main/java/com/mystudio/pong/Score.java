@@ -47,8 +47,8 @@ public class Score implements GameObject {
     public void drawScore(GameFont gameFont, Graphics g) {
         g.setFont(gameFont);
         g.setColor(Color.WHITE);
-        g.drawString(Integer.toString(scoreLeft), Gdx.graphics.getWidth()/2 - 50, 15);
-        g.drawString(Integer.toString(scoreRight), Gdx.graphics.getWidth()/2 + 26, 15);
+        g.drawString(Integer.toString(scoreLeft), (float) Gdx.graphics.getWidth()/2 - 50, 15);
+        g.drawString(Integer.toString(scoreRight), (float) Gdx.graphics.getWidth()/2 + 26, 15);
     }
 
     public void upLeftScore() {

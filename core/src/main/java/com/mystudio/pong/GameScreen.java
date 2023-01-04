@@ -9,26 +9,31 @@ import org.mini2Dx.core.screen.ScreenManager;
 
 public class GameScreen extends BasicGameScreen {
     public static int ID = 3;
+    Ball ball;
     private Score score;
     @Override
     public void initialise(GameContainer gc) {
         score = new Score();
+        ball = new Ball();
+        ball.initialise();
+
     }
 
     @Override
     public void update(GameContainer gc, ScreenManager<? extends org.mini2Dx.core.screen.GameScreen> screenManager, float delta) {
-
+        ball.update();
     }
 
     @Override
     public void interpolate(GameContainer gc, float alpha) {
-
+        ball.interpolate(alpha);
     }
 
     @Override
     public void render(GameContainer gc, Graphics g) {
         generateHyphen(g);
         score.render(g);
+        ball.render(g);
     }
 
     @Override
