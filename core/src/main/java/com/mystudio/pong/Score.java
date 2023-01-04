@@ -18,6 +18,7 @@ public class Score implements GameObject {
     public void initialise() {
         scoreLeft = 0;
         scoreRight = 0;
+        generateFont();
     }
 
     @Override
@@ -32,19 +33,19 @@ public class Score implements GameObject {
 
     @Override
     public void render(Graphics g) {
-        drawScore(generateFont(), g);
+        drawScore(g);
     }
 
-    public GameFont generateFont() {
-        Mini2DxFreeTypeFontGenerator fontGenerator = new Mini2DxFreeTypeFontGenerator(Gdx.files.internal("assets/retro.ttf"));
+    public void generateFont() {
+        Mini2DxFreeTypeFontGenerator fontGenerator = new Mini2DxFreeTypeFontGenerator(Gdx.files.internal("retro.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         fontParameter.size = 80;
         fontParameter.flip = true;
         Mini2DxFreeTypeFontGenerator.Mini2DxFreeTypeBitmapFontData freeTypeBitmapFontData = fontGenerator.generateFontData(fontParameter);
-        return gameFont = new BitmapFont(freeTypeBitmapFontData, freeTypeBitmapFontData.getRegions(), true);
+        gameFont = new BitmapFont(freeTypeBitmapFontData, freeTypeBitmapFontData.getRegions(), true);
     }
 
-    public void drawScore(GameFont gameFont, Graphics g) {
+    public void drawScore(Graphics g) {
         g.setFont(gameFont);
         g.setColor(Color.WHITE);
         g.drawString(Integer.toString(scoreLeft), (float) Gdx.graphics.getWidth()/2 - 50, 15);
