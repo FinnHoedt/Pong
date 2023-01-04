@@ -1,5 +1,6 @@
 package com.mystudio.pong;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import org.mini2Dx.core.game.GameContainer;
 import org.mini2Dx.core.graphics.Graphics;
@@ -8,9 +9,10 @@ import org.mini2Dx.core.screen.ScreenManager;
 
 public class GameScreen extends BasicGameScreen {
     public static int ID = 3;
+    private Score score;
     @Override
     public void initialise(GameContainer gc) {
-
+        score = new Score();
     }
 
     @Override
@@ -26,6 +28,7 @@ public class GameScreen extends BasicGameScreen {
     @Override
     public void render(GameContainer gc, Graphics g) {
         generateHyphen(g);
+        score.render(g);
     }
 
     @Override
@@ -38,11 +41,12 @@ public class GameScreen extends BasicGameScreen {
         int width = 8;
         int count = 12;
         int gap = 10;
-        int height = (580/count - gap);
+        int height = (Gdx.graphics.getHeight() /count - gap);
+        int x = (Gdx.graphics.getWidth()/2) - (width/2);
         int y;
         for (int i = 1; i <= count; i++) {
             y = (height+gap)*i - (height+gap/2);
-            g.fillRect(600 - width/2,y,width,height);
+            g.fillRect(x,y,width,height);
         }
     }
 }
