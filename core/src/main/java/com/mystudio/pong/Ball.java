@@ -17,20 +17,20 @@ public class Ball implements GameObject{
     private CollisionPoint point;
     private CollisionBox ballCollisions, testCollisions;
     private Sprite sprite;
-    private float ballPosX, ballPosY, ballDirection, ballPlusX, ballPlusY, ballSpeed, ballHeight, ballWidth;
-    boolean gameStart = false;
+    private float ballPosX, ballPosY, ballDirection, ballPlusX, ballPlusY, ballSpeed, ballDiameter;
+    boolean gameStart;
 
     @Override
     public void initialise() {
-        ballPosX = 400;
-        ballPosY = 400;
-        ballHeight = 10;
-        ballWidth = 10;
-        ballSpeed = -4;
+        gameStart = false;
+        ballDiameter = 10;
+        ballPosX = Gdx.graphics.getWidth()/2 - ballDiameter/2;
+        ballPosY = Gdx.graphics.getHeight()/2 - ballDiameter/2;
+        ballSpeed = 4;
         ballDirection = 0f;
         point = new CollisionPoint();
         point.set(ballPosX, ballPosY);
-        ballCollisions = new CollisionBox(point.getRenderX(), point.getRenderY(), ballWidth, ballHeight);
+        ballCollisions = new CollisionBox(point.getRenderX(), point.getRenderY(), ballDiameter, ballDiameter);
         sprite = new Sprite(new Texture(Gdx.files.internal("pongBall.png")));
         collisionTest();
     }
@@ -42,7 +42,6 @@ public class Ball implements GameObject{
         ballCollisionsTest();
 
     }
-
 
     @Override
     public void interpolate(float alpha) {
@@ -66,13 +65,9 @@ public class Ball implements GameObject{
     }
 
     public void ballCollisionsTest(){
-        if(point.getY() + ballHeight/2 >= Gdx.graphics.getHeight() || point.getY() + ballHeight/2 <= 0){
+        if(point.getY() + ballDiameter/2 >= Gdx.graphics.getHeight() || point.getY() + ballDiameter/2 <= 0){
             ballDirection = -1*ballDirection;
         }
-        if(point.getX() + ballWidth/2 >= Gdx.graphics.getWidth() || point.getX() + ballWidth/2 <= 0){
-            ballSpeed = -1 * ballSpeed;
-        }
-
     }
 
 
@@ -93,6 +88,10 @@ public class Ball implements GameObject{
         ballPlusX = ballPlusX * ballSpeed;
         ballPlusY = ballPlusY * Math.abs(ballSpeed);
         point.set(point.getX() + ballPlusX, point.getY() + ballPlusY);
+    }
+
+    public CollisionPoint getPosition() {
+        return point;
     }
 
 }
