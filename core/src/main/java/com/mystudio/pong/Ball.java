@@ -19,10 +19,7 @@ public class Ball implements GameObject{
     private Sprite sprite;
     private float ballPosX, ballPosY, ballDirection, ballPlusX, ballPlusY, ballSpeed, ballHeight, ballWidth;
     boolean gameStart = false;
-    public Ball() {
 
-
-    }
     @Override
     public void initialise() {
         ballPosX = 400;

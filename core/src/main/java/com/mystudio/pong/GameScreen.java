@@ -14,14 +14,15 @@ public class GameScreen extends BasicGameScreen {
     @Override
     public void initialise(GameContainer gc) {
         score = new Score();
+        score.initialise();
         ball = new Ball();
         ball.initialise();
-
     }
 
     @Override
     public void update(GameContainer gc, ScreenManager<? extends org.mini2Dx.core.screen.GameScreen> screenManager, float delta) {
         ball.update();
+        
     }
 
     @Override
