@@ -16,7 +16,7 @@ public class GameScreen extends BasicGameScreen {
         score = new Score();
         ball = new Ball();
         ball.initialise();
-
+        score.initialise();
     }
 
     @Override
