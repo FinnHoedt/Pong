@@ -37,7 +37,7 @@ public class Score implements GameObject {
     }
 
     public void generateFont() {
-        Mini2DxFreeTypeFontGenerator fontGenerator = new Mini2DxFreeTypeFontGenerator(Gdx.files.internal("assets/retro.ttf"));
+
         FreeTypeFontGenerator.FreeTypeFontParameter fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         fontParameter.size = 80;
         fontParameter.flip = true;
