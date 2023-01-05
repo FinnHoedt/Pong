@@ -11,12 +11,18 @@ public class GameScreen extends BasicGameScreen {
     public static int ID = 3;
     Ball ball;
     private Score score;
+    private Platform platformA;
+    private Platform platformB;
     @Override
     public void initialise(GameContainer gc) {
         score = new Score();
         score.initialise();
         ball = new Ball();
         ball.initialise();
+        platformA = new Platform(true);
+        platformA.initialise();
+        platformB = new Platform(false);
+        platformB.initialise();
     }
 
     @Override
@@ -29,11 +35,16 @@ public class GameScreen extends BasicGameScreen {
             score.upLeftScore();
             ball.initialise();
         }
+
+        platformA.update();
+        platformB.update();
     }
 
     @Override
     public void interpolate(GameContainer gc, float alpha) {
         ball.interpolate(alpha);
+        platformA.interpolate(alpha);
+        platformB.interpolate(alpha);
     }
 
     @Override
@@ -41,6 +52,8 @@ public class GameScreen extends BasicGameScreen {
         generateHyphen(g);
         score.render(g);
         ball.render(g);
+        platformA.render(g);
+        platformB.render(g);
     }
 
     @Override
