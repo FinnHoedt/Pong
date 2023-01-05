@@ -10,24 +10,26 @@ import org.mini2Dx.core.game.GameContainer;
 import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.screen.BasicGameScreen;
 import org.mini2Dx.core.screen.ScreenManager;
+import org.mini2Dx.core.screen.transition.FadeInTransition;
+import org.mini2Dx.core.screen.transition.FadeOutTransition;
 import org.mini2Dx.ui.UiContainer;
 import org.mini2Dx.ui.UiThemeLoader;
-import org.mini2Dx.ui.element.TextButton;
-import org.mini2Dx.ui.element.Visibility;
+import org.mini2Dx.ui.element.*;
+import org.mini2Dx.ui.event.ActionEvent;
+import org.mini2Dx.ui.listener.ActionListener;
 import org.mini2Dx.ui.style.UiTheme;
-
-
 
 
 public class MainScreen extends BasicGameScreen {
     public static int ID = 1;
     private AssetManager assetManager;
     private UiContainer uiContainer;
-
+    private TextButton startButton;
+    private TextButton settingsButton;
+    private TextButton quitButton;
 
     @Override
     public void initialise(GameContainer gc) {
-        Gdx.graphics.setWindowedMode(1200, 580);
 
         FileHandleResolver fileHandleResolver = new FallbackFileHandleResolver(new ClasspathFileHandleResolver(), new InternalFileHandleResolver());
 
@@ -35,39 +37,27 @@ public class MainScreen extends BasicGameScreen {
 
         assetManager.setLoader(UiTheme.class, new UiThemeLoader(fileHandleResolver));
 
-        assetManager.load(UiTheme.DEFAULT_THEME_FILENAME, UiTheme.class);
+        assetManager.load("test_1.json", UiTheme.class);
 
         uiContainer = new UiContainer(gc, assetManager);
 
-        TextButton startButton = new TextButton(500, 200, 200, 35);
+        uiSetup(uiContainer);
 
-        TextButton settingsButton = new TextButton(500, 250, 200, 35);
-
-        startButton.setText("START");
-
-        settingsButton.setText("SETTINGS");
-
-        startButton.setVisibility(Visibility.VISIBLE);
-
-        startButton.setEnabled(true);
-
-        settingsButton.setVisibility(Visibility.VISIBLE);
-
-        uiContainer.add(startButton);
-
-        uiContainer.add(settingsButton);
-
+        Pong.inputMultiplexer.addProcessor(uiContainer);
     }
 
     @Override
-    public void update(GameContainer gc, ScreenManager screenManager, float delta) {
+    public void update(GameContainer gc, final ScreenManager screenManager, float delta) {
         if(!assetManager.update()) {
             return;
         }
         if(!UiContainer.isThemeApplied()) {
-            UiContainer.setTheme(assetManager.get(UiTheme.DEFAULT_THEME_FILENAME, UiTheme.class));
+            UiContainer.setTheme(assetManager.get("test_1.json", UiTheme.class));
         }
         uiContainer.update(delta);
+        startButtonPress(screenManager);
+        settingsButtonPress(screenManager);
+        quitButtonPress();
     }
 
     @Override
@@ -84,4 +74,69 @@ public class MainScreen extends BasicGameScreen {
     public int getId() {
         return ID;
     }
+
+    private void uiSetup(UiContainer uiContainer) {
+        startButton = new TextButton(500, 200, 200, 35);
+        startButton.setText("START");
+        startButton.setVisibility(Visibility.VISIBLE);
+        uiContainer.add(startButton);
+
+        settingsButton = new TextButton(500, 250, 200, 35);
+        settingsButton.setText("SETTINGS");
+        settingsButton.setVisibility(Visibility.VISIBLE);
+        uiContainer.add(settingsButton);
+
+        quitButton = new TextButton(500,300,200,35);
+        quitButton.setText("Quit");
+        quitButton.setVisibility(Visibility.VISIBLE);
+        uiContainer.add(quitButton);
+    }
+
+    private void startButtonPress(final ScreenManager screenManager) {
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void onActionBegin(ActionEvent event) {
+                screenManager.enterGameScreen(GameScreen.ID, new FadeOutTransition(), new FadeInTransition());
+            }
+
+            @Override
+            public void onActionEnd(ActionEvent event) {
+
+            }
+        });
+    }
+
+    private void settingsButtonPress(final ScreenManager screenManager) {
+        settingsButton.addActionListener(new ActionListener() {
+            @Override
+            public void onActionBegin(ActionEvent event) {
+                screenManager.enterGameScreen(OptionScreen.ID, new FadeOutTransition(), new FadeInTransition());
+                Pong.inputMultiplexer.removeProcessor(uiContainer);
+            }
+
+            @Override
+            public void onActionEnd(ActionEvent event) {
+
+            }
+        });
+    }
+
+    private void quitButtonPress() {
+        quitButton.addActionListener(new ActionListener() {
+            @Override
+            public void onActionBegin(ActionEvent event) {
+                Gdx.app.exit();
+            }
+
+            @Override
+            public void onActionEnd(ActionEvent event) {
+
+            }
+        });
+    }
 }
+
+
+
+
+
