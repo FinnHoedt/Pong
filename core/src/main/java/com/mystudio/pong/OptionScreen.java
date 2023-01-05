@@ -13,10 +13,11 @@ import org.mini2Dx.core.screen.GameScreen;
 import org.mini2Dx.core.screen.ScreenManager;
 import org.mini2Dx.ui.UiContainer;
 import org.mini2Dx.ui.UiThemeLoader;
-import org.mini2Dx.ui.element.TextBox;
-import org.mini2Dx.ui.element.TextButton;
-import org.mini2Dx.ui.element.Visibility;
+import org.mini2Dx.ui.element.*;
+import org.mini2Dx.ui.event.ActionEvent;
+import org.mini2Dx.ui.listener.ActionListener;
 import org.mini2Dx.ui.style.UiTheme;
+
 
 public class OptionScreen extends BasicGameScreen {
     public static int ID = 2;
@@ -24,11 +25,19 @@ public class OptionScreen extends BasicGameScreen {
     private AssetManager assetManager;
     private UiContainer uiContainer;
 
-    private TextButton settingsText;
-    private TextButton soundText;
-    private TextButton musicText;
-    private TextButton volumeText;
-    private TextButton hotkeysText;
+    private Label settingsText;
+    private Label soundText;
+    private Checkbox soundCheckBox;
+    private Label musicText;
+    private Checkbox musicCheckBox;
+    private Label volumeText;
+    private Slider volumeSlider;
+    private Label hotkeysText;
+    private Label upText;
+    private Label downText;
+    private Label playerOneText;
+    private Label playerTwoText;
+
     @Override
     public void initialise(GameContainer gc) {
         FileHandleResolver fileHandleResolver = new FallbackFileHandleResolver(new ClasspathFileHandleResolver(), new InternalFileHandleResolver());
@@ -42,6 +51,8 @@ public class OptionScreen extends BasicGameScreen {
         uiContainer = new UiContainer(gc, assetManager);
 
         uiSetup(uiContainer);
+
+        Pong.inputMultiplexer.addProcessor(uiContainer);
     }
 
     @Override
@@ -53,6 +64,7 @@ public class OptionScreen extends BasicGameScreen {
             UiContainer.setTheme(assetManager.get(UiTheme.DEFAULT_THEME_FILENAME, UiTheme.class));
         }
         uiContainer.update(delta);
+        volumeSliderValue();
     }
 
     @Override
@@ -71,9 +83,60 @@ public class OptionScreen extends BasicGameScreen {
     }
 
     private void uiSetup(UiContainer uiContainer) {
-        settingsText = new TextButton(500, 50, 600, 100);
+        settingsText = new Label(550,40,1,1);
         settingsText.setText("Settings");
         settingsText.setVisibility(Visibility.VISIBLE);
+        settingsText.setColor(Color.WHITE);
         uiContainer.add(settingsText);
+
+        soundText = new Label(350,150,1,1);
+        soundText.setText("Sound");
+        soundText.setVisibility(Visibility.VISIBLE);
+        soundText.setColor(Color.WHITE);
+        uiContainer.add(soundText);
+
+        soundCheckBox = new Checkbox(450,145,1,1);
+        soundCheckBox.setVisibility(Visibility.VISIBLE);
+        uiContainer.add(soundCheckBox);
+
+        musicText = new Label(350,200,1,1);
+        musicText.setText("Music");
+        musicText.setVisibility(Visibility.VISIBLE);
+        musicText.setColor(Color.WHITE);
+        uiContainer.add(musicText);
+
+        musicCheckBox = new Checkbox(450,195,1,1);
+        musicCheckBox.setVisibility(Visibility.VISIBLE);
+        uiContainer.add(musicCheckBox);
+
+        volumeText = new Label(350,250,1,1);
+        volumeText.setText("Volume");
+        volumeText.setVisibility(Visibility.VISIBLE);
+        volumeText.setColor(Color.WHITE);
+        uiContainer.add(volumeText);
+
+        volumeSlider = new Slider(450,240,1,1);
+        volumeSlider.setVisibility(Visibility.VISIBLE);
+        uiContainer.add(volumeSlider);
+
+        hotkeysText = new Label(350,300,1,1);
+        hotkeysText.setText("Hotkeys");
+        hotkeysText.setVisibility(Visibility.VISIBLE);
+        hotkeysText.setColor(Color.WHITE);
+        uiContainer.add(hotkeysText);
+    }
+
+    private void volumeSliderValue(){
+        volumeSlider.addActionListener(new ActionListener() {
+            @Override
+            public void onActionBegin(ActionEvent event) {
+
+            }
+
+            @Override
+            public void onActionEnd(ActionEvent event) {
+                    System.out.println(volumeSlider.getValue());
+            }
+        });
     }
 }
