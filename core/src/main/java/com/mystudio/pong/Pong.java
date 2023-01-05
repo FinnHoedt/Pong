@@ -2,6 +2,7 @@ package com.mystudio.pong;
 
 
 
+import jdk.tools.jmod.Main;
 import org.mini2Dx.core.game.ScreenBasedGame;
 
 
@@ -18,6 +19,6 @@ public class Pong extends ScreenBasedGame {
 
     @Override
     public int getInitialScreenId() {
-        return GameScreen.ID;
+        return MainScreen.ID;
     }
 }

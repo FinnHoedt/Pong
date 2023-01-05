@@ -35,7 +35,7 @@ public class MainScreen extends BasicGameScreen {
 
         assetManager.setLoader(UiTheme.class, new UiThemeLoader(fileHandleResolver));
 
-        assetManager.load(UiTheme.DEFAULT_THEME_FILENAME, UiTheme.class);
+        assetManager.load("test_1.json", UiTheme.class);
 
         uiContainer = new UiContainer(gc, assetManager);
 
@@ -57,6 +57,8 @@ public class MainScreen extends BasicGameScreen {
 
         uiContainer.add(settingsButton);
 
+        Gdx.input.setInputProcessor(uiContainer);
+
     }
 
     @Override
@@ -65,7 +67,7 @@ public class MainScreen extends BasicGameScreen {
             return;
         }
         if(!UiContainer.isThemeApplied()) {
-            UiContainer.setTheme(assetManager.get(UiTheme.DEFAULT_THEME_FILENAME, UiTheme.class));
+            UiContainer.setTheme(assetManager.get("test_1.json", UiTheme.class));
         }
         uiContainer.update(delta);
     }
