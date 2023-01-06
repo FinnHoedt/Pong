@@ -23,7 +23,7 @@ public class Collision {
     public void checkCollision() {
         checkScoreCollision();
         checkPlatformCollision();
-        checkTopBottomCollision();
+        checkBorderCollision();
     }
 
     private void checkScoreCollision() {
@@ -44,7 +44,7 @@ public class Collision {
         }
     }
 
-    private void checkTopBottomCollision() {
+    private void checkBorderCollision() {
         if (borderTop.intersects(ball.getBallCollision())) {
             ball.changeVerticalHorizontal();
         } else if (borderBottom.intersects(ball.getBallCollision())) {
