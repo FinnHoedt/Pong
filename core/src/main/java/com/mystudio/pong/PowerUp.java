@@ -2,7 +2,16 @@ package com.mystudio.pong;
 
 import org.mini2Dx.core.graphics.Graphics;
 
-public class PowerUp implements GameObject{
+public class PowerUp implements GameObject{ // müsste abstract sein
+	
+	Sprite sprite; 
+	Vector2 position;
+	float size;
+	
+	public void spawn(){};
+	
+	public void applyPowerUp(){};
+	
     @Override
     public void initialise() {
 
@@ -22,4 +31,6 @@ public class PowerUp implements GameObject{
     public void render(Graphics g) {
 
     }
+    
+    
 }
