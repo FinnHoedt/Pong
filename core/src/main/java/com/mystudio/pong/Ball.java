@@ -9,9 +9,6 @@ import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.graphics.Sprite;
 
 public class Ball implements GameObject{
-    private static final String KEY_ = "SPACE";
-    //private CollisionPoint point;
-    //private CollisionBox ballCollisions, testCollisions;
 
     private CollisionCircle ballCollision;
 
@@ -27,22 +24,16 @@ public class Ball implements GameObject{
         ballPosY = Gdx.graphics.getHeight()/2;
         ballSpeed = 8;
         ballDirection = -1f;
-        //point = new CollisionPoint();
-        //point.set(ballPosX, ballPosY);
 
         ballCollision = new CollisionCircle(ballPosX, ballPosY, ballDiameter);
-
-        //ballCollisions = new CollisionBox(point.getRenderX(), point.getRenderY(), ballDiameter, ballDiameter);
+        
         //sprite = new Sprite(new Texture(Gdx.files.internal("pongBall.png")));
-        //collisionTest();
     }
 
     @Override
     public void update() {
         ballCollision.preUpdate();
         ballStart();
-        //ballCollisionsTest();
-
     }
 
     @Override
@@ -67,16 +58,6 @@ public class Ball implements GameObject{
         }
     }
 
-    /*
-    public void ballCollisionsTest(){
-        if(ballCollision.getY() + ballDiameter/2 >= Gdx.graphics.getHeight() || ballCollision.getY() + ballDiameter/2 <= 0){
-            ballDirection = -1*ballDirection;
-        }
-    }
-
-    public void collisionTest() {
-        testCollisions = new CollisionBox(0, 500, 1000, 10);
-    }*/
 
     public void calcNewPos(){
         int sign;
@@ -92,10 +73,7 @@ public class Ball implements GameObject{
         ballPlusY = ballPlusY * Math.abs(ballSpeed);
         ballCollision.set(ballCollision.getX() + ballPlusX, ballCollision.getY() + ballPlusY);
     }
-    /*
-    public CollisionPoint getPosition() {
-        return point;
-    }*/
+
     public void changeVerticalHorizontal() {
         ballDirection = -ballDirection;
     }

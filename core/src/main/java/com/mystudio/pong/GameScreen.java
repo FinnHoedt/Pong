@@ -69,5 +69,4 @@ public class GameScreen extends BasicGameScreen {
             g.fillRect(x,y,width,height);
         }
     }
-
 }
