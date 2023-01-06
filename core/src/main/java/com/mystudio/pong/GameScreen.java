@@ -13,6 +13,7 @@ public class GameScreen extends BasicGameScreen {
     private Score score;
     private Platform platformA;
     private Platform platformB;
+    private Collision collision;
     @Override
     public void initialise(GameContainer gc) {
         score = new Score();
@@ -23,6 +24,7 @@ public class GameScreen extends BasicGameScreen {
         platformA.initialise();
         platformB = new Platform(false);
         platformB.initialise();
+        collision = new Collision(platformA, platformB, ball, score);
     }
 
     @Override
@@ -30,7 +32,7 @@ public class GameScreen extends BasicGameScreen {
         ball.update();
         platformA.update();
         platformB.update();
-        ballScores();
+        collision.checkCollision();
     }
 
     @Override
@@ -68,13 +70,4 @@ public class GameScreen extends BasicGameScreen {
         }
     }
 
-    private void ballScores() {
-        if(ball.getColliisionPoint().getX() < 0) {
-            score.upRightScore();
-            ball.initialise();
-        } else if(ball.getColliisionPoint().getX() > Gdx.graphics.getWidth()) {
-            score.upLeftScore();
-            ball.initialise();
-        }
-    }
 }

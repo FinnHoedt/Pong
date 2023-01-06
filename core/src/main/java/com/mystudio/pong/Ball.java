@@ -3,20 +3,19 @@ package com.mystudio.pong;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
-import org.mini2Dx.core.collisions.PointQuadTree;
-import org.mini2Dx.core.collisions.QuadTree;
 import org.mini2Dx.core.engine.geom.CollisionBox;
-import org.mini2Dx.core.engine.geom.CollisionPoint;
-import org.mini2Dx.core.geom.Circle;
+import org.mini2Dx.core.engine.geom.CollisionCircle;
 import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.graphics.Sprite;
-import org.mini2Dx.core.screen.BasicGameScreen;
 
 public class Ball implements GameObject{
     private static final String KEY_ = "SPACE";
-    private CollisionPoint point;
-    private CollisionBox ballCollisions, testCollisions;
-    private Sprite sprite;
+    //private CollisionPoint point;
+    //private CollisionBox ballCollisions, testCollisions;
+
+    private CollisionCircle ballCollision;
+
+    //private Sprite sprite;
     private float ballPosX, ballPosY, ballDirection, ballPlusX, ballPlusY, ballSpeed, ballDiameter;
     boolean gameStart;
 
@@ -24,33 +23,37 @@ public class Ball implements GameObject{
     public void initialise() {
         gameStart = false;
         ballDiameter = 10;
-        ballPosX = Gdx.graphics.getWidth()/2 - ballDiameter/2;
-        ballPosY = Gdx.graphics.getHeight()/2 - ballDiameter/2;
-        ballSpeed = 4;
-        ballDirection = 0f;
-        point = new CollisionPoint();
-        point.set(ballPosX, ballPosY);
-        ballCollisions = new CollisionBox(point.getRenderX(), point.getRenderY(), ballDiameter, ballDiameter);
-        sprite = new Sprite(new Texture(Gdx.files.internal("pongBall.png")));
-        collisionTest();
+        ballPosX = Gdx.graphics.getWidth()/2;
+        ballPosY = Gdx.graphics.getHeight()/2;
+        ballSpeed = 8;
+        ballDirection = -1f;
+        //point = new CollisionPoint();
+        //point.set(ballPosX, ballPosY);
+
+        ballCollision = new CollisionCircle(ballPosX, ballPosY, ballDiameter);
+
+        //ballCollisions = new CollisionBox(point.getRenderX(), point.getRenderY(), ballDiameter, ballDiameter);
+        //sprite = new Sprite(new Texture(Gdx.files.internal("pongBall.png")));
+        //collisionTest();
     }
 
     @Override
     public void update() {
-        point.preUpdate();
+        ballCollision.preUpdate();
         ballStart();
-        ballCollisionsTest();
+        //ballCollisionsTest();
 
     }
 
     @Override
     public void interpolate(float alpha) {
-        point.interpolate(null, alpha);
+        ballCollision.interpolate(null, alpha);
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawSprite(sprite, point.getRenderX(), point.getRenderY());
+        g.fillCircle(ballCollision.getRenderX(), ballCollision.getRenderY(), ballCollision.getRenderRadius());
+        //g.drawSprite(sprite, ballCollision.getRenderX(), ballCollision.getRenderY());
     }
 
     public void ballStart(){
@@ -64,17 +67,16 @@ public class Ball implements GameObject{
         }
     }
 
+    /*
     public void ballCollisionsTest(){
-        if(point.getY() + ballDiameter/2 >= Gdx.graphics.getHeight() || point.getY() + ballDiameter/2 <= 0){
+        if(ballCollision.getY() + ballDiameter/2 >= Gdx.graphics.getHeight() || ballCollision.getY() + ballDiameter/2 <= 0){
             ballDirection = -1*ballDirection;
         }
     }
 
-
     public void collisionTest() {
-
         testCollisions = new CollisionBox(0, 500, 1000, 10);
-    }
+    }*/
 
     public void calcNewPos(){
         int sign;
@@ -88,11 +90,21 @@ public class Ball implements GameObject{
         ballPlusY = (float) (Math.sqrt(-Math.pow(ballPlusX, 2) + 1) * sign);
         ballPlusX = ballPlusX * ballSpeed;
         ballPlusY = ballPlusY * Math.abs(ballSpeed);
-        point.set(point.getX() + ballPlusX, point.getY() + ballPlusY);
+        ballCollision.set(ballCollision.getX() + ballPlusX, ballCollision.getY() + ballPlusY);
     }
-
-    public CollisionPoint getColliisionPoint() {
+    /*
+    public CollisionPoint getPosition() {
         return point;
+    }*/
+    public void changeVerticalHorizontal() {
+        ballDirection = -ballDirection;
     }
 
+    public void changeHorizontalDirection() {
+        ballSpeed = -ballSpeed;
+    }
+
+    public CollisionCircle getBallCollision() {
+        return ballCollision;
+    }
 }
