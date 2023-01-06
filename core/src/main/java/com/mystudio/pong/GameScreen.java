@@ -13,6 +13,7 @@ public class GameScreen extends BasicGameScreen {
     private Score score;
     private Platform platformA;
     private Platform platformB;
+    private Collision collision;
     @Override
     public void initialise(GameContainer gc) {
         score = new Score();
@@ -23,21 +24,15 @@ public class GameScreen extends BasicGameScreen {
         platformA.initialise();
         platformB = new Platform(false);
         platformB.initialise();
+        collision = new Collision(platformA, platformB, ball, score);
     }
 
     @Override
     public void update(GameContainer gc, ScreenManager<? extends org.mini2Dx.core.screen.GameScreen> screenManager, float delta) {
         ball.update();
-        if(ball.getPosition().getX() < 0) {
-            score.upRightScore();
-            ball.initialise();
-        } else if(ball.getPosition().getX() > Gdx.graphics.getWidth()) {
-            score.upLeftScore();
-            ball.initialise();
-        }
-
         platformA.update();
         platformB.update();
+        collision.checkCollision();
     }
 
     @Override

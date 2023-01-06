@@ -1,10 +1,7 @@
 package com.mystudio.pong;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import org.mini2Dx.core.engine.geom.CollisionBox;
-import org.mini2Dx.core.engine.geom.CollisionCircle;
-import org.mini2Dx.core.engine.geom.CollisionPoint;
 import org.mini2Dx.core.graphics.Graphics;
 
 public class Platform implements GameObject{
