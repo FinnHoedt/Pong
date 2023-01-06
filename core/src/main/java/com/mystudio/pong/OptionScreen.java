@@ -37,6 +37,7 @@ public class OptionScreen extends BasicGameScreen {
     private Label downText;
     private Label playerOneText;
     private Label playerTwoText;
+    private Label colorText;
 
     @Override
     public void initialise(GameContainer gc) {
@@ -119,11 +120,41 @@ public class OptionScreen extends BasicGameScreen {
         volumeSlider.setVisibility(Visibility.VISIBLE);
         uiContainer.add(volumeSlider);
 
-        hotkeysText = new Label(350,300,1,1);
+        hotkeysText = new Label(350,310,1,1);
         hotkeysText.setText("Hotkeys");
         hotkeysText.setVisibility(Visibility.VISIBLE);
         hotkeysText.setColor(Color.WHITE);
         uiContainer.add(hotkeysText);
+
+        upText = new Label(350,360,1,1);
+        upText.setText("Up");
+        upText.setVisibility(Visibility.VISIBLE);
+        upText.setColor(Color.WHITE);
+        uiContainer.add(upText);
+
+        downText = new Label(350,390,1,1);
+        downText.setText("Down");
+        downText.setVisibility(Visibility.VISIBLE);
+        downText.setColor(Color.WHITE);
+        uiContainer.add(downText);
+
+        playerOneText = new Label(500,310,1,1);
+        playerOneText.setText("Player 1");
+        playerOneText.setVisibility(Visibility.VISIBLE);
+        playerOneText.setColor(Color.WHITE);
+        uiContainer.add(playerOneText);
+
+        playerTwoText = new Label(630,310,1,1);
+        playerTwoText.setText("Player 2");
+        playerTwoText.setVisibility(Visibility.VISIBLE);
+        playerTwoText.setColor(Color.WHITE);
+        uiContainer.add(playerTwoText);
+
+        colorText = new Label(350,440,1,1);
+        colorText.setText("Color");
+        colorText.setVisibility(Visibility.VISIBLE);
+        colorText.setColor(Color.WHITE);
+        uiContainer.add(colorText);
     }
 
     private void volumeSliderValue(){
