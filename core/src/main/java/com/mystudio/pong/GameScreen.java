@@ -11,8 +11,8 @@ public class GameScreen extends BasicGameScreen {
     public static int ID = 3;
     Ball ball;
     private Score score;
-    private Platform platformA;
-    private Platform platformB;
+    private LeftPlatform leftPlatform;
+    private RightPlatform rightPlatform;
     private Collision collision;
     @Override
     public void initialise(GameContainer gc) {
@@ -20,26 +20,26 @@ public class GameScreen extends BasicGameScreen {
         score.initialise();
         ball = new Ball();
         ball.initialise();
-        platformA = new Platform(true);
-        platformA.initialise();
-        platformB = new Platform(false);
-        platformB.initialise();
-        collision = new Collision(platformA, platformB, ball, score);
+        leftPlatform = new LeftPlatform();
+        leftPlatform.initialise();
+        rightPlatform = new RightPlatform();
+        rightPlatform.initialise();
+        collision = new Collision(leftPlatform, rightPlatform, ball, score);
     }
 
     @Override
     public void update(GameContainer gc, ScreenManager<? extends org.mini2Dx.core.screen.GameScreen> screenManager, float delta) {
         ball.update();
-        platformA.update();
-        platformB.update();
+        leftPlatform.update();
+        rightPlatform.update();
         collision.checkCollision();
     }
 
     @Override
     public void interpolate(GameContainer gc, float alpha) {
         ball.interpolate(alpha);
-        platformA.interpolate(alpha);
-        platformB.interpolate(alpha);
+        leftPlatform.interpolate(alpha);
+        rightPlatform.interpolate(alpha);
     }
 
     @Override
@@ -47,8 +47,8 @@ public class GameScreen extends BasicGameScreen {
         generateHyphen(g);
         score.render(g);
         ball.render(g);
-        platformA.render(g);
-        platformB.render(g);
+        leftPlatform.render(g);
+        rightPlatform.render(g);
     }
 
     @Override

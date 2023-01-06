@@ -4,43 +4,25 @@ import com.badlogic.gdx.Gdx;
 import org.mini2Dx.core.engine.geom.CollisionBox;
 import org.mini2Dx.core.graphics.Graphics;
 
-public class Platform implements GameObject{
-    private float xPosition, yPosition, width, height;
-    private CollisionBox box;
-    private int keyUP;
-    private int keyDown;
-    private boolean leftPlatform;
+public abstract class Platform implements GameObject{
+    protected float xPosition, yPosition, width, height;
+    protected CollisionBox box;
+    protected int keyUP;
+    protected int keyDown;
 
-    public Platform(boolean leftPlatform) {
-        this.leftPlatform = leftPlatform;
-        if (leftPlatform) {
-            keyUP = 51;
-            keyDown = 47;
-        } else {
-            keyUP = 19;
-            keyDown = 20;
-        }
-    }
-
-    @Override
-    public void initialise() {
-        width = 20;
+    public Platform() {
+        width = 10;
         height = 100;
+    }
+    @Override
+    public void initialise(){
         yPosition = Gdx.graphics.getHeight()/2 - height/2;
-
-        if (leftPlatform) {
-            xPosition = 0;
-        } else {
-            xPosition = Gdx.graphics.getWidth() - width;
-        }
-
         box = new CollisionBox(xPosition, yPosition, width, height);
     }
 
     @Override
     public void update() {
         box.preUpdate();
-        updateXPosition();
         checkInput();
     }
 
@@ -75,17 +57,13 @@ public class Platform implements GameObject{
         }
     }
 
-    private void updateXPosition() {
-        if(leftPlatform) {
-            xPosition = 0;
-        } else {
-            xPosition = Gdx.graphics.getWidth() - width;
-        }
-        box.setX(xPosition);
-    }
-
     public CollisionBox getCollisionBox() {
         return box;
+    }
+
+    public void changeKeybinds(int keyUP, int keyDown) {
+        this.keyUP = keyUP;
+        this.keyDown = keyDown;
     }
 
 }
