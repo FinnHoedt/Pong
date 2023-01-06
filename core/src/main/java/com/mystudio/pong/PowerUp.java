@@ -5,7 +5,7 @@ import org.mini2Dx.core.graphics.Graphics;
 public class PowerUp implements GameObject{ // müsste abstract sein
 	
 	Sprite sprite; 
-	Vector2 position;
+	Vector2 position;//dfghjk
 	float size;
 	
 	public void spawn(){};
