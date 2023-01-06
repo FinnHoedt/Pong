@@ -8,13 +8,16 @@ import org.mini2Dx.core.engine.geom.CollisionCircle;
 import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.graphics.Sprite;
 
+import java.util.Random;
+
 public class Ball implements GameObject{
 
     private CollisionCircle ballCollision;
+    private Random rand;
 
     //private Sprite sprite;
-    private float ballPosX, ballPosY, ballDirection, ballPlusX, ballPlusY, ballSpeed, ballDiameter;
-    boolean gameStart;
+    private float ballPosX, ballPosY, ballDirection, ballPlusX, ballPlusY, ballSpeedStart, ballSpeed, ballDiameter;
+    boolean gameStart, lastPoint;
 
     @Override
     public void initialise() {
@@ -22,12 +25,23 @@ public class Ball implements GameObject{
         ballDiameter = 10;
         ballPosX = Gdx.graphics.getWidth()/2;
         ballPosY = Gdx.graphics.getHeight()/2;
-        ballSpeed = 8;
+        ballSpeedStart = 10;
+        ballSpeed = ballSpeedStart;
         ballDirection = -1f;
-
+        rand = new Random();
         ballCollision = new CollisionCircle(ballPosX, ballPosY, ballDiameter);
         
         //sprite = new Sprite(new Texture(Gdx.files.internal("pongBall.png")));
+    }
+
+    public void ballReset(){
+        gameStart = false;
+        ballPosX = Gdx.graphics.getWidth()/2;
+        ballPosY = Gdx.graphics.getHeight()/2;
+        ballCollision.set(ballPosX, ballPosY);
+        speedDirection();
+        randomBallDirection();
+
     }
 
     @Override
@@ -74,15 +88,33 @@ public class Ball implements GameObject{
         ballCollision.set(ballCollision.getX() + ballPlusX, ballCollision.getY() + ballPlusY);
     }
 
-    public void changeVerticalHorizontal() {
+    public void changeVerticalDirection() {
         ballDirection = -ballDirection;
     }
 
     public void changeHorizontalDirection() {
         ballSpeed = -ballSpeed;
+        randomBallDirection();
+    }
+
+    public void randomBallDirection(){
+        ballDirection = (rand.nextFloat() - 0.5f) * 2.5f;
     }
 
     public CollisionCircle getBallCollision() {
         return ballCollision;
+    }
+
+    private void speedDirection(){
+        if(lastPoint){
+            ballSpeed = ballSpeedStart * (1);
+        }
+        else{
+            ballSpeed = ballSpeedStart * (-1);
+        }
+    }
+
+    public void setLastPoint(boolean lastPoint){
+        this.lastPoint = lastPoint;
     }
 }

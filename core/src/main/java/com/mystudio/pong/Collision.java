@@ -29,10 +29,12 @@ public class Collision {
     private void checkScoreCollision() {
         if(ball.getBallCollision().getX() < 0) {
             score.upRightScore();
-            ball.initialise();
+            ball.setLastPoint(true);
+            ball.ballReset();
         } else if(ball.getBallCollision().getX() > Gdx.graphics.getWidth()) {
             score.upLeftScore();
-            ball.initialise();
+            ball.setLastPoint(false);
+            ball.ballReset();
         }
     }
 
@@ -46,9 +48,9 @@ public class Collision {
 
     private void checkBorderCollision() {
         if (borderTop.intersects(ball.getBallCollision())) {
-            ball.changeVerticalHorizontal();
+            ball.changeVerticalDirection();
         } else if (borderBottom.intersects(ball.getBallCollision())) {
-            ball.changeVerticalHorizontal();
+            ball.changeVerticalDirection();
         }
     }
 }
