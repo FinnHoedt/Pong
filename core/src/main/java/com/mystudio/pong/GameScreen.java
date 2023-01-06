@@ -28,16 +28,9 @@ public class GameScreen extends BasicGameScreen {
     @Override
     public void update(GameContainer gc, ScreenManager<? extends org.mini2Dx.core.screen.GameScreen> screenManager, float delta) {
         ball.update();
-        if(ball.getPosition().getX() < 0) {
-            score.upRightScore();
-            ball.initialise();
-        } else if(ball.getPosition().getX() > Gdx.graphics.getWidth()) {
-            score.upLeftScore();
-            ball.initialise();
-        }
-
         platformA.update();
         platformB.update();
+        ballScores();
     }
 
     @Override
@@ -63,15 +56,25 @@ public class GameScreen extends BasicGameScreen {
 
     private void generateHyphen(Graphics g) {
         g.setColor(Color.DARK_GRAY);
-        int width = 8;
-        int count = 12;
-        int gap = 10;
-        int height = (Gdx.graphics.getHeight() /count - gap);
-        int x = (Gdx.graphics.getWidth()/2) - (width/2);
-        int y;
+        float width = 8;
+        float count = 12;
+        float gap = 10;
+        float height = (Gdx.graphics.getHeight() /count - gap);
+        float x = (Gdx.graphics.getWidth()/2) - (width/2);
+        float y;
         for (int i = 1; i <= count; i++) {
             y = (height+gap)*i - (height+gap/2);
             g.fillRect(x,y,width,height);
+        }
+    }
+
+    private void ballScores() {
+        if(ball.getColliisionPoint().getX() < 0) {
+            score.upRightScore();
+            ball.initialise();
+        } else if(ball.getColliisionPoint().getX() > Gdx.graphics.getWidth()) {
+            score.upLeftScore();
+            ball.initialise();
         }
     }
 }

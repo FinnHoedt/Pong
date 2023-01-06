@@ -72,6 +72,7 @@ public class Ball implements GameObject{
 
 
     public void collisionTest() {
+
         testCollisions = new CollisionBox(0, 500, 1000, 10);
     }
 
@@ -90,7 +91,7 @@ public class Ball implements GameObject{
         point.set(point.getX() + ballPlusX, point.getY() + ballPlusY);
     }
 
-    public CollisionPoint getPosition() {
+    public CollisionPoint getColliisionPoint() {
         return point;
     }
 
