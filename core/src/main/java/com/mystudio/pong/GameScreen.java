@@ -7,6 +7,10 @@ import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.screen.BasicGameScreen;
 import org.mini2Dx.core.screen.ScreenManager;
 
+/**
+ * The GameScreen generates the screen for playing pong itself and manages it
+ * @author bwecke
+ */
 public class GameScreen extends BasicGameScreen {
     public static int ID = 3;
     Ball ball;
@@ -14,6 +18,11 @@ public class GameScreen extends BasicGameScreen {
     private LeftPlatform leftPlatform;
     private RightPlatform rightPlatform;
     private Collision collision;
+
+    /**
+     * Generates a new ball, score, a left and right platform and a collision class
+     * @param gc The {@link GameContainer} of the game
+     */
     @Override
     public void initialise(GameContainer gc) {
         score = new Score();
@@ -27,6 +36,12 @@ public class GameScreen extends BasicGameScreen {
         collision = new Collision(leftPlatform, rightPlatform, ball, score);
     }
 
+    /**
+     * Calls update methods for ball, left and right platform, and for the collision class
+     * @param gc The {@link GameContainer} of the game
+     * @param screenManager The {@link ScreenManager} of the game
+     * @param delta The time in seconds since the last update
+     */
     @Override
     public void update(GameContainer gc, ScreenManager<? extends org.mini2Dx.core.screen.GameScreen> screenManager, float delta) {
         ball.update();
@@ -35,6 +50,11 @@ public class GameScreen extends BasicGameScreen {
         collision.checkCollision();
     }
 
+    /**
+     * Calls interpolate methods for ball, left and right platform
+     * @param gc
+     * @param alpha The interpolation alpha value
+     */
     @Override
     public void interpolate(GameContainer gc, float alpha) {
         ball.interpolate(alpha);
@@ -42,6 +62,11 @@ public class GameScreen extends BasicGameScreen {
         rightPlatform.interpolate(alpha);
     }
 
+    /**
+     * Renders the game field
+     * @param gc The {@link GameContainer} of the game
+     * @param g The {@link Graphics} context available for rendering
+     */
     @Override
     public void render(GameContainer gc, Graphics g) {
         generateHyphen(g);
@@ -51,11 +76,19 @@ public class GameScreen extends BasicGameScreen {
         rightPlatform.render(g);
     }
 
+    /**
+     * Returns ID form GameScreen
+     * @return ID
+     */
     @Override
     public int getId() {
         return ID;
     }
 
+    /**
+     * Generates the hyphen in the middle of the screen
+     * @param g
+     */
     private void generateHyphen(Graphics g) {
         g.setColor(Color.DARK_GRAY);
         float width = 8;
