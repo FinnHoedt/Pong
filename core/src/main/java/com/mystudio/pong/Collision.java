@@ -10,12 +10,14 @@ public class Collision {
     private Score score;
     private CollisionBox borderTop;
     private CollisionBox borderBottom;
+    private Flash flash;
 
-    public Collision(Platform platformA, Platform platformB, Ball ball, Score score) {
+    public Collision(Platform platformA, Platform platformB, Ball ball, Score score, Flash flash) {
         this.platformA = platformA;
         this.platformB = platformB;
         this.ball = ball;
         this.score = score;
+        this.flash = flash;
         borderTop = new CollisionBox(0, 0, Gdx.graphics.getWidth(),0);
         borderBottom = new CollisionBox(0, Gdx.graphics.getHeight(), Gdx.graphics.getWidth(),0);
     }
@@ -24,6 +26,7 @@ public class Collision {
         checkScoreCollision();
         checkPlatformCollision();
         checkBorderCollision();
+        checkFlashCollision();
     }
 
     private void checkScoreCollision() {
@@ -51,6 +54,11 @@ public class Collision {
             ball.changeVerticalDirection();
         } else if (borderBottom.intersects(ball.getBallCollision())) {
             ball.changeVerticalDirection();
+        }
+    }
+    private void checkFlashCollision() {
+        if (flash.getCollisionBox().intersects(ball.getBallCollision()) && flash.getState() == true) { //Collission nur wenn sichtbar
+            flash.applyPowerUp();
         }
     }
 }
