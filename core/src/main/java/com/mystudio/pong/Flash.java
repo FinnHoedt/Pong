@@ -8,16 +8,16 @@ import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.graphics.Sprite;
 
 import java.util.Random;
-
+/**
+ * This PowerUp accelerates the speed of the ball
+ */
 public class Flash extends PowerUp {
-    //wenn getroffen wird der Ball schneller / macht das noch Sinn, wenn der Ball sowieso schneller wird?
 
     Sprite sprite;
     protected float xPosition, yPosition;
     protected float width = 100;
     protected float height = 100;
     protected CollisionBox box;
-    private Random rand;
     private boolean active;
     @Override
     public void initialise() {
@@ -38,10 +38,13 @@ public class Flash extends PowerUp {
 
     @Override
     public void render(Graphics g) {// Zeichnen des Objekts auf einem Bildschirm
-        if (active == true) {
+        if (active) {
             g.drawSprite(sprite);
         }
     }
+    /**
+     * waits a certain time until the PowerUp appears
+     */
     public void waitForPowerUp(){
         Timer.schedule(new Timer.Task() {
             @Override
@@ -50,11 +53,13 @@ public class Flash extends PowerUp {
             }
         }, 4);
     }
-
+    /**
+     * PowerUp appears at a random location on the screen
+     */
     public void spawn() {
         active = true; //sichtbar machen
 
-        rand = new Random();
+        Random rand = new Random();
         xPosition = 70 + rand.nextFloat() * (1020 - 70);// xpos zwischen 70 und 1020
         yPosition = 20 + rand.nextFloat() * (500 - 20); // ypos zwischen 20 und 500
 
@@ -62,15 +67,24 @@ public class Flash extends PowerUp {
         sprite.setPosition(xPosition, yPosition);
         box = new CollisionBox(xPosition, yPosition, width, height);
     }
-
+    /**
+     * PowerUp is applied
+     * Call in class Collission
+     */
     public void applyPowerUp() {
         //Ball wird schneller
         active = false;
         waitForPowerUp();
     }
+    /**
+     * @return Collisionbox from PowerUp Flash
+     */
     public CollisionBox getCollisionBox() {
         return box;
     }
+    /**
+     * @return state of the PowerUp, true=active
+     */
     public boolean getState(){
         return active;
     }
