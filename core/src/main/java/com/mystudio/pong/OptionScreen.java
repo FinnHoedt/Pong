@@ -18,7 +18,9 @@ import org.mini2Dx.ui.event.ActionEvent;
 import org.mini2Dx.ui.listener.ActionListener;
 import org.mini2Dx.ui.style.UiTheme;
 
-
+/**
+ * OptionScreen of application
+ */
 public class OptionScreen extends BasicGameScreen {
     public static int ID = 2;
 
@@ -39,6 +41,10 @@ public class OptionScreen extends BasicGameScreen {
     private Label playerTwoText;
     private Label colorText;
 
+    /**
+     * Initializes OptionScreen and loads theme and UI-Elements
+     * @param gc The {@link GameContainer} of the game
+     */
     @Override
     public void initialise(GameContainer gc) {
         FileHandleResolver fileHandleResolver = new FallbackFileHandleResolver(new ClasspathFileHandleResolver(), new InternalFileHandleResolver());
@@ -55,7 +61,12 @@ public class OptionScreen extends BasicGameScreen {
 
         Pong.inputMultiplexer.addProcessor(uiContainer);
     }
-
+    /**
+     * Updates OptionScreen and waits until theme is loaded
+     * @param gc The {@link GameContainer} of the game
+     * @param screenManager The {@link ScreenManager} of the game
+     * @param delta The time in seconds since the last update
+     */
     @Override
     public void update(GameContainer gc, ScreenManager<? extends GameScreen> screenManager, float delta) {
         if(!assetManager.update()) {
@@ -67,22 +78,36 @@ public class OptionScreen extends BasicGameScreen {
         uiContainer.update(delta);
         volumeSliderValue();
     }
-
+    /**
+     * Interpolates OptionScreen
+     * @param gc GameContainer
+     * @param alpha The interpolation alpha value
+     */
     @Override
     public void interpolate(GameContainer gc, float alpha) {
         uiContainer.interpolate(alpha);
     }
-
+    /**
+     * Renders OptionScreen and UI-Elements
+     * @param gc The {@link GameContainer} of the game
+     * @param g The {@link Graphics} context available for rendering
+     */
     @Override
     public void render(GameContainer gc, Graphics g) {
         uiContainer.render(g);
     }
-
+    /**
+     * Returns OptionScreenID
+     * @return ID OptionScreenID
+     */
     @Override
     public int getId() {
         return ID;
     }
-
+    /**
+     * Creates UI-Elements and sets them up
+     * @param uiContainer UIContainer
+     */
     private void uiSetup(UiContainer uiContainer) {
         settingsText = new Label(550,40,1,1);
         settingsText.setText("Settings");
@@ -157,6 +182,9 @@ public class OptionScreen extends BasicGameScreen {
         uiContainer.add(colorText);
     }
 
+    /**
+     * Changes volume when slider is used
+     */
     private void volumeSliderValue(){
         volumeSlider.addActionListener(new ActionListener() {
             @Override

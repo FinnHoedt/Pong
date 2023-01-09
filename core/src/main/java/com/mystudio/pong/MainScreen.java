@@ -19,7 +19,9 @@ import org.mini2Dx.ui.event.ActionEvent;
 import org.mini2Dx.ui.listener.ActionListener;
 import org.mini2Dx.ui.style.UiTheme;
 
-
+/**
+ * MainScreen of application
+ */
 public class MainScreen extends BasicGameScreen {
     public static int ID = 1;
     private AssetManager assetManager;
@@ -28,6 +30,10 @@ public class MainScreen extends BasicGameScreen {
     private TextButton settingsButton;
     private TextButton quitButton;
 
+    /**
+     * Initializes MainScreen and loads theme and UI-Elements
+     * @param gc The {@link GameContainer} of the game
+     */
     @Override
     public void initialise(GameContainer gc) {
 
@@ -46,6 +52,12 @@ public class MainScreen extends BasicGameScreen {
         Pong.inputMultiplexer.addProcessor(uiContainer);
     }
 
+    /**
+     * Updates MainScreen and waits until theme is loaded
+     * @param gc The {@link GameContainer} of the game
+     * @param screenManager The {@link ScreenManager} of the game
+     * @param delta The time in seconds since the last update
+     */
     @Override
     public void update(GameContainer gc, final ScreenManager screenManager, float delta) {
         if(!assetManager.update()) {
@@ -60,21 +72,39 @@ public class MainScreen extends BasicGameScreen {
         quitButtonPress();
     }
 
+    /**
+     * Interpolates MainScreen
+     * @param gc GameContainer
+     * @param alpha The interpolation alpha value
+     */
     @Override
     public void interpolate(GameContainer gc, float alpha) {
         uiContainer.interpolate(alpha);
     }
 
+    /**
+     * Renders MainScreen and UI-Elements
+     * @param gc The {@link GameContainer} of the game
+     * @param g The {@link Graphics} context available for rendering
+     */
     @Override
     public void render(GameContainer gc, Graphics g) {
         uiContainer.render(g);
     }
 
+    /**
+     * Returns MainScreenID
+     * @return ID MainScreenID
+     */
     @Override
     public int getId() {
         return ID;
     }
 
+    /**
+     * Creates UI-Elements and sets them up
+     * @param uiContainer UIContainer
+     */
     private void uiSetup(UiContainer uiContainer) {
         startButton = new TextButton(500, 200, 200, 35);
         startButton.setText("START");
@@ -92,6 +122,10 @@ public class MainScreen extends BasicGameScreen {
         uiContainer.add(quitButton);
     }
 
+    /**
+     * Changes to GameScreen if start-button is pressed
+     * @param screenManager ScreenManager
+     */
     private void startButtonPress(final ScreenManager screenManager) {
         startButton.addActionListener(new ActionListener() {
             @Override
@@ -106,6 +140,10 @@ public class MainScreen extends BasicGameScreen {
         });
     }
 
+    /**
+     * Changes to OptionsScreen if settings-button is pressed
+     * @param screenManager ScreenManager
+     */
     private void settingsButtonPress(final ScreenManager screenManager) {
         settingsButton.addActionListener(new ActionListener() {
             @Override
@@ -121,6 +159,9 @@ public class MainScreen extends BasicGameScreen {
         });
     }
 
+    /**
+     * Quits application if quit-button is pressed
+     */
     private void quitButtonPress() {
         quitButton.addActionListener(new ActionListener() {
             @Override
