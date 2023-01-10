@@ -3,6 +3,9 @@ package com.mystudio.pong;
 import com.badlogic.gdx.Gdx;
 import org.mini2Dx.core.engine.geom.CollisionBox;
 
+/**
+ * collision physiks for ball
+ */
 public class Collision {
 
     private Platform platformA, platformB;
@@ -20,12 +23,19 @@ public class Collision {
         borderBottom = new CollisionBox(0, Gdx.graphics.getHeight(), Gdx.graphics.getWidth(),0);
     }
 
+    /**
+     * check collisions
+     */
     public void checkCollision() {
         checkScoreCollision();
         checkPlatformCollision();
         checkBorderCollision();
     }
 
+    /**
+     * check collision with left and right border
+     * increase score
+     */
     private void checkScoreCollision() {
         if(ball.getBallCollision().getX() < 0) {
             score.upRightScore();
@@ -38,6 +48,9 @@ public class Collision {
         }
     }
 
+    /**
+     * check collision with platform
+     */
     private void checkPlatformCollision() {
         if (platformA.getCollisionBox().intersects(ball.getBallCollision())){
             ball.changeHorizontalDirection();
@@ -46,6 +59,9 @@ public class Collision {
         }
     }
 
+    /**
+     * check collision with top and bottom border
+     */
     private void checkBorderCollision() {
         if (borderTop.intersects(ball.getBallCollision())) {
             ball.changeVerticalDirection();

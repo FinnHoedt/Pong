@@ -2,6 +2,9 @@ package com.mystudio.pong;
 
 import com.badlogic.gdx.Gdx;
 
+/**
+ * right platform class
+ */
 public class RightPlatform extends Platform{
 
     public RightPlatform() {
