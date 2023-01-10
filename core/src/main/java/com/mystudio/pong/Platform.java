@@ -80,7 +80,7 @@ public abstract class Platform implements GameObject{
      * move platform down
      */
     private void moveDown() {
-        if(!(box.getY() + height >= Gdx.graphics.getHeight())) {
+        if(!(box.getY() + box.getHeight() >= Gdx.graphics.getHeight())) {
             box.setY(box.getY() + 8f);
         }
     }
@@ -101,6 +101,23 @@ public abstract class Platform implements GameObject{
     public void changeKeybinds(int keyUP, int keyDown) {
         this.keyUP = keyUP;
         this.keyDown = keyDown;
+    }
+
+    /**
+     * change platform height
+     * @param newHeight
+     */
+    public void changeHeight(float newHeight) {
+        box.setY(box.getY() - ((newHeight - box.getHeight()) / 2));
+        box.setHeight(newHeight);
+    }
+
+    /**
+     * reset platform height
+     */
+    public void resetHeight() {
+        box.setY(box.getY() - ((height - box.getHeight()) / 2));
+        box.setHeight(height);
     }
 
 }
