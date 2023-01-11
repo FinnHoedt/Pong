@@ -17,6 +17,7 @@ public class Flash extends PowerUp {
     protected float xPosition, yPosition;
     protected float width = 100;
     protected float height = 100;
+    Random rand;
     protected CollisionBox box;
     private boolean active;
     @Override
@@ -46,12 +47,14 @@ public class Flash extends PowerUp {
      * waits a certain time until the PowerUp appears
      */
     public void waitForPowerUp(){
+        rand = new Random();
+        int time = 3 + rand.nextInt(4);
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
                 spawn();
             }
-        }, 4);
+        }, 4); // 4-7 erstmal
     }
     /**
      * PowerUp appears at a random location on the screen
@@ -59,7 +62,6 @@ public class Flash extends PowerUp {
     public void spawn() {
         active = true; //sichtbar machen
 
-        Random rand = new Random();
         xPosition = 70 + rand.nextFloat() * (1020 - 70);// xpos zwischen 70 und 1020
         yPosition = 20 + rand.nextFloat() * (500 - 20); // ypos zwischen 20 und 500
 

@@ -1,5 +1,6 @@
 package com.mystudio.pong;
 
+import org.mini2Dx.core.engine.geom.CollisionBox;
 import org.mini2Dx.core.engine.geom.CollisionCircle;
 
 import org.mini2Dx.core.graphics.Graphics;
@@ -7,8 +8,6 @@ import org.mini2Dx.core.graphics.Sprite;
 
 
 public abstract class PowerUp implements GameObject{
-    Sprite sprite;
-    private CollisionCircle powerUpCollision;
 
     @Override
     public void initialise() {}//Objekt fuer die Verwendung vorzubereiten}
@@ -25,4 +24,5 @@ public abstract class PowerUp implements GameObject{
     public void applyPowerUp(){} // individuell für Unterklassen
 
     public void spawn(){}
+
 }
