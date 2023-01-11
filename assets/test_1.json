@@ -197,11 +197,11 @@
   },
   "fonts": {
     "default": {
-      "path": "retro.ttf",
+      "path": "AldotheApache.ttf",
       "fontSize": 30
     },
     "header": {
-      "path": "retro.ttf",
+      "path": "AldotheApache.ttf",
       "fontSize": 30
     }
   },
@@ -226,8 +226,8 @@
       "rules": {
         "XS": {
           "font": "default",
-          "textColor": "255,255,255",
-          "marginTop": 4,
+          "textColor": "181, 181, 181",
+          "marginTop": -4,
           "marginBottom": 4,
           "marginLeft": 0,
           "marginRight": 0
