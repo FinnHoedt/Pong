@@ -137,6 +137,7 @@ public class MainScreen extends BasicGameScreen {
             @Override
             public void onActionBegin(ActionEvent event) {
                 screenManager.enterGameScreen(GameScreen.ID, new FadeOutTransition(), new FadeInTransition());
+                Pong.inputMultiplexer.removeProcessor(uiContainer);
             }
 
             @Override
@@ -185,7 +186,7 @@ public class MainScreen extends BasicGameScreen {
     private void soundTrackLoop() {
         soundTrack = Gdx.audio.newMusic(Gdx.files.internal("ponggoeshard.mp3"));
         soundTrack.setLooping(true);
-        soundTrack.setVolume(.5f);
+        soundTrack.setVolume(1f);
         soundTrack.play();
     }
 }
