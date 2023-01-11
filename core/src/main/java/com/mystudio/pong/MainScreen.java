@@ -5,9 +5,6 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.ClasspathFileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.files.FileHandle;
 import org.mini2Dx.core.assets.FallbackFileHandleResolver;
 import org.mini2Dx.core.game.GameContainer;
 import org.mini2Dx.core.graphics.Graphics;
@@ -33,7 +30,7 @@ public class MainScreen extends BasicGameScreen {
     private TextButton settingsButton;
     private TextButton quitButton;
 
-    private Music soundTrack;
+    private Settings settings;
 
     /**
      * Initializes MainScreen and loads theme and UI-Elements
@@ -56,7 +53,9 @@ public class MainScreen extends BasicGameScreen {
 
         Pong.inputMultiplexer.addProcessor(uiContainer);
 
-        soundTrackLoop();
+        settings = Settings.getSettings();
+
+        settings.soundTrackSetUp();
     }
 
     /**
@@ -181,13 +180,6 @@ public class MainScreen extends BasicGameScreen {
 
             }
         });
-    }
-
-    private void soundTrackLoop() {
-        soundTrack = Gdx.audio.newMusic(Gdx.files.internal("ponggoeshard.mp3"));
-        soundTrack.setLooping(true);
-        soundTrack.setVolume(1f);
-        soundTrack.play();
     }
 }
 
