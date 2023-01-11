@@ -43,25 +43,18 @@ public class Flash extends PowerUp {
             g.drawSprite(sprite);
         }
     }
-    /**
-     * waits a certain time until the PowerUp appears
-     */
     public void waitForPowerUp(){
         rand = new Random();
-        int time = 3 + rand.nextInt(4);
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
                 spawn();
             }
-        }, 4); // 4-7 erstmal
+        }, 10 + rand.nextFloat() * (30 - 10));
     }
-    /**
-     * PowerUp appears at a random location on the screen
-     */
     public void spawn() {
         active = true; //sichtbar machen
-
+        rand = new Random();
         xPosition = 70 + rand.nextFloat() * (1020 - 70);// xpos zwischen 70 und 1020
         yPosition = 20 + rand.nextFloat() * (500 - 20); // ypos zwischen 20 und 500
 
@@ -69,10 +62,6 @@ public class Flash extends PowerUp {
         sprite.setPosition(xPosition, yPosition);
         box = new CollisionBox(xPosition, yPosition, width, height);
     }
-    /**
-     * PowerUp is applied
-     * Call in class Collission
-     */
     public void applyPowerUp() {
         //Ball wird schneller
         active = false;

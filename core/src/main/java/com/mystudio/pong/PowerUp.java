@@ -20,9 +20,19 @@ public abstract class PowerUp implements GameObject{
 
     @Override
     public void render(Graphics g) {}// Zeichnen des Objekts auf einem Bildschirm}
+    /**
+     * waits a certain time until the PowerUp appears
+     */
+    public abstract void waitForPowerUp();
+    /**
+     * PowerUp appears at a random location on the screen
+     */
+    public abstract void spawn();
+    /**
+     * PowerUp is applied
+     * Call in class Collission
+     */
+    public abstract void applyPowerUp(); // individuell für Unterklassen
 
-    public void applyPowerUp(){} // individuell für Unterklassen
-
-    public void spawn(){}
 
 }

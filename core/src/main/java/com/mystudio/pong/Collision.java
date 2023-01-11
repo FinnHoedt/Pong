@@ -10,14 +10,18 @@ public class Collision {
     private Score score;
     private CollisionBox borderTop;
     private CollisionBox borderBottom;
-    private Flash flash;
+    private Flash flash; private SplitBall split; private BiggerPlatform grow;
 
-    public Collision(Platform platformA, Platform platformB, Ball ball, Score score, Flash flash) {
+    public Collision(Platform platformA, Platform platformB, Ball ball, Score score, Flash flash, SplitBall split, BiggerPlatform grow) {
         this.platformA = platformA;
         this.platformB = platformB;
         this.ball = ball;
         this.score = score;
+        //PowerUp
         this.flash = flash;
+        this.split = split;
+        this.grow = grow;
+
         borderTop = new CollisionBox(0, 0, Gdx.graphics.getWidth(),0);
         borderBottom = new CollisionBox(0, Gdx.graphics.getHeight(), Gdx.graphics.getWidth(),0);
     }
@@ -27,6 +31,8 @@ public class Collision {
         checkPlatformCollision();
         checkBorderCollision();
         checkFlashCollision();
+        checkSplitCollision();
+        checkGrowCollision();
     }
 
     private void checkScoreCollision() {
@@ -61,4 +67,22 @@ public class Collision {
             flash.applyPowerUp();
         }
     }
+    private void checkSplitCollision() {
+        if (split.getCollisionBox().intersects(ball.getBallCollision()) && split.getState() == true) { //Collission nur wenn sichtbar
+            split.applyPowerUp();
+        }
+    }
+    private void checkGrowCollision() {
+        if (grow.getCollisionBox().intersects(ball.getBallCollision()) && grow.getState() == true) { //Collission nur wenn sichtbar
+            grow.applyPowerUp();
+        }
+    }
+    /*private void checkPowerUpCollision() {
+        //if(powerUp instance of flash) {
+            if (flash.getCollisionBox().intersects(ball.getBallCollision()) && flash.getState() == true) {
+                flash.applyPowerUp();
+            }
+        //}
+    }
+    */
 }
