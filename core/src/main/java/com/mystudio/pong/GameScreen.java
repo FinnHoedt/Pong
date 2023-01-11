@@ -1,11 +1,17 @@
 package com.mystudio.pong;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import org.graalvm.compiler.debug.CSVUtil;
 import org.mini2Dx.core.game.GameContainer;
 import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.screen.BasicGameScreen;
 import org.mini2Dx.core.screen.ScreenManager;
+import org.mini2Dx.core.screen.transition.FadeInTransition;
+import org.mini2Dx.core.screen.transition.FadeOutTransition;
+
+import java.security.Key;
 
 /**
  * The GameScreen generates the screen for playing pong itself and manages it
@@ -48,6 +54,7 @@ public class GameScreen extends BasicGameScreen {
         leftPlatform.update();
         rightPlatform.update();
         collision.checkCollision();
+        exitGameScreen(screenManager);
     }
 
     /**
@@ -100,6 +107,12 @@ public class GameScreen extends BasicGameScreen {
         for (int i = 1; i <= count; i++) {
             y = (height+gap)*i - (height+gap/2);
             g.fillRect(x,y,width,height);
+        }
+    }
+
+    private void exitGameScreen(ScreenManager screenManager) {
+        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+            screenManager.enterGameScreen(MainScreen.ID, new FadeOutTransition(), new FadeInTransition());
         }
     }
 }
