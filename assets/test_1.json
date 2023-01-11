@@ -226,7 +226,7 @@
       "rules": {
         "XS": {
           "font": "default",
-          "textColor": "181, 181, 181",
+          "textColor": "230, 230, 230",
           "marginTop": -4,
           "marginBottom": 4,
           "marginLeft": 0,
