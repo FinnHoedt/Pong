@@ -13,14 +13,14 @@ button_danger_action
   index: -1
 button_danger_hover
   rotate: false
-  xy: 116, 19
+  xy: 78, 19
   size: 36, 36
   orig: 36, 36
   offset: 0, 0
   index: -1
 button_danger_normal
   rotate: false
-  xy: 154, 19
+  xy: 116, 19
   size: 36, 36
   orig: 36, 36
   offset: 0, 0
@@ -32,16 +32,16 @@ button_default_action
   orig: 36, 36
   offset: 0, 0
   index: -1
-button_default_disabled
+button_default_hover
   rotate: false
-  xy: 418, 90
+  xy: 266, 90
   size: 36, 36
   orig: 36, 36
   offset: 0, 0
   index: -1
-button_default_hover
+button_default_disabled
   rotate: false
-  xy: 78, 19
+  xy: 418, 90
   size: 36, 36
   orig: 36, 36
   offset: 0, 0
@@ -76,7 +76,7 @@ button_success_hover
   index: -1
 button_success_normal
   rotate: false
-  xy: 192, 19
+  xy: 154, 19
   size: 36, 36
   orig: 36, 36
   offset: 0, 0
@@ -132,9 +132,9 @@ checkicon_disabled
   index: -1
 checkicon_normal
   rotate: false
-  xy: 382, 30
-  size: 21, 20
-  orig: 21, 20
+  xy: 192, 19
+  size: 36, 36
+  orig: 36, 36
   offset: 0, 0
   index: -1
 frame
@@ -153,21 +153,21 @@ progress_bar_fill
   index: -1
 radiobutton
   rotate: false
-  xy: 405, 32
+  xy: 382, 32
   size: 18, 18
   orig: 18, 18
   offset: 0, 0
   index: -1
 radiobutton_active
   rotate: false
-  xy: 425, 32
+  xy: 402, 32
   size: 18, 18
   orig: 18, 18
   offset: 0, 0
   index: -1
 radiobutton_disabled_active
   rotate: false
-  xy: 445, 32
+  xy: 422, 32
   size: 18, 18
   orig: 18, 18
   offset: 0, 0
