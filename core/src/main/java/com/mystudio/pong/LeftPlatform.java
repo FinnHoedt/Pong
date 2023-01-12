@@ -1,5 +1,8 @@
 package com.mystudio.pong;
 
+/**
+ * left platform class
+ */
 public class LeftPlatform extends Platform{
 
     public LeftPlatform() {
