@@ -30,6 +30,8 @@ public class MainScreen extends BasicGameScreen {
     private TextButton settingsButton;
     private TextButton quitButton;
 
+    private Settings settings;
+
     /**
      * Initializes MainScreen and loads theme and UI-Elements
      * @param gc The {@link GameContainer} of the game
@@ -47,9 +49,13 @@ public class MainScreen extends BasicGameScreen {
 
         uiContainer = new UiContainer(gc, assetManager);
 
-        uiSetup(uiContainer);
+        uiSetup();
 
         Pong.inputMultiplexer.addProcessor(uiContainer);
+
+        settings = Settings.getSettings();
+
+        settings.soundTrackSetUp();
     }
 
     /**
@@ -103,9 +109,8 @@ public class MainScreen extends BasicGameScreen {
 
     /**
      * Creates UI-Elements and sets them up
-     * @param uiContainer UIContainer
      */
-    private void uiSetup(UiContainer uiContainer) {
+    private void uiSetup() {
         startButton = new TextButton(500, 200, 200, 35);
         startButton.setText("START");
         startButton.setVisibility(Visibility.VISIBLE);
@@ -131,6 +136,7 @@ public class MainScreen extends BasicGameScreen {
             @Override
             public void onActionBegin(ActionEvent event) {
                 screenManager.enterGameScreen(GameScreen.ID, new FadeOutTransition(), new FadeInTransition());
+                Pong.inputMultiplexer.removeProcessor(uiContainer);
             }
 
             @Override

@@ -40,6 +40,8 @@ public class OptionScreen extends BasicGameScreen {
     private Label playerOneText;
     private Label playerTwoText;
     private Label colorText;
+    private Settings settings;
+
 
     /**
      * Initializes OptionScreen and loads theme and UI-Elements
@@ -60,6 +62,8 @@ public class OptionScreen extends BasicGameScreen {
         uiSetup(uiContainer);
 
         Pong.inputMultiplexer.addProcessor(uiContainer);
+
+        settings = Settings.getSettings();
     }
     /**
      * Updates OptionScreen and waits until theme is loaded
@@ -77,6 +81,7 @@ public class OptionScreen extends BasicGameScreen {
         }
         uiContainer.update(delta);
         volumeSliderValue();
+        musicCheckBoxEvent();
     }
     /**
      * Interpolates OptionScreen
@@ -133,6 +138,7 @@ public class OptionScreen extends BasicGameScreen {
 
         musicCheckBox = new Checkbox(450,195,1,1);
         musicCheckBox.setVisibility(Visibility.VISIBLE);
+        musicCheckBox.setChecked(true);
         uiContainer.add(musicCheckBox);
 
         volumeText = new Label(350,250,1,1);
@@ -143,6 +149,7 @@ public class OptionScreen extends BasicGameScreen {
 
         volumeSlider = new Slider(450,240,1,1);
         volumeSlider.setVisibility(Visibility.VISIBLE);
+        volumeSlider.setValue(1f);
         uiContainer.add(volumeSlider);
 
         hotkeysText = new Label(350,310,1,1);
@@ -194,7 +201,28 @@ public class OptionScreen extends BasicGameScreen {
 
             @Override
             public void onActionEnd(ActionEvent event) {
-                    System.out.println(volumeSlider.getValue());
+                settings.setVolume(volumeSlider.getValue());
+                settings.volumeChanged();
+            }
+        });
+    }
+
+    private void musicCheckBoxEvent() {
+        musicCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void onActionBegin(ActionEvent event) {
+
+            }
+
+            @Override
+            public void onActionEnd(ActionEvent event) {
+                if(!musicCheckBox.isChecked()) {
+                    settings.setMusic(false);
+                    settings.toggleSoundtrack();
+                } else {
+                    settings.setMusic(true);
+                    settings.toggleSoundtrack();
+                }
             }
         });
     }

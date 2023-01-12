@@ -22,8 +22,8 @@ public class Score implements GameObject {
      */
     @Override
     public void initialise() {
-        scoreLeft = 0;
-        scoreRight = 0;
+        scoreLeft = 8;
+        scoreRight = 10;
         generateFont();
     }
 
@@ -65,7 +65,11 @@ public class Score implements GameObject {
     public void drawScore(Graphics g) {
         g.setFont(gameFont);
         g.setColor(Color.WHITE);
-        g.drawString(Integer.toString(scoreLeft), (float) Gdx.graphics.getWidth()/2 - 50, 15);
+        if(scoreLeft < 10) {
+            g.drawString(Integer.toString(scoreLeft), (float) Gdx.graphics.getWidth()/2 - 50, 15);
+        } else {
+            g.drawString(Integer.toString(scoreLeft), (float) Gdx.graphics.getWidth()/2 - 77, 15);
+        }
         g.drawString(Integer.toString(scoreRight), (float) Gdx.graphics.getWidth()/2 + 26, 15);
     }
 
