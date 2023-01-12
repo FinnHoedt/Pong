@@ -25,12 +25,15 @@ public class GameScreen extends BasicGameScreen {
     private RightPlatform rightPlatform;
     private Collision collision;
 
+    private boolean init;
+
     /**
      * Generates a new ball, score, a left and right platform and a collision class
      * @param gc The {@link GameContainer} of the game
      */
     @Override
     public void initialise(GameContainer gc) {
+        init = false;
         score = new Score();
         score.initialise();
         ball = new Ball();
@@ -50,6 +53,10 @@ public class GameScreen extends BasicGameScreen {
      */
     @Override
     public void update(GameContainer gc, ScreenManager<? extends org.mini2Dx.core.screen.GameScreen> screenManager, float delta) {
+        if (init) {
+            this.initialise(gc);
+        }
+
         ball.update();
         leftPlatform.update();
         rightPlatform.update();
@@ -113,6 +120,7 @@ public class GameScreen extends BasicGameScreen {
     private void exitGameScreen(ScreenManager screenManager) {
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
             screenManager.enterGameScreen(MainScreen.ID, new FadeOutTransition(), new FadeInTransition());
+            init = true;
         }
     }
 }

@@ -40,7 +40,7 @@ public class OptionScreen extends BasicGameScreen {
     private Label playerOneText;
     private Label playerTwoText;
     private Label colorText;
-    private Settings settings;
+    private Sounds sounds;
 
 
     /**
@@ -202,7 +202,7 @@ public class OptionScreen extends BasicGameScreen {
             @Override
             public void onActionEnd(ActionEvent event) {
                 settings.setVolume(volumeSlider.getValue());
-                settings.volumeChanged();
+                .volumeChanged();
             }
         });
     }
