@@ -12,7 +12,7 @@ public class Settings {
 
     private boolean sound;
     private Settings(){
-        volume = 0f;
+        volume = 1f;
         music = true;
         sound = true;
     }
