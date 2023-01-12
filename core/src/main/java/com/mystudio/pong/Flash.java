@@ -62,7 +62,7 @@ public class Flash extends PowerUp {
         box = new CollisionBox(xPosition, yPosition, width, height);
     }
     public void applyPowerUp() {
-        //Ball.raiseSpeed(2);//Ball wird schneller//Funktion muss static sein
+        Ball.raiseSpeed(3);//Ball wird schneller. Neuer Ball ist wieder normal schnell
         active = false;
         waitForPowerUp();
     }
