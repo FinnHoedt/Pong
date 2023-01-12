@@ -6,10 +6,13 @@ import com.badlogic.gdx.utils.Timer;
 import org.mini2Dx.core.engine.geom.CollisionBox;
 import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.graphics.Sprite;
-
 import java.util.Random;
 
-public class BiggerPlatform extends PowerUp{ //Plattform wächst
+/**
+ * This PowerUp makes the platform of the last Player who touched the ball grow in length
+ * @see PowerUp
+ */
+public class BiggerPlatform extends PowerUp{
     Sprite sprite;
     protected float xPosition, yPosition;
     protected float width = 100;
@@ -57,6 +60,11 @@ public class BiggerPlatform extends PowerUp{ //Plattform wächst
         sprite.setPosition(xPosition, yPosition);
         box = new CollisionBox(xPosition, yPosition, width, height);
     }
+    /**
+     * applies the PowerUps unique Power then disappears again
+     * in this case the platform grows
+     * @see Platform
+     */
     public void applyPowerUp() {
         //Ball wird schneller
         active = false;

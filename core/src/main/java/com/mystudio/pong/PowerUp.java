@@ -17,16 +17,15 @@ public abstract class PowerUp implements GameObject{//vielleicht sollte es doch 
     public void render(Graphics g) {}// Zeichnen des Objekts auf einem Bildschirm}
 
     /**
-     * waits a certain time until the PowerUp appears
+     * sets a Timer, which waits a random delay time before the PowerUp should appear on the Screen
      */
     public abstract void waitForPowerUp();
     /**
-     * PowerUp appears at a random location on the screen
+     * makes PowerUp-Sprite appear at a random space on the GameScreen
      */
     public abstract void spawn();
     /**
-     * PowerUp is applied
-     * Call in class Collission
+     * applies the PowerUps unique Power then disappears again
      */
     public abstract void applyPowerUp(); // individuell für Unterklassen
 

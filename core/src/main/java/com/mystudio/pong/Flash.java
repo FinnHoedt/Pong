@@ -10,6 +10,7 @@ import org.mini2Dx.core.graphics.Sprite;
 import java.util.Random;
 /**
  * This PowerUp accelerates the speed of the ball
+ * @see PowerUp
  */
 public class Flash extends PowerUp {
 
@@ -42,6 +43,9 @@ public class Flash extends PowerUp {
             g.drawSprite(sprite);
         }
     }
+    /**
+     * sets a Timer, which waits a random delay time before the PowerUp should appear on the Screen
+     */
     public void waitForPowerUp(){
         rand = new Random();
         Timer.schedule(new Timer.Task() {
@@ -51,6 +55,9 @@ public class Flash extends PowerUp {
             }
         }, 10 + rand.nextFloat() * (30 - 10));
     }
+    /**
+     * makes PowerUp-Sprite appear at a random space on the GameScreen
+     */
     public void spawn() {
         active = true; //sichtbar machen
         rand = new Random();
@@ -61,6 +68,11 @@ public class Flash extends PowerUp {
         sprite.setPosition(xPosition, yPosition);
         box = new CollisionBox(xPosition, yPosition, width, height);
     }
+    /**
+     * applies the PowerUps unique Power then disappears again
+     * in this case the speed is raised
+     * @see Ball
+     */
     public void applyPowerUp() {
         Ball.raiseSpeed(3);//Ball wird schneller. Neuer Ball ist wieder normal schnell
         active = false;
