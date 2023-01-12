@@ -18,7 +18,9 @@ import org.mini2Dx.ui.event.ActionEvent;
 import org.mini2Dx.ui.listener.ActionListener;
 import org.mini2Dx.ui.style.UiTheme;
 
-
+/**
+ * OptionScreen of application
+ */
 public class OptionScreen extends BasicGameScreen {
     public static int ID = 2;
 
@@ -38,7 +40,13 @@ public class OptionScreen extends BasicGameScreen {
     private Label playerOneText;
     private Label playerTwoText;
     private Label colorText;
+    private Settings settings;
 
+
+    /**
+     * Initializes OptionScreen and loads theme and UI-Elements
+     * @param gc The {@link GameContainer} of the game
+     */
     @Override
     public void initialise(GameContainer gc) {
         FileHandleResolver fileHandleResolver = new FallbackFileHandleResolver(new ClasspathFileHandleResolver(), new InternalFileHandleResolver());
@@ -54,8 +62,15 @@ public class OptionScreen extends BasicGameScreen {
         uiSetup(uiContainer);
 
         Pong.inputMultiplexer.addProcessor(uiContainer);
-    }
 
+        settings = Settings.getSettings();
+    }
+    /**
+     * Updates OptionScreen and waits until theme is loaded
+     * @param gc The {@link GameContainer} of the game
+     * @param screenManager The {@link ScreenManager} of the game
+     * @param delta The time in seconds since the last update
+     */
     @Override
     public void update(GameContainer gc, ScreenManager<? extends GameScreen> screenManager, float delta) {
         if(!assetManager.update()) {
@@ -66,23 +81,38 @@ public class OptionScreen extends BasicGameScreen {
         }
         uiContainer.update(delta);
         volumeSliderValue();
+        musicCheckBoxEvent();
     }
-
+    /**
+     * Interpolates OptionScreen
+     * @param gc GameContainer
+     * @param alpha The interpolation alpha value
+     */
     @Override
     public void interpolate(GameContainer gc, float alpha) {
         uiContainer.interpolate(alpha);
     }
-
+    /**
+     * Renders OptionScreen and UI-Elements
+     * @param gc The {@link GameContainer} of the game
+     * @param g The {@link Graphics} context available for rendering
+     */
     @Override
     public void render(GameContainer gc, Graphics g) {
         uiContainer.render(g);
     }
-
+    /**
+     * Returns OptionScreenID
+     * @return ID OptionScreenID
+     */
     @Override
     public int getId() {
         return ID;
     }
-
+    /**
+     * Creates UI-Elements and sets them up
+     * @param uiContainer UIContainer
+     */
     private void uiSetup(UiContainer uiContainer) {
         settingsText = new Label(550,40,1,1);
         settingsText.setText("Settings");
@@ -108,6 +138,7 @@ public class OptionScreen extends BasicGameScreen {
 
         musicCheckBox = new Checkbox(450,195,1,1);
         musicCheckBox.setVisibility(Visibility.VISIBLE);
+        musicCheckBox.setChecked(true);
         uiContainer.add(musicCheckBox);
 
         volumeText = new Label(350,250,1,1);
@@ -118,6 +149,7 @@ public class OptionScreen extends BasicGameScreen {
 
         volumeSlider = new Slider(450,240,1,1);
         volumeSlider.setVisibility(Visibility.VISIBLE);
+        volumeSlider.setValue(1f);
         uiContainer.add(volumeSlider);
 
         hotkeysText = new Label(350,310,1,1);
@@ -157,6 +189,9 @@ public class OptionScreen extends BasicGameScreen {
         uiContainer.add(colorText);
     }
 
+    /**
+     * Changes volume when slider is used
+     */
     private void volumeSliderValue(){
         volumeSlider.addActionListener(new ActionListener() {
             @Override
@@ -166,7 +201,28 @@ public class OptionScreen extends BasicGameScreen {
 
             @Override
             public void onActionEnd(ActionEvent event) {
-                    System.out.println(volumeSlider.getValue());
+                settings.setVolume(volumeSlider.getValue());
+                settings.volumeChanged();
+            }
+        });
+    }
+
+    private void musicCheckBoxEvent() {
+        musicCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void onActionBegin(ActionEvent event) {
+
+            }
+
+            @Override
+            public void onActionEnd(ActionEvent event) {
+                if(!musicCheckBox.isChecked()) {
+                    settings.setMusic(false);
+                    settings.toggleSoundtrack();
+                } else {
+                    settings.setMusic(true);
+                    settings.toggleSoundtrack();
+                }
             }
         });
     }

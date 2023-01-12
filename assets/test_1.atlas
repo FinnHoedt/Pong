@@ -6,7 +6,7 @@ filter: Nearest, Nearest
 repeat: none
 button_danger_action
   rotate: false
-  xy: 40, 16
+  xy: 78, 19
   size: 36, 36
   orig: 36, 36
   offset: 0, 0
@@ -27,28 +27,28 @@ button_danger_normal
   index: -1
 button_default_action
   rotate: false
-  xy: 266, 90
-  size: 36, 36
-  orig: 36, 36
-  offset: 0, 0
-  index: -1
-button_default_disabled
-  rotate: false
-  xy: 418, 90
+  xy: 304, 90
   size: 36, 36
   orig: 36, 36
   offset: 0, 0
   index: -1
 button_default_hover
   rotate: false
-  xy: 78, 19
+  xy: 304, 90
+  size: 36, 36
+  orig: 36, 36
+  offset: 0, 0
+  index: -1
+button_default_disabled
+  rotate: false
+  xy: 456, 90
   size: 36, 36
   orig: 36, 36
   offset: 0, 0
   index: -1
 button_default_normal
   rotate: false
-  xy: 228, 90
+  xy: 266, 90
   size: 36, 36
   orig: 36, 36
   offset: 0, 0
@@ -62,14 +62,14 @@ button_list_item_disabled
   index: -1
 button_success_action
   rotate: false
-  xy: 342, 90
+  xy: 380, 90
   size: 36, 36
   orig: 36, 36
   offset: 0, 0
   index: -1
 button_success_hover
   rotate: false
-  xy: 114, 90
+  xy: 152, 90
   size: 36, 36
   orig: 36, 36
   offset: 0, 0
@@ -83,58 +83,58 @@ button_success_normal
   index: -1
 button_tab_active
   rotate: false
-  xy: 304, 90
+  xy: 342, 90
   size: 36, 36
   orig: 36, 36
   offset: 0, 0
   index: -1
 button_tab_disabled
   rotate: false
-  xy: 344, 19
+  xy: 434, 52
   size: 36, 36
   orig: 36, 36
   offset: 0, 0
   index: -1
 button_tab_hover
   rotate: false
-  xy: 152, 90
+  xy: 190, 90
   size: 36, 36
   orig: 36, 36
   offset: 0, 0
   index: -1
 button_tab_normal
   rotate: false
-  xy: 306, 19
+  xy: 396, 52
   size: 36, 36
   orig: 36, 36
   offset: 0, 0
   index: -1
 checkbox_disabled
   rotate: false
-  xy: 456, 90
+  xy: 40, 16
   size: 36, 36
   orig: 36, 36
   offset: 0, 0
   index: -1
 checkbox_normal
   rotate: false
-  xy: 190, 90
+  xy: 228, 90
   size: 36, 36
   orig: 36, 36
   offset: 0, 0
   index: -1
 checkicon_disabled
   rotate: false
-  xy: 486, 42
+  xy: 408, 30
   size: 21, 20
   orig: 21, 20
   offset: 0, 0
   index: -1
 checkicon_normal
   rotate: false
-  xy: 382, 30
-  size: 21, 20
-  orig: 21, 20
+  xy: 230, 19
+  size: 36, 36
+  orig: 36, 36
   offset: 0, 0
   index: -1
 frame
@@ -146,28 +146,28 @@ frame
   index: -1
 progress_bar_fill
   rotate: false
-  xy: 486, 64
+  xy: 382, 26
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: -1
 radiobutton
   rotate: false
-  xy: 405, 32
+  xy: 431, 32
   size: 18, 18
   orig: 18, 18
   offset: 0, 0
   index: -1
 radiobutton_active
   rotate: false
-  xy: 425, 32
+  xy: 451, 32
   size: 18, 18
   orig: 18, 18
   offset: 0, 0
   index: -1
 radiobutton_disabled_active
   rotate: false
-  xy: 445, 32
+  xy: 471, 32
   size: 18, 18
   orig: 18, 18
   offset: 0, 0
@@ -237,9 +237,9 @@ select_right_normal
   index: -1
 slider_active
   rotate: false
-  xy: 426, 52
-  size: 28, 36
-  orig: 28, 36
+  xy: 268, 19
+  size: 36, 36
+  orig: 36, 36
   offset: 0, 0
   index: -1
 slider_background
@@ -251,16 +251,16 @@ slider_background
   index: -1
 slider_disabled
   rotate: false
-  xy: 456, 52
+  xy: 472, 52
   size: 28, 36
   orig: 28, 36
   offset: 0, 0
   index: -1
 slider_normal
   rotate: false
-  xy: 396, 52
-  size: 28, 36
-  orig: 28, 36
+  xy: 114, 90
+  size: 36, 36
+  orig: 36, 36
   offset: 0, 0
   index: -1
 tab_bg
@@ -272,7 +272,7 @@ tab_bg
   index: -1
 tab_menu_bg
   rotate: false
-  xy: 380, 90
+  xy: 418, 90
   size: 36, 36
   orig: 36, 36
   offset: 0, 0
@@ -293,14 +293,14 @@ progress_bar_background
   index: -1
 textbox_hover
   rotate: false
-  xy: 230, 19
+  xy: 306, 19
   size: 36, 36
   orig: 36, 36
   offset: 0, 0
   index: -1
 textbox_normal
   rotate: false
-  xy: 268, 19
+  xy: 344, 19
   size: 36, 36
   orig: 36, 36
   offset: 0, 0

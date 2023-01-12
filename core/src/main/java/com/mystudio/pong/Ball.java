@@ -19,21 +19,28 @@ public class Ball implements GameObject{
     private float ballPosX, ballPosY, ballDirection, ballPlusX, ballPlusY, ballSpeedStart, ballSpeed, ballDiameter;
     boolean gameStart, lastPoint;
 
+
+    /**
+     * ball is initialized
+     */
     @Override
     public void initialise() {
         gameStart = false;
         ballDiameter = 10;
         ballPosX = Gdx.graphics.getWidth()/2;
         ballPosY = Gdx.graphics.getHeight()/2;
-        ballSpeedStart = 10;
+        ballSpeedStart = 8;
         ballSpeed = ballSpeedStart;
         ballDirection = -1f;
         rand = new Random();
         ballCollision = new CollisionCircle(ballPosX, ballPosY, ballDiameter);
-        
+
         //sprite = new Sprite(new Texture(Gdx.files.internal("pongBall.png")));
     }
 
+    /**
+     * ball resets after point
+     */
     public void ballReset(){
         gameStart = false;
         ballPosX = Gdx.graphics.getWidth()/2;
@@ -44,23 +51,35 @@ public class Ball implements GameObject{
 
     }
 
+    /**
+     * ball is updated
+     */
     @Override
     public void update() {
         ballCollision.preUpdate();
         ballStart();
     }
 
+    /**
+     * ball is updated
+     */
     @Override
     public void interpolate(float alpha) {
         ballCollision.interpolate(null, alpha);
     }
 
+    /**
+     * ball is rendered
+     */
     @Override
     public void render(Graphics g) {
         g.fillCircle(ballCollision.getRenderX(), ballCollision.getRenderY(), ballCollision.getRenderRadius());
         //g.drawSprite(sprite, ballCollision.getRenderX(), ballCollision.getRenderY());
     }
 
+    /**
+     * test if space is pressed to start the game
+     */
     public void ballStart(){
         if(!gameStart) {
             if(Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
@@ -72,7 +91,9 @@ public class Ball implements GameObject{
         }
     }
 
-
+    /**
+     * calculates new position from ball
+     */
     public void calcNewPos(){
         int sign;
         if(ballDirection == 0) {
@@ -88,23 +109,38 @@ public class Ball implements GameObject{
         ballCollision.set(ballCollision.getX() + ballPlusX, ballCollision.getY() + ballPlusY);
     }
 
+    /**
+     * changes vertical direction of ball
+     */
     public void changeVerticalDirection() {
         ballDirection = -ballDirection;
     }
 
+    /**
+     * changes horizontal direction of ball
+     */
     public void changeHorizontalDirection() {
         ballSpeed = -ballSpeed;
         randomBallDirection();
     }
 
+    /**
+     * gives the ball a random direction
+     */
     public void randomBallDirection(){
         ballDirection = (rand.nextFloat() - 0.5f) * 2.5f;
     }
 
+    /**
+     * get the collision of the ball
+     */
     public CollisionCircle getBallCollision() {
         return ballCollision;
     }
 
+    /**
+     * get the direction of the ball after reset based on the last point of a player
+     */
     private void speedDirection(){
         if(lastPoint){
             ballSpeed = ballSpeedStart * (1);
@@ -114,7 +150,24 @@ public class Ball implements GameObject{
         }
     }
 
+    /**
+     * get the sign of the speed from the ball
+     */
+    private float getBallSpeedSign(){
+        return Math.abs(ballSpeed)/ballSpeed;
+    }
+
+    /**
+     * set who got the last point
+     */
     public void setLastPoint(boolean lastPoint){
         this.lastPoint = lastPoint;
+    }
+
+    /**
+     * raises speed of the ball
+     */
+    public void raiseSpeed(float plusSpeed){
+        ballSpeed += getBallSpeedSign() * plusSpeed;
     }
 }
