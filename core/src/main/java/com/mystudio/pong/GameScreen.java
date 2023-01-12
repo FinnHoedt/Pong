@@ -14,6 +14,7 @@ public class GameScreen extends BasicGameScreen {
     private LeftPlatform leftPlatform;
     private RightPlatform rightPlatform;
     private Collision collision;
+    private Flash flash; private SplitBall split; private BiggerPlatform grow;
     @Override
     public void initialise(GameContainer gc) {
         score = new Score();
@@ -24,7 +25,13 @@ public class GameScreen extends BasicGameScreen {
         leftPlatform.initialise();
         rightPlatform = new RightPlatform();
         rightPlatform.initialise();
-        collision = new Collision(leftPlatform, rightPlatform, ball, score);
+        flash = new Flash();
+        flash.initialise();
+        split = new SplitBall();
+        split.initialise();
+        grow = new BiggerPlatform();
+        grow.initialise();
+        collision = new Collision(leftPlatform, rightPlatform, ball, score,flash, split, grow);
     }
 
     @Override
@@ -32,6 +39,9 @@ public class GameScreen extends BasicGameScreen {
         ball.update();
         leftPlatform.update();
         rightPlatform.update();
+        flash.update();
+        split.update();
+        grow.update();
         collision.checkCollision();
     }
 
@@ -49,6 +59,9 @@ public class GameScreen extends BasicGameScreen {
         ball.render(g);
         leftPlatform.render(g);
         rightPlatform.render(g);
+        flash.render(g);
+        split.render(g);
+        grow.render(g);
     }
 
     @Override

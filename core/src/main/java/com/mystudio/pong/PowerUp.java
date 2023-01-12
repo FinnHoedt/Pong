@@ -1,13 +1,8 @@
 package com.mystudio.pong;
 
-import org.mini2Dx.core.engine.geom.CollisionBox;
-import org.mini2Dx.core.engine.geom.CollisionCircle;
-
 import org.mini2Dx.core.graphics.Graphics;
-import org.mini2Dx.core.graphics.Sprite;
 
-
-public abstract class PowerUp implements GameObject{
+public abstract class PowerUp implements GameObject{//vielleicht sollte es doch eher ein Interface sein
 
     @Override
     public void initialise() {}//Objekt fuer die Verwendung vorzubereiten}
@@ -20,6 +15,7 @@ public abstract class PowerUp implements GameObject{
 
     @Override
     public void render(Graphics g) {}// Zeichnen des Objekts auf einem Bildschirm}
+
     /**
      * waits a certain time until the PowerUp appears
      */

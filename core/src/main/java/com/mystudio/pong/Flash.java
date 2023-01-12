@@ -27,14 +27,13 @@ public class Flash extends PowerUp {
         waitForPowerUp();// wird mit Anfang Spiel gestartet NICHT MIT GAMESCREEN !!! ÄNDERN
     }
     @Override
-    public void update() {//muss random zwischen xLinkePlattform und x rechtePlattform erscheinen
+    public void update() {
         //check ob Ball berührt in Collision
         box.preUpdate();
     }
 
     @Override
     public void interpolate(float alpha) {//Animation eines Objekts auf dem Bildschirm
-
     }
 
     @Override
@@ -63,7 +62,7 @@ public class Flash extends PowerUp {
         box = new CollisionBox(xPosition, yPosition, width, height);
     }
     public void applyPowerUp() {
-        //Ball wird schneller
+        //Ball.raiseSpeed(2);//Ball wird schneller//Funktion muss static sein
         active = false;
         waitForPowerUp();
     }

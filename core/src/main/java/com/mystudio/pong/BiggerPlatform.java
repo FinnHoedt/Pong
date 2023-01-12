@@ -40,13 +40,12 @@ public class BiggerPlatform extends PowerUp{ //Plattform wächst
     }
     public void waitForPowerUp(){
         rand = new Random();
-        int time = 3 + rand.nextInt(4);
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
                 spawn();
             }
-        }, 10 + rand.nextFloat() * (30 - 10)); // 4-7 erstmal
+        }, 10 + rand.nextFloat() * (40 - 10));
     }
     public void spawn() {
         active = true; //sichtbar machen

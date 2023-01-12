@@ -45,7 +45,7 @@ public class SplitBall extends PowerUp{ //1 Ball -> 2 Bälle
             public void run() {
                 spawn();
             }
-        }, 10 + rand.nextFloat() * (30 - 10)); // 4-7 erstmal
+        }, 10 + rand.nextFloat() * (40 - 10));
     }
     public void spawn() {
         active = true; //sichtbar machen
