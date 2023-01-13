@@ -49,6 +49,13 @@ public class Sounds {
         }
     }
 
+    public void setVolume(float volume) {
+        settings.setVolume(volume);
+    }
+    public void setMusic(boolean music) {
+        settings.setMusic(music);
+    }
+
     public void playHitPaddle() {
         hitPaddle.play();
     }

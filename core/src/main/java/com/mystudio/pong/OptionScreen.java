@@ -63,7 +63,7 @@ public class OptionScreen extends BasicGameScreen {
 
         Pong.inputMultiplexer.addProcessor(uiContainer);
 
-        settings = Settings.getSettings();
+        sounds = Sounds.getSounds();
     }
     /**
      * Updates OptionScreen and waits until theme is loaded
@@ -201,8 +201,8 @@ public class OptionScreen extends BasicGameScreen {
 
             @Override
             public void onActionEnd(ActionEvent event) {
-                settings.setVolume(volumeSlider.getValue());
-                .volumeChanged();
+                sounds.setVolume(volumeSlider.getValue());
+                sounds.volumeChanged();
             }
         });
     }
@@ -217,11 +217,11 @@ public class OptionScreen extends BasicGameScreen {
             @Override
             public void onActionEnd(ActionEvent event) {
                 if(!musicCheckBox.isChecked()) {
-                    settings.setMusic(false);
-                    settings.toggleSoundtrack();
+                    sounds.setMusic(false);
+                    sounds.toggleSoundtrack();
                 } else {
-                    settings.setMusic(true);
-                    settings.toggleSoundtrack();
+                    sounds.setMusic(true);
+                    sounds.toggleSoundtrack();
                 }
             }
         });

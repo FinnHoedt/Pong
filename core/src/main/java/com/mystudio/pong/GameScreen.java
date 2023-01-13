@@ -8,6 +8,7 @@ import org.mini2Dx.core.game.GameContainer;
 import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.screen.BasicGameScreen;
 import org.mini2Dx.core.screen.ScreenManager;
+import org.mini2Dx.core.screen.Transition;
 import org.mini2Dx.core.screen.transition.FadeInTransition;
 import org.mini2Dx.core.screen.transition.FadeOutTransition;
 
@@ -25,7 +26,7 @@ public class GameScreen extends BasicGameScreen {
     private RightPlatform rightPlatform;
     private Collision collision;
 
-    private boolean init;
+    //private boolean init;
 
     /**
      * Generates a new ball, score, a left and right platform and a collision class
@@ -33,15 +34,15 @@ public class GameScreen extends BasicGameScreen {
      */
     @Override
     public void initialise(GameContainer gc) {
-        init = false;
+        //init = false;
         score = new Score();
-        score.initialise();
+        //score.initialise();
         ball = new Ball();
-        ball.initialise();
+        //ball.initialise();
         leftPlatform = new LeftPlatform();
-        leftPlatform.initialise();
+        //leftPlatform.initialise();
         rightPlatform = new RightPlatform();
-        rightPlatform.initialise();
+        //rightPlatform.initialise();
         collision = new Collision(leftPlatform, rightPlatform, ball, score);
     }
 
@@ -53,9 +54,9 @@ public class GameScreen extends BasicGameScreen {
      */
     @Override
     public void update(GameContainer gc, ScreenManager<? extends org.mini2Dx.core.screen.GameScreen> screenManager, float delta) {
-        if (init) {
+        /*if (init) {
             this.initialise(gc);
-        }
+        }*/
 
         ball.update();
         leftPlatform.update();
@@ -120,7 +121,15 @@ public class GameScreen extends BasicGameScreen {
     private void exitGameScreen(ScreenManager screenManager) {
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
             screenManager.enterGameScreen(MainScreen.ID, new FadeOutTransition(), new FadeInTransition());
-            init = true;
+            //init = true;
         }
+    }
+
+    @Override
+    public void preTransitionIn(Transition transitionIn) {
+            ball.initialise();
+            score.initialise();
+            leftPlatform.initialise();
+            rightPlatform.initialise();
     }
 }

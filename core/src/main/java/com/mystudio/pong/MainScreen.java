@@ -10,6 +10,7 @@ import org.mini2Dx.core.game.GameContainer;
 import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.screen.BasicGameScreen;
 import org.mini2Dx.core.screen.ScreenManager;
+import org.mini2Dx.core.screen.Transition;
 import org.mini2Dx.core.screen.transition.FadeInTransition;
 import org.mini2Dx.core.screen.transition.FadeOutTransition;
 import org.mini2Dx.ui.UiContainer;
@@ -31,8 +32,6 @@ public class MainScreen extends BasicGameScreen {
     private TextButton quitButton;
 
     private Sounds sounds;
-
-    private boolean init;
 
     /**
      * Initializes MainScreen and loads theme and UI-Elements
@@ -68,11 +67,6 @@ public class MainScreen extends BasicGameScreen {
      */
     @Override
     public void update(GameContainer gc, final ScreenManager screenManager, float delta) {
-        if (init) {
-            Pong.inputMultiplexer.addProcessor(uiContainer);
-            init = false;
-        }
-
         if(!assetManager.update()) {
             return;
         }
@@ -143,8 +137,7 @@ public class MainScreen extends BasicGameScreen {
             @Override
             public void onActionBegin(ActionEvent event) {
                 screenManager.enterGameScreen(GameScreen.ID, new FadeOutTransition(), new FadeInTransition());
-                Pong.inputMultiplexer.removeProcessor(uiContainer);
-                init = true;
+                //Pong.inputMultiplexer.removeProcessor(uiContainer);
             }
 
             @Override
@@ -163,7 +156,7 @@ public class MainScreen extends BasicGameScreen {
             @Override
             public void onActionBegin(ActionEvent event) {
                 screenManager.enterGameScreen(OptionScreen.ID, new FadeOutTransition(), new FadeInTransition());
-                Pong.inputMultiplexer.removeProcessor(uiContainer);
+                //Pong.inputMultiplexer.removeProcessor(uiContainer);
             }
 
             @Override
@@ -188,6 +181,15 @@ public class MainScreen extends BasicGameScreen {
 
             }
         });
+    }
+
+    @Override
+    public void preTransitionIn(Transition transitionIn) {
+        Pong.inputMultiplexer.addProcessor(uiContainer);
+    }
+    @Override
+    public void preTransitionOut(Transition transitionIn) {
+        Pong.inputMultiplexer.removeProcessor(uiContainer);
     }
 }
 
