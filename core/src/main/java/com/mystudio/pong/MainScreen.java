@@ -137,7 +137,6 @@ public class MainScreen extends BasicGameScreen {
             @Override
             public void onActionBegin(ActionEvent event) {
                 screenManager.enterGameScreen(GameScreen.ID, new FadeOutTransition(), new FadeInTransition());
-                //Pong.inputMultiplexer.removeProcessor(uiContainer);
             }
 
             @Override
@@ -156,7 +155,6 @@ public class MainScreen extends BasicGameScreen {
             @Override
             public void onActionBegin(ActionEvent event) {
                 screenManager.enterGameScreen(OptionScreen.ID, new FadeOutTransition(), new FadeInTransition());
-                //Pong.inputMultiplexer.removeProcessor(uiContainer);
             }
 
             @Override

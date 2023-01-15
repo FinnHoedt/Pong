@@ -11,25 +11,31 @@ public class Sounds {
     private Sound hitPaddle;
     private Sound hitWall;
     private Sound playerScores;
-
     private float soundVolume;
     private Settings settings;
 
     private Sounds() {
         settings = Settings.getSettings();
     }
+
     public static Sounds getSounds() {
         return sounds;
     }
+
     public void soundsSetUp() {
+        if(settings.getSound()) {
+            soundVolume = 1f;
+        } else {
+            soundVolume = 0f;
+        }
         hitPaddle = Gdx.audio.newSound(Gdx.files.internal("sounds/hit_paddle_sound.mp3"));
         hitWall = Gdx.audio.newSound(Gdx.files.internal("sounds/hit_wall_sound.mp3"));
         playerScores = Gdx.audio.newSound(Gdx.files.internal("sounds/score_sound.mp3"));
-        soundVolume = 1f;
         hitPaddle.setVolume(1, soundVolume);
         hitWall.setVolume(1, soundVolume);
         playerScores.setVolume(1, soundVolume);
     }
+
     public void soundTrackSetUp() {
         soundTrack = Gdx.audio.newMusic(Gdx.files.internal("ponggoeshard.mp3"));
         soundTrack.setLooping(true);
@@ -41,7 +47,7 @@ public class Sounds {
         soundTrack.setVolume(settings.getVolume());
     }
 
-    public void toggleSoundtrack() {
+    public void toggleMusic() {
         if(settings.getMusic()) {
             soundTrack.play();
         } else {
@@ -49,20 +55,24 @@ public class Sounds {
         }
     }
 
-    public void setVolume(float volume) {
-        settings.setVolume(volume);
-    }
-    public void setMusic(boolean music) {
-        settings.setMusic(music);
+    public void toggleSounds() {
+        if(settings.getSound()) {
+            soundVolume = 1f;
+        } else {
+            soundVolume = 0f;
+        }
     }
 
     public void playHitPaddle() {
-        hitPaddle.play();
+        hitPaddle.play(soundVolume);
     }
+
     public void playHitWall() {
-        hitWall.play();
+        hitWall.play(soundVolume);
     }
+
     public void playPlayerScores() {
-        playerScores.play();
+        playerScores.play(soundVolume);
     }
+
 }
