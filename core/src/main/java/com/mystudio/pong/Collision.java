@@ -116,6 +116,7 @@ public class Collision {
         if(platformB.getCollisionBox().intersects(ball[i].getBallCollision())) {
             ball[i].changeHorizontalDirection();
             platformCollision[i] = false;
+            sounds.playHitPaddle();
         }
     }
 
