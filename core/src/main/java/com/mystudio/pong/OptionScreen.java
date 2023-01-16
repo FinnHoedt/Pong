@@ -1,5 +1,7 @@
 package com.mystudio.pong;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.ClasspathFileHandleResolver;
@@ -11,6 +13,9 @@ import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.screen.BasicGameScreen;
 import org.mini2Dx.core.screen.GameScreen;
 import org.mini2Dx.core.screen.ScreenManager;
+import org.mini2Dx.core.screen.Transition;
+import org.mini2Dx.core.screen.transition.FadeInTransition;
+import org.mini2Dx.core.screen.transition.FadeOutTransition;
 import org.mini2Dx.ui.UiContainer;
 import org.mini2Dx.ui.UiThemeLoader;
 import org.mini2Dx.ui.element.*;
@@ -40,6 +45,8 @@ public class OptionScreen extends BasicGameScreen {
     private Label playerOneText;
     private Label playerTwoText;
     private Label colorText;
+    private Sounds sounds;
+
     private Settings settings;
 
 
@@ -49,6 +56,8 @@ public class OptionScreen extends BasicGameScreen {
      */
     @Override
     public void initialise(GameContainer gc) {
+        settings = Settings.getSettings();
+
         FileHandleResolver fileHandleResolver = new FallbackFileHandleResolver(new ClasspathFileHandleResolver(), new InternalFileHandleResolver());
 
         assetManager = new AssetManager(fileHandleResolver);
@@ -61,9 +70,7 @@ public class OptionScreen extends BasicGameScreen {
 
         uiSetup(uiContainer);
 
-        Pong.inputMultiplexer.addProcessor(uiContainer);
-
-        settings = Settings.getSettings();
+        sounds = Sounds.getSounds();
     }
     /**
      * Updates OptionScreen and waits until theme is loaded
@@ -82,6 +89,8 @@ public class OptionScreen extends BasicGameScreen {
         uiContainer.update(delta);
         volumeSliderValue();
         musicCheckBoxEvent();
+        soundsCheckboxEvent();
+        exitGameScreen(screenManager);
     }
     /**
      * Interpolates OptionScreen
@@ -128,6 +137,7 @@ public class OptionScreen extends BasicGameScreen {
 
         soundCheckBox = new Checkbox(450,145,1,1);
         soundCheckBox.setVisibility(Visibility.VISIBLE);
+        soundCheckBox.setChecked(settings.getSound());
         uiContainer.add(soundCheckBox);
 
         musicText = new Label(350,200,1,1);
@@ -138,7 +148,7 @@ public class OptionScreen extends BasicGameScreen {
 
         musicCheckBox = new Checkbox(450,195,1,1);
         musicCheckBox.setVisibility(Visibility.VISIBLE);
-        musicCheckBox.setChecked(true);
+        musicCheckBox.setChecked(settings.getMusic());
         uiContainer.add(musicCheckBox);
 
         volumeText = new Label(350,250,1,1);
@@ -202,7 +212,7 @@ public class OptionScreen extends BasicGameScreen {
             @Override
             public void onActionEnd(ActionEvent event) {
                 settings.setVolume(volumeSlider.getValue());
-                settings.volumeChanged();
+                sounds.volumeChanged();
             }
         });
     }
@@ -218,12 +228,48 @@ public class OptionScreen extends BasicGameScreen {
             public void onActionEnd(ActionEvent event) {
                 if(!musicCheckBox.isChecked()) {
                     settings.setMusic(false);
-                    settings.toggleSoundtrack();
+                    sounds.toggleMusic();
                 } else {
                     settings.setMusic(true);
-                    settings.toggleSoundtrack();
+                    sounds.toggleMusic();
                 }
             }
         });
+    }
+
+    private void soundsCheckboxEvent() {
+        soundCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void onActionBegin(ActionEvent event) {
+
+            }
+
+            @Override
+            public void onActionEnd(ActionEvent event) {
+                if(!soundCheckBox.isChecked()) {
+                    settings.setSound(false);
+                    sounds.toggleSounds();
+                } else {
+                    settings.setSound(true);
+                    sounds.toggleSounds();
+                }
+            }
+        });
+    }
+
+    private void exitGameScreen(ScreenManager screenManager) {
+        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+            screenManager.enterGameScreen(MainScreen.ID, new FadeOutTransition(), new FadeInTransition());
+            //init = true;
+        }
+    }
+
+    @Override
+    public void preTransitionIn(Transition transitionIn) {
+        Pong.inputMultiplexer.addProcessor(uiContainer);
+    }
+    @Override
+    public void preTransitionOut(Transition transitionIn) {
+        Pong.inputMultiplexer.removeProcessor(uiContainer);
     }
 }

@@ -15,6 +15,7 @@ public class Collision {
     private CollisionBox borderBottom;
     private Flash flash; private SplitBall split; private BiggerPlatform grow;
     private Boolean platformCollision = true;
+    private Sounds sounds;
 
     public Collision(Platform platformA, Platform platformB, Ball ball, Score score, Flash flash, SplitBall split, BiggerPlatform grow) {
         this.platformA = platformA;
@@ -28,8 +29,8 @@ public class Collision {
 
         borderTop = new CollisionBox(0, 0, Gdx.graphics.getWidth(),0);
         borderBottom = new CollisionBox(0, Gdx.graphics.getHeight(), Gdx.graphics.getWidth(),0);
-        borderTop = new CollisionBox(0, -50, Gdx.graphics.getWidth(),50);
-        borderBottom = new CollisionBox(0, Gdx.graphics.getHeight(), Gdx.graphics.getWidth(),50);
+        sounds = Sounds.getSounds();
+        sounds.soundsSetUp();
     }
 
     /**
@@ -54,10 +55,12 @@ public class Collision {
             score.upRightScore();
             ball.setLastPoint(true);
             ball.ballReset();
+            sounds.playPlayerScores();
         } else if(ball.getBallCollision().getX() > Gdx.graphics.getWidth()) {
             score.upLeftScore();
             ball.setLastPoint(false);
             ball.ballReset();
+            sounds.playPlayerScores();
         }
     }
 
@@ -86,6 +89,7 @@ public class Collision {
     private void checkPlatformCollision() {
         if (platformA.getCollisionBox().intersects(ball.getBallCollision())){
             ball.changeHorizontalDirection();
+            sounds.playHitPaddle();
         } else if(platformB.getCollisionBox().intersects(ball.getBallCollision())) {
             ball.changeHorizontalDirection();
         }
@@ -98,6 +102,7 @@ public class Collision {
         if (platformA.getCollisionBox().intersects(ball.getBallCollision())) {
             ball.changeHorizontalDirection();
             platformCollision = false;
+            sounds.playHitPaddle();
         }
     }
 
@@ -117,8 +122,10 @@ public class Collision {
     private void checkBorderCollision() {
         if (borderTop.intersects(ball.getBallCollision())) {
             ball.changeVerticalDirection();
+            sounds.playHitWall();
         } else if (borderBottom.intersects(ball.getBallCollision())) {
             ball.changeVerticalDirection();
+            sounds.playHitWall();
         }
     }
     private void checkFlashCollision() {
