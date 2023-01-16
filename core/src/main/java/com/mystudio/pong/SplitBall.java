@@ -47,7 +47,7 @@ public class SplitBall extends PowerUp{
             public void run() {
                 spawn();
             }
-        }, 10 + rand.nextFloat() * (40 - 10));
+        }, 10 + rand.nextFloat() * (30 - 10));
     }
     public void spawn() {
         active = true; //sichtbar machen

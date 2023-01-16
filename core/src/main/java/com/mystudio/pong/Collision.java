@@ -140,15 +140,7 @@ public class Collision {
     }
     private void checkGrowCollision() {
         if (grow.getCollisionBox().intersects(ball.getBallCollision()) && grow.getState() == true) { //Collission nur wenn sichtbar
-            grow.applyPowerUp();
+            grow.applyPowerUp(platformA, platformB);
         }
     }
-    /*private void checkPowerUpCollision() {
-        //if(powerUp instance of flash) {
-            if (flash.getCollisionBox().intersects(ball.getBallCollision()) && flash.getState() == true) {
-                flash.applyPowerUp();
-            }
-        //}
-    }
-    */
 }

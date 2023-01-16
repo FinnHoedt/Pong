@@ -14,6 +14,7 @@ import java.util.Random;
  */
 public class BiggerPlatform extends PowerUp{
     Sprite sprite;
+    private Platform platformA, platformB;
     protected float xPosition, yPosition;
     protected float width = 100;
     protected float height = 100;
@@ -48,7 +49,7 @@ public class BiggerPlatform extends PowerUp{
             public void run() {
                 spawn();
             }
-        }, 10 + rand.nextFloat() * (40 - 10));
+        }, 10 + rand.nextFloat() * (35 - 10));
     }
     public void spawn() {
         active = true; //sichtbar machen
@@ -65,9 +66,22 @@ public class BiggerPlatform extends PowerUp{
      * in this case the platform grows
      * @see Platform
      */
-    public void applyPowerUp() {
-        //Ball wird schneller
+    public void applyPowerUp(final Platform a, final Platform b) {
         active = false;
+        this.platformA = a;
+        this.platformB = b;
+
+        a.changeHeight(60);//Plattform wird kurz größer
+        b.changeHeight(60);
+        Timer.schedule(new Timer.Task() {
+                           @Override
+                           public void run() {
+                               a.resetHeight();
+                               b.resetHeight(); //Plattform wird wieder normal
+                           }
+                       }, 8);
+
+
         waitForPowerUp();
     }
     /**

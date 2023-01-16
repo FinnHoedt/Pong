@@ -20,12 +20,12 @@ public class Flash extends PowerUp {
     protected float height = 100;
     Random rand;
     protected CollisionBox box;
-    private boolean active;
+    /**this specific PowerUp is active and visible*/ private boolean active;
     @Override
     public void initialise() {
-        active = false;
-        box = new CollisionBox(10, 10, width, height); // wird geupdatet
-        waitForPowerUp();// wird mit Anfang Spiel gestartet NICHT MIT GAMESCREEN !!! ÄNDERN
+            active = false;
+            box = new CollisionBox(10, 10, width, height); // wird geupdatet
+            waitForPowerUp();// wird mit Anfang Spiel gestartet NICHT MIT GAMESCREEN !!! ÄNDERN
     }
     @Override
     public void update() {
@@ -49,11 +49,11 @@ public class Flash extends PowerUp {
     public void waitForPowerUp(){
         rand = new Random();
         Timer.schedule(new Timer.Task() {
-            @Override
-            public void run() {
-                spawn();
-            }
-        }, 10 + rand.nextFloat() * (30 - 10));
+                @Override
+                public void run() {
+                    spawn();
+                }
+            }, 8 + rand.nextFloat() * (15 - 8));
     }
     /**
      * makes PowerUp-Sprite appear at a random space on the GameScreen

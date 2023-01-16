@@ -24,10 +24,7 @@ public abstract class PowerUp implements GameObject{//vielleicht sollte es doch 
      * makes PowerUp-Sprite appear at a random space on the GameScreen
      */
     public abstract void spawn();
-    /**
-     * applies the PowerUps unique Power then disappears again
-     */
-    public abstract void applyPowerUp(); // individuell für Unterklassen
 
-
+    // /**applies the PowerUps unique Power then disappears again*/
+    //public abstract void applyPowerUp(); // individuell für Unterklassen -> passt nicht hierhin
 }
