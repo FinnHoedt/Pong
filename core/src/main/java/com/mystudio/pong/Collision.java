@@ -1,5 +1,6 @@
 package com.mystudio.pong;
 
+import GameObjects.*;
 import com.badlogic.gdx.Gdx;
 import org.mini2Dx.core.engine.geom.CollisionBox;
 

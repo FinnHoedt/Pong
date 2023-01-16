@@ -1,5 +1,6 @@
-package com.mystudio.pong;
+package GameObjects;
 
+import GameObjects.PowerUp;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Timer;
@@ -8,8 +9,11 @@ import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.graphics.Sprite;
 
 import java.util.Random;
+/**
+ * This PowerUp accelerates the speed of the ball
+ */
+public class Flash extends PowerUp {
 
-public class BiggerPlatform extends PowerUp{ //Plattform wächst
     Sprite sprite;
     protected float xPosition, yPosition;
     protected float width = 100;
@@ -20,20 +24,21 @@ public class BiggerPlatform extends PowerUp{ //Plattform wächst
     @Override
     public void initialise() {
         active = false;
-        box = new CollisionBox(10, 10, width, height);
-        waitForPowerUp();
+        box = new CollisionBox(10, 10, width, height); // wird geupdatet
+        waitForPowerUp();// wird mit Anfang Spiel gestartet NICHT MIT GAMESCREEN !!! ÄNDERN
     }
     @Override
     public void update() {
         //check ob Ball berührt in Collision
         box.preUpdate();
     }
-    @Override
-    public void interpolate(float alpha) {
 
-    }
     @Override
-    public void render(Graphics g) {
+    public void interpolate(float alpha) {//Animation eines Objekts auf dem Bildschirm
+    }
+
+    @Override
+    public void render(Graphics g) {// Zeichnen des Objekts auf einem Bildschirm
         if (active) {
             g.drawSprite(sprite);
         }
@@ -45,7 +50,7 @@ public class BiggerPlatform extends PowerUp{ //Plattform wächst
             public void run() {
                 spawn();
             }
-        }, 10 + rand.nextFloat() * (40 - 10));
+        }, 10 + rand.nextFloat() * (30 - 10));
     }
     public void spawn() {
         active = true; //sichtbar machen
@@ -53,12 +58,12 @@ public class BiggerPlatform extends PowerUp{ //Plattform wächst
         xPosition = 70 + rand.nextFloat() * (1020 - 70);// xpos zwischen 70 und 1020
         yPosition = 20 + rand.nextFloat() * (500 - 20); // ypos zwischen 20 und 500
 
-        sprite = new Sprite(new Texture(Gdx.files.internal("assets/Grow.png")));
+        sprite = new Sprite(new Texture(Gdx.files.internal("assets/PixelFlashGross.png")));
         sprite.setPosition(xPosition, yPosition);
         box = new CollisionBox(xPosition, yPosition, width, height);
     }
     public void applyPowerUp() {
-        //Ball wird schneller
+        //Ball.raiseSpeed(2);//Ball wird schneller//Funktion muss static sein
         active = false;
         waitForPowerUp();
     }

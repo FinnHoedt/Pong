@@ -1,5 +1,6 @@
-package com.mystudio.pong;
+package GameObjects;
 
+import GameObjects.PowerUp;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Timer;
@@ -9,7 +10,7 @@ import org.mini2Dx.core.graphics.Sprite;
 
 import java.util.Random;
 
-public class SplitBall extends PowerUp{ //1 Ball -> 2 Bälle
+public class BiggerPlatform extends PowerUp { //Plattform wächst
     Sprite sprite;
     protected float xPosition, yPosition;
     protected float width = 100;
@@ -20,7 +21,7 @@ public class SplitBall extends PowerUp{ //1 Ball -> 2 Bälle
     @Override
     public void initialise() {
         active = false;
-        box = new CollisionBox(10, 10, width, height); // wird geupdatet
+        box = new CollisionBox(10, 10, width, height);
         waitForPowerUp();
     }
     @Override
@@ -29,11 +30,11 @@ public class SplitBall extends PowerUp{ //1 Ball -> 2 Bälle
         box.preUpdate();
     }
     @Override
-    public void interpolate(float alpha) {//Animation eines Objekts auf dem Bildschirm
+    public void interpolate(float alpha) {
 
     }
     @Override
-    public void render(Graphics g) {// Zeichnen des Objekts auf einem Bildschirm
+    public void render(Graphics g) {
         if (active) {
             g.drawSprite(sprite);
         }
@@ -53,12 +54,12 @@ public class SplitBall extends PowerUp{ //1 Ball -> 2 Bälle
         xPosition = 70 + rand.nextFloat() * (1020 - 70);// xpos zwischen 70 und 1020
         yPosition = 20 + rand.nextFloat() * (500 - 20); // ypos zwischen 20 und 500
 
-        sprite = new Sprite(new Texture(Gdx.files.internal("assets/axe.png")));
+        sprite = new Sprite(new Texture(Gdx.files.internal("assets/Grow.png")));
         sprite.setPosition(xPosition, yPosition);
         box = new CollisionBox(xPosition, yPosition, width, height);
     }
     public void applyPowerUp() {
-        //Ball wird aufgeteilt
+        //Ball wird schneller
         active = false;
         waitForPowerUp();
     }

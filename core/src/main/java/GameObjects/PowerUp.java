@@ -1,8 +1,8 @@
-package com.mystudio.pong;
+package GameObjects;
 
 import org.mini2Dx.core.graphics.Graphics;
 
-public abstract class PowerUp implements GameObject{//vielleicht sollte es doch eher ein Interface sein
+public abstract class PowerUp implements GameObject {//vielleicht sollte es doch eher ein Interface sein
 
     @Override
     public void initialise() {}//Objekt fuer die Verwendung vorzubereiten}

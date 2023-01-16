@@ -1,5 +1,6 @@
-package com.mystudio.pong;
+package GameObjects;
 
+import GameObjects.GameObject;
 import com.badlogic.gdx.Gdx;
 import org.mini2Dx.core.engine.geom.CollisionBox;
 import org.mini2Dx.core.graphics.Graphics;
@@ -7,7 +8,7 @@ import org.mini2Dx.core.graphics.Graphics;
 /**
  * platform class
  */
-public abstract class Platform implements GameObject{
+public abstract class Platform implements GameObject {
     protected float xPosition, yPosition, width, height;
     protected CollisionBox box;
     protected int keyUP;

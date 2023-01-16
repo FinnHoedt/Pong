@@ -1,9 +1,9 @@
-package com.mystudio.pong;
+package GameObjects;
 
 /**
  * left platform class
  */
-public class LeftPlatform extends Platform{
+public class LeftPlatform extends Platform {
 
     public LeftPlatform() {
         keyUP = 51;
