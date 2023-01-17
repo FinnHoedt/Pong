@@ -26,11 +26,8 @@ public class SplitBall extends PowerUp{
     public void applyPowerUp(Ball[] ball) {
         game.addBall();
         ball[1].getBallCollision().set(ball[0].getBallCollision().getX(), ball[0].getBallCollision().getY());
-        ball[1].setBallDirection(ball[0].getBallDirection());
-        ball[1].setBallSpeed(-ball[0].getBallSpeed());
-        /*
-        ball[0].changeVerticalDirection();
-        */
+        ball[1].setBallDirection(-ball[0].getBallDirection());
+        ball[1].setBallSpeed(ball[0].getBallSpeed()/2);
 
         active = false;
         waitForPowerUp();
