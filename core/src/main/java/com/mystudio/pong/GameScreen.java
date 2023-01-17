@@ -19,37 +19,42 @@ import java.security.Key;
  */
 public class GameScreen extends BasicGameScreen {
     public static int ID = 3;
-    Ball ball;
+    private Ball ball[] = {new Ball(), new Ball()};
     private Score score;
     private LeftPlatform leftPlatform;
     private RightPlatform rightPlatform;
     private Collision collision;
+    private Flash flash;
+    private SplitBall split;
+    private BiggerPlatform grow;
+    private int ballCount = 1;
     //private boolean init;
 
     /**
      * Generates a new ball, score, a left and right platform and a collision class
      * @param gc The {@link GameContainer} of the game
      */
-    private Flash flash; private SplitBall split; private BiggerPlatform grow;
+
     @Override
     public void initialise(GameContainer gc) {
         //init = false;
         score = new Score();
         //score.initialise();
-        ball = new Ball();
         //ball.initialise();
         leftPlatform = new LeftPlatform();
         //leftPlatform.initialise();
         rightPlatform = new RightPlatform();
-        rightPlatform.initialise();
+        //rightPlatform.initialise();
         flash = new Flash();
         flash.initialise();
-        split = new SplitBall();
+        split = new SplitBall(this);
         split.initialise();
         grow = new BiggerPlatform();
         grow.initialise();
-        collision = new Collision(leftPlatform, rightPlatform, ball, score,flash, split, grow);
+        collision = new Collision(leftPlatform, rightPlatform, ball, score,flash, split, grow, this);
         //collision = new Collision(leftPlatform, rightPlatform, ball, score);
+
+
     }
 
     /**
@@ -63,8 +68,9 @@ public class GameScreen extends BasicGameScreen {
         /*if (init) {
             this.initialise(gc);
         }*/
-
-        ball.update();
+        for(int i = 0; i< ballCount; i++) {
+            ball[i].update();
+        }
         leftPlatform.update();
         rightPlatform.update();
         flash.update();
@@ -81,7 +87,9 @@ public class GameScreen extends BasicGameScreen {
      */
     @Override
     public void interpolate(GameContainer gc, float alpha) {
-        ball.interpolate(alpha);
+        for(int i = 0; i< ballCount; i++) {
+            ball[i].interpolate(alpha);
+        }
         leftPlatform.interpolate(alpha);
         rightPlatform.interpolate(alpha);
     }
@@ -95,7 +103,9 @@ public class GameScreen extends BasicGameScreen {
     public void render(GameContainer gc, Graphics g) {
         generateHyphen(g);
         score.render(g);
-        ball.render(g);
+        for(int i = 0; i< ballCount; i++) {
+            ball[i].render(g);
+        }
         leftPlatform.render(g);
         rightPlatform.render(g);
         flash.render(g);
@@ -139,9 +149,24 @@ public class GameScreen extends BasicGameScreen {
 
     @Override
     public void preTransitionIn(Transition transitionIn) {
-            ball.initialise();
-            score.initialise();
-            leftPlatform.initialise();
-            rightPlatform.initialise();
+        for(int i = 0; i< ballCount; i++) {
+            ball[i].initialise();
+        }
+        ball[0].raiseSpeed(2);
+        score.initialise();
+        leftPlatform.initialise();
+        rightPlatform.initialise();
+    }
+
+    public void addBall() {
+        ballCount = 2;
+        ball[1].initialise();
+        ball[1].setGameStartTrue();
+        collision.addBall();
+    }
+
+    public void removeBall() {
+        ballCount = 1;
+        collision.removeBall();
     }
 }

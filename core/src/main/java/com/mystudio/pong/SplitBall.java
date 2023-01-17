@@ -2,83 +2,37 @@ package com.mystudio.pong;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.utils.Timer;
-import org.mini2Dx.core.engine.geom.CollisionBox;
-import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.graphics.Sprite;
-import java.util.Random;
+
 /**
  * This PowerUp splits 1 Ball into 2
  * @see PowerUp
  */
 public class SplitBall extends PowerUp{
-    Sprite sprite;
-    protected float xPosition, yPosition;
-    protected float width = 100;
-    protected float height = 100;
-    Random rand;
-    protected CollisionBox box;
-    private boolean active;
-    @Override
-    public void initialise() {
-        active = false;
-        box = new CollisionBox(10, 10, width, height); // wird geupdatet
-        waitForPowerUp();
-    }
-    @Override
-    public void update() {
-        //check ob Ball berührt in Collision
-        box.preUpdate();
-    }
-    @Override
-    public void interpolate(float alpha) {//Animation eines Objekts auf dem Bildschirm
 
-    }
-    @Override
-    public void render(Graphics g) {// Zeichnen des Objekts auf einem Bildschirm
-        if (active) {
-            g.drawSprite(sprite);
-        }
-    }
-    public void waitForPowerUp(){
-        rand = new Random();
-        Timer.schedule(new Timer.Task() {
-            @Override
-            public void run() {
-                spawn();
-            }
-        }, 10 + rand.nextFloat() * (30 - 10));
-    }
-    public void spawn() {
-        active = true; //sichtbar machen
-        rand = new Random();
-        xPosition = 70 + rand.nextFloat() * (1020 - 70);// xpos zwischen 70 und 1020
-        yPosition = 20 + rand.nextFloat() * (500 - 20); // ypos zwischen 20 und 500
+    private GameScreen game;
 
+    public SplitBall(GameScreen game){
         sprite = new Sprite(new Texture(Gdx.files.internal("assets/axe.png")));
-        sprite.setPosition(xPosition, yPosition);
-        box = new CollisionBox(xPosition, yPosition, width, height);
+        delay = 20;
+        this.game = game;
     }
+
     /**
      * applies the PowerUps unique Power then disappears again
      * in this case the ball is duplicated
      * @see Ball
      */
-    public void applyPowerUp() {
-        //Ball wird aufgeteilt
+    public void applyPowerUp(Ball[] ball) {
+        game.addBall();
+        ball[1].getBallCollision().set(ball[0].getBallCollision().getX(), ball[0].getBallCollision().getY());
+        ball[1].setBallDirection(ball[0].getBallDirection());
+        ball[1].setBallSpeed(-ball[0].getBallSpeed());
+        /*
+        ball[0].changeVerticalDirection();
+        */
+
         active = false;
         waitForPowerUp();
-    }
-    /**
-     * @return Collisionbox from PowerUp Flash
-     */
-    public CollisionBox getCollisionBox() {
-        return box;
-    }
-    /**
-     * @return state of the PowerUp, true=active
-     */
-    public boolean getState(){
-        return active;
     }
 }

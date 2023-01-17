@@ -2,11 +2,8 @@ package com.mystudio.pong;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
-import org.mini2Dx.core.engine.geom.CollisionBox;
 import org.mini2Dx.core.engine.geom.CollisionCircle;
 import org.mini2Dx.core.graphics.Graphics;
-import org.mini2Dx.core.graphics.Sprite;
 
 import java.util.Random;
 
@@ -17,9 +14,8 @@ public class Ball implements GameObject{
 
     //private Sprite sprite;
     private float ballPosX, ballPosY, ballDirection, ballPlusX, ballPlusY, ballSpeedStart, ballDiameter;
-    private static float ballSpeed;
+    private float ballSpeed;
     boolean gameStart, lastPoint;
-
 
     /**
      * ball is initialized
@@ -154,7 +150,7 @@ public class Ball implements GameObject{
     /**
      * get the sign of the speed from the ball
      */
-    private static float getBallSpeedSign(){
+    private float getBallSpeedSign(){
         return Math.abs(ballSpeed)/ballSpeed;
     }
 
@@ -168,7 +164,27 @@ public class Ball implements GameObject{
     /**
      * raises speed of the ball
      */
-    public static void raiseSpeed(float plusSpeed){
+    public void raiseSpeed(float plusSpeed){
         ballSpeed += getBallSpeedSign() * plusSpeed;
+    }
+
+    public void setBallDirection(float ballDirection) {
+        this.ballDirection = ballDirection;
+    }
+
+    public float getBallDirection() {
+        return ballDirection;
+    }
+
+    public void setBallSpeed(float ballSpeed) {
+        this.ballSpeed = ballSpeed;
+    }
+
+    public float getBallSpeed() {
+        return ballSpeed;
+    }
+
+    public void setGameStartTrue() {
+        gameStart = true;
     }
 }
