@@ -10,6 +10,7 @@ import org.mini2Dx.core.graphics.Sprite;
 import java.util.Random;
 /**
  * This PowerUp accelerates the speed of the ball
+ * @see PowerUp
  */
 public class Flash extends PowerUp {
 
@@ -19,12 +20,12 @@ public class Flash extends PowerUp {
     protected float height = 100;
     Random rand;
     protected CollisionBox box;
-    private boolean active;
+    /**this specific PowerUp is active and visible*/ private boolean active;
     @Override
     public void initialise() {
-        active = false;
-        box = new CollisionBox(10, 10, width, height); // wird geupdatet
-        waitForPowerUp();// wird mit Anfang Spiel gestartet NICHT MIT GAMESCREEN !!! ÄNDERN
+            active = false;
+            box = new CollisionBox(10, 10, width, height); // wird geupdatet
+            waitForPowerUp();// wird mit Anfang Spiel gestartet NICHT MIT GAMESCREEN !!! ÄNDERN
     }
     @Override
     public void update() {
@@ -42,15 +43,21 @@ public class Flash extends PowerUp {
             g.drawSprite(sprite);
         }
     }
+    /**
+     * sets a Timer, which waits a random delay time before the PowerUp should appear on the Screen
+     */
     public void waitForPowerUp(){
         rand = new Random();
         Timer.schedule(new Timer.Task() {
-            @Override
-            public void run() {
-                spawn();
-            }
-        }, 10 + rand.nextFloat() * (30 - 10));
+                @Override
+                public void run() {
+                    spawn();
+                }
+            }, 8 + rand.nextFloat() * (15 - 8));
     }
+    /**
+     * makes PowerUp-Sprite appear at a random space on the GameScreen
+     */
     public void spawn() {
         active = true; //sichtbar machen
         rand = new Random();
@@ -61,8 +68,13 @@ public class Flash extends PowerUp {
         sprite.setPosition(xPosition, yPosition);
         box = new CollisionBox(xPosition, yPosition, width, height);
     }
+    /**
+     * applies the PowerUps unique Power then disappears again
+     * in this case the speed is raised
+     * @see Ball
+     */
     public void applyPowerUp() {
-        //Ball.raiseSpeed(2);//Ball wird schneller//Funktion muss static sein
+        Ball.raiseSpeed(3);//Ball wird schneller. Neuer Ball ist wieder normal schnell
         active = false;
         waitForPowerUp();
     }

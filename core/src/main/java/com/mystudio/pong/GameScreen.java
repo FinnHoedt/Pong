@@ -24,7 +24,6 @@ public class GameScreen extends BasicGameScreen {
     private LeftPlatform leftPlatform;
     private RightPlatform rightPlatform;
     private Collision collision;
-
     //private boolean init;
 
     /**
@@ -50,7 +49,6 @@ public class GameScreen extends BasicGameScreen {
         grow = new BiggerPlatform();
         grow.initialise();
         collision = new Collision(leftPlatform, rightPlatform, ball, score,flash, split, grow);
-        //rightPlatform.initialise();
         //collision = new Collision(leftPlatform, rightPlatform, ball, score);
     }
 

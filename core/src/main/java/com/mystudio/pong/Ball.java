@@ -16,7 +16,8 @@ public class Ball implements GameObject{
     private Random rand;
 
     //private Sprite sprite;
-    private float ballPosX, ballPosY, ballDirection, ballPlusX, ballPlusY, ballSpeedStart, ballSpeed, ballDiameter;
+    private float ballPosX, ballPosY, ballDirection, ballPlusX, ballPlusY, ballSpeedStart, ballDiameter;
+    private static float ballSpeed;
     boolean gameStart, lastPoint;
 
 
@@ -153,7 +154,7 @@ public class Ball implements GameObject{
     /**
      * get the sign of the speed from the ball
      */
-    private float getBallSpeedSign(){
+    private static float getBallSpeedSign(){
         return Math.abs(ballSpeed)/ballSpeed;
     }
 
@@ -167,7 +168,7 @@ public class Ball implements GameObject{
     /**
      * raises speed of the ball
      */
-    public void raiseSpeed(float plusSpeed){
+    public static void raiseSpeed(float plusSpeed){
         ballSpeed += getBallSpeedSign() * plusSpeed;
     }
 }

@@ -6,10 +6,12 @@ import com.badlogic.gdx.utils.Timer;
 import org.mini2Dx.core.engine.geom.CollisionBox;
 import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.graphics.Sprite;
-
 import java.util.Random;
-
-public class SplitBall extends PowerUp{ //1 Ball -> 2 Bälle
+/**
+ * This PowerUp splits 1 Ball into 2
+ * @see PowerUp
+ */
+public class SplitBall extends PowerUp{
     Sprite sprite;
     protected float xPosition, yPosition;
     protected float width = 100;
@@ -45,7 +47,7 @@ public class SplitBall extends PowerUp{ //1 Ball -> 2 Bälle
             public void run() {
                 spawn();
             }
-        }, 10 + rand.nextFloat() * (40 - 10));
+        }, 10 + rand.nextFloat() * (30 - 10));
     }
     public void spawn() {
         active = true; //sichtbar machen
@@ -57,6 +59,11 @@ public class SplitBall extends PowerUp{ //1 Ball -> 2 Bälle
         sprite.setPosition(xPosition, yPosition);
         box = new CollisionBox(xPosition, yPosition, width, height);
     }
+    /**
+     * applies the PowerUps unique Power then disappears again
+     * in this case the ball is duplicated
+     * @see Ball
+     */
     public void applyPowerUp() {
         //Ball wird aufgeteilt
         active = false;

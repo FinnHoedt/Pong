@@ -70,11 +70,11 @@ public class Collision {
     /**
      * sets Boolean platformCollision true when ball is in center
      */
-    private void checkBallX(int i) {
-        float ballX = ball[i].getBallCollision().getX();
+    private void checkBallX() {
+        float ballX = ball.getBallCollision().getX();
         float width = Gdx.graphics.getWidth()/2;
-        if(ballX >= width -50 && ballX <= width + 50 && !platformCollision[i]) {
-            platformCollision[i] = true;
+        if(ballX >= width -50 && ballX <= width + 50 && !platformCollision) {
+            platformCollision = true;
         }
     }
 
@@ -82,10 +82,10 @@ public class Collision {
     /**
      * checks collision with platforms if Boolean platformCollision is true
      */
-    private void checkPlatformCollision(int i) {
-        if(platformCollision[i]) {
-            checkPlatformA(i);
-            checkPlatformB(i);
+    private void checkPlatformCollision() {
+        if(platformCollision) {
+            checkPlatformA();
+            checkPlatformB();
         }
     }
     /*
@@ -144,8 +144,7 @@ public class Collision {
     }
     private void checkGrowCollision(int i) {
         if (grow.getCollisionBox().intersects(ball[i].getBallCollision()) && grow.getState() == true) { //Collission nur wenn sichtbar
-            grow.applyPowerUp();
-        }
+            grow.applyPowerUp(platformA, platformB);
     }
     /*private void checkPowerUpCollision() {
         //if(powerUp instance of flash) {
