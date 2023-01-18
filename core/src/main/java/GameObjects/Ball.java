@@ -13,9 +13,9 @@ public class Ball implements GameObject{
     private Random rand;
 
     //private Sprite sprite;
-    private float ballPosX, ballPosY, ballDirection, ballPlusX, ballPlusY, ballSpeedStart, ballSpeed, ballDiameter;
+    private float ballPosX, ballPosY, ballDirection, ballPlusX, ballPlusY, ballSpeedStart, ballDiameter;
+    private float ballSpeed;
     boolean gameStart, lastPoint;
-
 
     /**
      * ball is initialized
@@ -166,5 +166,25 @@ public class Ball implements GameObject{
      */
     public void raiseSpeed(float plusSpeed){
         ballSpeed += getBallSpeedSign() * plusSpeed;
+    }
+
+    public void setBallDirection(float ballDirection) {
+        this.ballDirection = ballDirection;
+    }
+
+    public float getBallDirection() {
+        return ballDirection;
+    }
+
+    public void setBallSpeed(float ballSpeed) {
+        this.ballSpeed = ballSpeed;
+    }
+
+    public float getBallSpeed() {
+        return ballSpeed;
+    }
+
+    public void setGameStartTrue() {
+        gameStart = true;
     }
 }
