@@ -1,4 +1,4 @@
-package com.mystudio.pong;
+package GameObjects;
 
 import com.badlogic.gdx.utils.Timer;
 import org.mini2Dx.core.engine.geom.CollisionBox;
@@ -7,7 +7,7 @@ import org.mini2Dx.core.graphics.Sprite;
 
 import java.util.Random;
 
-public abstract class PowerUp implements GameObject{//vielleicht sollte es doch eher ein Interface sein
+public abstract class PowerUp implements GameObject {//vielleicht sollte es doch eher ein Interface sein
 
     protected Sprite sprite;
     protected float xPosition, yPosition;
