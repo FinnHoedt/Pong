@@ -94,15 +94,6 @@ public class Collision {
             checkPlatformB(i);
         }
     }
-    /*
-    private void checkPlatformCollision() {
-        if (platformA.getCollisionBox().intersects(ball.getBallCollision())){
-            ball.changeHorizontalDirection();
-            sounds.playHitPaddle();
-        } else if(platformB.getCollisionBox().intersects(ball.getBallCollision())) {
-            ball.changeHorizontalDirection();
-        }
-    }*/
 
     /**
      * check collision with platform A
@@ -170,5 +161,6 @@ public class Collision {
 
     public void removeBall() {
         ballCount = 1;
+        platformCollision[1] = true;
     }
 }
