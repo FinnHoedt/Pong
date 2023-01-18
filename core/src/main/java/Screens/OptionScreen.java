@@ -1,5 +1,6 @@
 package Screens;
 
+import GameObjects.ColorPicker;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetManager;
@@ -49,8 +50,11 @@ public class OptionScreen extends BasicGameScreen {
     private Label playerTwoText;
     private Label colorText;
     private Sounds sounds;
-
     private Settings settings;
+    private ColorPicker colorPickerLeft;
+    private ColorPicker colorPickerRight;
+    private  Button colorPickerLeftButton;
+    private Button colorPickerRightButton;
 
 
     /**
@@ -71,9 +75,13 @@ public class OptionScreen extends BasicGameScreen {
 
         uiContainer = new UiContainer(gc, assetManager);
 
-        uiSetup(uiContainer);
-
         sounds = Sounds.getSounds();
+
+        colorPickerLeft = new ColorPicker(615,435,70,20);
+
+        colorPickerRight = new ColorPicker(920,435,70,20);
+
+        uiSetup(uiContainer);
     }
     /**
      * Updates OptionScreen and waits until theme is loaded
@@ -94,6 +102,8 @@ public class OptionScreen extends BasicGameScreen {
         musicCheckBoxEvent();
         soundsCheckboxEvent();
         exitGameScreen(screenManager);
+        leftColorPickerEvent();
+        rightColorPickerEvent();
     }
     /**
      * Interpolates OptionScreen
@@ -112,6 +122,7 @@ public class OptionScreen extends BasicGameScreen {
     @Override
     public void render(GameContainer gc, Graphics g) {
         uiContainer.render(g);
+        renderColorPicker(g);
     }
     /**
      * Returns OptionScreenID
@@ -183,13 +194,13 @@ public class OptionScreen extends BasicGameScreen {
         downText.setColor(Color.WHITE);
         uiContainer.add(downText);
 
-        playerOneText = new Label(500,310,1,1);
+        playerOneText = new Label(600,310,1,1);
         playerOneText.setText("Player 1");
         playerOneText.setVisibility(Visibility.VISIBLE);
         playerOneText.setColor(Color.WHITE);
         uiContainer.add(playerOneText);
 
-        playerTwoText = new Label(630,310,1,1);
+        playerTwoText = new Label(900,310,1,1);
         playerTwoText.setText("Player 2");
         playerTwoText.setVisibility(Visibility.VISIBLE);
         playerTwoText.setColor(Color.WHITE);
@@ -200,6 +211,14 @@ public class OptionScreen extends BasicGameScreen {
         colorText.setVisibility(Visibility.VISIBLE);
         colorText.setColor(Color.WHITE);
         uiContainer.add(colorText);
+
+        colorPickerLeftButton = new Button(700, 435, 30, 20);
+        colorPickerLeftButton.setVisibility(Visibility.VISIBLE);
+        uiContainer.add(colorPickerLeftButton);
+
+        colorPickerRightButton = new Button(1000, 435, 30, 20);
+        colorPickerRightButton.setVisibility(Visibility.VISIBLE);
+        uiContainer.add(colorPickerRightButton);
     }
 
     /**
@@ -260,12 +279,49 @@ public class OptionScreen extends BasicGameScreen {
         });
     }
 
+    private void leftColorPickerEvent() {
+        colorPickerLeftButton.addActionListener(new ActionListener() {
+            @Override
+            public void onActionBegin(ActionEvent event) {
+                colorPickerLeft.upArray();
+                settings.setLeftPlatformColor(colorPickerLeft.getColorArray());
+            }
+
+            @Override
+            public void onActionEnd(ActionEvent event) {
+
+            }
+        });
+    }
+
+    private void rightColorPickerEvent() {
+        colorPickerRightButton.addActionListener(new ActionListener() {
+            @Override
+            public void onActionBegin(ActionEvent event) {
+                colorPickerRight.upArray();
+                settings.setLeftPlatformColor(colorPickerRight.getColorArray());
+            }
+
+            @Override
+            public void onActionEnd(ActionEvent event) {
+
+            }
+        });
+    }
+
+
     private void exitGameScreen(ScreenManager screenManager) {
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
             screenManager.enterGameScreen(MainScreen.ID, new FadeOutTransition(), new FadeInTransition());
             //init = true;
         }
     }
+
+    private void renderColorPicker(Graphics g) {
+        colorPickerLeft.render(g);
+        colorPickerRight.render(g);
+    }
+
 
     @Override
     public void preTransitionIn(Transition transitionIn) {

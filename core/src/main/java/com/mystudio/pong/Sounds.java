@@ -40,7 +40,7 @@ public class Sounds {
         soundTrack = Gdx.audio.newMusic(Gdx.files.internal("ponggoeshard.mp3"));
         soundTrack.setLooping(true);
         soundTrack.setVolume(settings.getVolume());
-        //soundTrack.play();
+        soundTrack.play();
     }
 
     public void volumeChanged() {
