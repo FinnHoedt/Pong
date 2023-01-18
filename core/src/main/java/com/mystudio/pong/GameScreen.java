@@ -30,6 +30,8 @@ public class GameScreen extends BasicGameScreen {
     private int ballCount = 1;
     //private boolean init;
 
+    private ComputerPlayer pc;
+
     /**
      * Generates a new ball, score, a left and right platform and a collision class
      * @param gc The {@link GameContainer} of the game
@@ -53,7 +55,7 @@ public class GameScreen extends BasicGameScreen {
         grow.initialise();
         collision = new Collision(leftPlatform, rightPlatform, ball, score,flash, split, grow, this);
         //collision = new Collision(leftPlatform, rightPlatform, ball, score);
-
+        pc = new ComputerPlayer(ball, rightPlatform, this);
 
     }
 
@@ -78,6 +80,7 @@ public class GameScreen extends BasicGameScreen {
         grow.update();
         collision.checkCollision();
         exitGameScreen(screenManager);
+        pc.update();
     }
 
     /**
@@ -167,6 +170,9 @@ public class GameScreen extends BasicGameScreen {
 
     public void removeBall() {
         ballCount = 1;
-        collision.removeBall();
+    }
+
+    public int getBallCount() {
+        return ballCount;
     }
 }
