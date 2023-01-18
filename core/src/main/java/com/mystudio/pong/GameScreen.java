@@ -159,6 +159,9 @@ public class GameScreen extends BasicGameScreen {
         score.initialise();
         leftPlatform.initialise();
         rightPlatform.initialise();
+        flash.initialise();
+        split.initialise();
+        grow.initialise();
     }
 
     public void addBall() {
