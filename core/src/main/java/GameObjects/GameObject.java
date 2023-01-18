@@ -1,4 +1,4 @@
-package com.mystudio.pong;
+package GameObjects;
 
 import org.mini2Dx.core.graphics.Graphics;
 

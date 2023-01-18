@@ -1,4 +1,4 @@
-package com.mystudio.pong;
+package GameObjects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.Mini2DxFreeTypeFontGenerator;
 import org.mini2Dx.core.font.BitmapFont;
 import org.mini2Dx.core.font.GameFont;
-import org.mini2Dx.core.font.GameFontCache;
 import org.mini2Dx.core.graphics.Graphics;
 
 /**

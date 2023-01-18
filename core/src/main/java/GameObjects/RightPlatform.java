@@ -1,11 +1,11 @@
-package com.mystudio.pong;
+package GameObjects;
 
 import com.badlogic.gdx.Gdx;
 
 /**
  * right platform class
  */
-public class RightPlatform extends Platform{
+public class RightPlatform extends Platform {
 
     public RightPlatform() {
         keyUP = 19;

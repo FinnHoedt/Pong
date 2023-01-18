@@ -1,5 +1,6 @@
-package com.mystudio.pong;
+package GameObjects;
 
+import Screens.GameScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import org.mini2Dx.core.graphics.Sprite;

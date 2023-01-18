@@ -1,8 +1,10 @@
-package com.mystudio.pong;
+package Screens;
 
+import GameObjects.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.mystudio.pong.*;
 import org.mini2Dx.core.game.GameContainer;
 import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.screen.BasicGameScreen;
@@ -10,8 +12,6 @@ import org.mini2Dx.core.screen.ScreenManager;
 import org.mini2Dx.core.screen.Transition;
 import org.mini2Dx.core.screen.transition.FadeInTransition;
 import org.mini2Dx.core.screen.transition.FadeOutTransition;
-
-import java.security.Key;
 
 /**
  * The GameScreen generates the screen for playing pong itself and manages it
