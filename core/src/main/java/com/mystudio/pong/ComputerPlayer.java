@@ -6,8 +6,8 @@ import Screens.GameScreen;
 public class ComputerPlayer {
     private Ball[] ball;
     private Platform platform;
-    private GameScreen game;
-    public ComputerPlayer(Ball[] ball, Platform platform, GameScreen game) {
+    private Game game;
+    public ComputerPlayer(Ball[] ball, Platform platform, Game game) {
         this.ball = ball;
         this.platform = platform;
         this.game = game;

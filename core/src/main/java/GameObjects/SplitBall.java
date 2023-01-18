@@ -11,9 +11,9 @@ import org.mini2Dx.core.graphics.Sprite;
  */
 public class SplitBall extends PowerUp{
 
-    private GameScreen game;
+    private Game game;
 
-    public SplitBall(GameScreen game){
+    public SplitBall(Game game){
         sprite = new Sprite(new Texture(Gdx.files.internal("assets/axe.png")));
         delay = 0;
         this.game = game;
@@ -31,6 +31,6 @@ public class SplitBall extends PowerUp{
         ball[1].setBallSpeed(ball[0].getBallSpeed()/2);
 
         active = false;
-        waitForPowerUp();
+        //waitForPowerUp();
     }
 }

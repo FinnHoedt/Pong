@@ -32,6 +32,6 @@ public class BiggerPlatform extends PowerUp{
             }
         }, 8);
 
-        waitForPowerUp();
+        //waitForPowerUp();
     }
 }

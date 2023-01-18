@@ -19,19 +19,19 @@ public class Collision {
     private Flash flash; private SplitBall split; private BiggerPlatform grow;
     private Boolean [] platformCollision = {true, true};
     private Platform [] lastPlatform = new Platform[2];
-    private GameScreen game;
+    private Game game;
     private Sounds sounds;
 
-    public Collision(Platform platformA, Platform platformB, Ball[] ball, Score score, Flash flash, SplitBall split, BiggerPlatform grow, GameScreen game) {
+    public Collision(Platform platformA, Platform platformB, Ball[] ball, Score score, SpawnHandler spawnHandler, Game game) {
         this.platformA = platformA;
         this.platformB = platformB;
         this.ball = ball;
         this.score = score;
         this.game = game;
 
-        this.flash = flash;
-        this.split = split;
-        this.grow = grow;
+        this.flash = spawnHandler.getFlash();
+        this.grow = spawnHandler.getBiggerPlatform();
+        this.split = spawnHandler.getSplitBall();
         lastPlatform[0] = platformA;
         lastPlatform[1] = platformA;
         borderTop = new CollisionBox(0, 0, Gdx.graphics.getWidth(),0);
@@ -52,7 +52,6 @@ public class Collision {
             checkSplitCollision(i);
             checkGrowCollision(i);
             checkBallX(i);
-
         }
     }
 
@@ -66,12 +65,14 @@ public class Collision {
             ball[0].setLastPoint(true);
             ball[0].ballReset();
             removeBall();
+            game.setStart();
             sounds.playPlayerScores();
         } else if(ball[i].getBallCollision().getX() > Gdx.graphics.getWidth()) {
             score.upLeftScore();
             ball[0].setLastPoint(false);
             ball[0].ballReset();
             removeBall();
+            game.setStart();
             sounds.playPlayerScores();
         }
     }
@@ -152,7 +153,6 @@ public class Collision {
     public void addBall() {
         ballCount = 2;
     }
-
     public void removeBall() {
         ballCount = 1;
         platformCollision[1] = true;

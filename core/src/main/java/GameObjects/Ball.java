@@ -54,7 +54,10 @@ public class Ball implements GameObject{
     @Override
     public void update() {
         ballCollision.preUpdate();
-        ballStart();
+        //ballStart();
+        if(gameStart) {
+            calcNewPos();
+        }
     }
 
     /**
@@ -184,7 +187,9 @@ public class Ball implements GameObject{
         return ballSpeed;
     }
 
-    public void setGameStartTrue() {
+    public void setGameStart() {
         gameStart = true;
     }
+
+
 }

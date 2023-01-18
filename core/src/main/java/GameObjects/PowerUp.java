@@ -18,14 +18,16 @@ public abstract class PowerUp implements GameObject {//vielleicht sollte es doch
     protected boolean active;
     protected int delay;
 
-    //Objekt fuer die Verwendung vorzubereiten
-    @Override
-    public void initialise() {
+    public PowerUp() {
         width = 70;
         height = 70;
+        box = new CollisionBox(10, 10, width, height);
+    }
+
+
+    @Override
+    public void initialise() {
         active = false;
-        box = new CollisionBox(10, 10, width, height); // wird geupdatet
-        waitForPowerUp();// wird mit Anfang Spiel gestartet NICHT MIT GAMESCREEN !!! ÄNDERN
     }
 
     //internen Zustand eines Objekts zu aktualisieren}
@@ -51,7 +53,7 @@ public abstract class PowerUp implements GameObject {//vielleicht sollte es doch
     /**
      * sets a Timer, which waits a random delay time before the PowerUp should appear on the Screen
      */
-    public void waitForPowerUp() {
+    /*public void waitForPowerUp() {
         rand = new Random();
         Timer.schedule(new Timer.Task() {
             @Override
@@ -59,7 +61,7 @@ public abstract class PowerUp implements GameObject {//vielleicht sollte es doch
                 spawn();
             }
         }, 10 + rand.nextFloat() * delay);
-    }
+    }*/
 
     /**
      * makes PowerUp-Sprite appear at a random space on the GameScreen

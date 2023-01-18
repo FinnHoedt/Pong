@@ -24,6 +24,6 @@ public class Flash extends PowerUp {
     public void applyPowerUp(Ball ball) {
         ball.raiseSpeed(3);//Ball wird schneller. Neuer Ball ist wieder normal schnell
         active = false;
-        waitForPowerUp();
+        //waitForPowerUp();
     }
 }
