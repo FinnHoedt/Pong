@@ -97,15 +97,6 @@ public class Collision {
             checkPlatformB(i);
         }
     }
-    /*
-    private void checkPlatformCollision() {
-        if (platformA.getCollisionBox().intersects(ball.getBallCollision())){
-            ball.changeHorizontalDirection();
-            sounds.playHitPaddle();
-        } else if(platformB.getCollisionBox().intersects(ball.getBallCollision())) {
-            ball.changeHorizontalDirection();
-        }
-    }*/
 
     /**
      * check collision with platform A
@@ -158,15 +149,6 @@ public class Collision {
             grow.applyPowerUp(lastPlatform[i]);
         }
     }
-    /*private void checkPowerUpCollision() {
-        //if(powerUp instance of flash) {
-            if (flash.getCollisionBox().intersects(ball.getBallCollision()) && flash.getState() == true) {
-                flash.applyPowerUp();
-            }
-        //}
-    }
-    */
-
     public void addBall() {
         ballCount = 2;
     }
