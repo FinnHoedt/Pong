@@ -71,7 +71,7 @@ public abstract class Platform implements GameObject {
     /**
      * move platform up
      */
-    private void moveUP() {
+    public void moveUP() {
         if(!(box.getY() <= 0)) {
             box.setY(box.getY() - 8f);
         }
@@ -80,7 +80,7 @@ public abstract class Platform implements GameObject {
     /**
      * move platform down
      */
-    private void moveDown() {
+    public void moveDown() {
         if(!(box.getY() + box.getHeight() >= Gdx.graphics.getHeight())) {
             box.setY(box.getY() + 8f);
         }

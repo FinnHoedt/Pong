@@ -18,7 +18,7 @@ public class Collision {
     private CollisionBox borderBottom;
     private Flash flash; private SplitBall split; private BiggerPlatform grow;
     private Boolean [] platformCollision = {true, true};
-    private Platform lastPlatform;
+    private Platform [] lastPlatform = new Platform[2];
     private GameScreen game;
     private Sounds sounds;
 
@@ -32,7 +32,8 @@ public class Collision {
         this.flash = flash;
         this.split = split;
         this.grow = grow;
-
+        lastPlatform[0] = platformA;
+        lastPlatform[1] = platformA;
         borderTop = new CollisionBox(0, 0, Gdx.graphics.getWidth(),0);
         borderBottom = new CollisionBox(0, Gdx.graphics.getHeight(), Gdx.graphics.getWidth(),0);
         sounds = Sounds.getSounds();
@@ -64,13 +65,13 @@ public class Collision {
             score.upRightScore();
             ball[0].setLastPoint(true);
             ball[0].ballReset();
-            game.removeBall();
+            removeBall();
             sounds.playPlayerScores();
         } else if(ball[i].getBallCollision().getX() > Gdx.graphics.getWidth()) {
             score.upLeftScore();
             ball[0].setLastPoint(false);
             ball[0].ballReset();
-            game.removeBall();
+            removeBall();
             sounds.playPlayerScores();
         }
     }
@@ -104,7 +105,7 @@ public class Collision {
         if (platformA.getCollisionBox().intersects(ball[i].getBallCollision())) {
             ball[i].changeHorizontalDirection();
             platformCollision[i] = false;
-            lastPlatform = platformA;
+            lastPlatform[i] = platformA;
             sounds.playHitPaddle();
         }
     }
@@ -116,7 +117,7 @@ public class Collision {
         if(platformB.getCollisionBox().intersects(ball[i].getBallCollision())) {
             ball[i].changeHorizontalDirection();
             platformCollision[i] = false;
-            lastPlatform = platformB;
+            lastPlatform[i] = platformB;
             sounds.playHitPaddle();
         }
     }
@@ -145,7 +146,7 @@ public class Collision {
     }
     private void checkGrowCollision(int i) {
         if (grow.getCollisionBox().intersects(ball[i].getBallCollision()) && grow.getState()) { //Collission nur wenn sichtbar
-            grow.applyPowerUp(lastPlatform);
+            grow.applyPowerUp(lastPlatform[i]);
         }
     }
     /*private void checkPowerUpCollision() {
@@ -164,5 +165,6 @@ public class Collision {
     public void removeBall() {
         ballCount = 1;
         platformCollision[1] = true;
+        game.removeBall();
     }
 }

@@ -30,6 +30,8 @@ public class GameScreen extends BasicGameScreen {
     private int ballCount = 1;
     //private boolean init;
 
+    private ComputerPlayer pc;
+
     /**
      * Generates a new ball, score, a left and right platform and a collision class
      * @param gc The {@link GameContainer} of the game
@@ -37,13 +39,23 @@ public class GameScreen extends BasicGameScreen {
 
     @Override
     public void initialise(GameContainer gc) {
+        //init = false;
         score = new Score();
+        //score.initialise();
+        //ball.initialise();
         leftPlatform = new LeftPlatform();
+        //leftPlatform.initialise();
         rightPlatform = new RightPlatform();
+        //rightPlatform.initialise();
         flash = new Flash();
+        flash.initialise();
         split = new SplitBall(this);
+        split.initialise();
         grow = new BiggerPlatform();
+        grow.initialise();
         collision = new Collision(leftPlatform, rightPlatform, ball, score,flash, split, grow, this);
+        //collision = new Collision(leftPlatform, rightPlatform, ball, score);
+        pc = new ComputerPlayer(ball, rightPlatform, this);
 
     }
 
@@ -55,6 +67,9 @@ public class GameScreen extends BasicGameScreen {
      */
     @Override
     public void update(GameContainer gc, ScreenManager<? extends org.mini2Dx.core.screen.GameScreen> screenManager, float delta) {
+        /*if (init) {
+            this.initialise(gc);
+        }*/
         for(int i = 0; i< ballCount; i++) {
             ball[i].update();
         }
@@ -65,6 +80,7 @@ public class GameScreen extends BasicGameScreen {
         grow.update();
         collision.checkCollision();
         exitGameScreen(screenManager);
+        pc.update();
     }
 
     /**
@@ -157,6 +173,9 @@ public class GameScreen extends BasicGameScreen {
 
     public void removeBall() {
         ballCount = 1;
-        collision.removeBall();
+    }
+
+    public int getBallCount() {
+        return ballCount;
     }
 }
