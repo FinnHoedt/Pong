@@ -149,15 +149,6 @@ public class Collision {
             grow.applyPowerUp(lastPlatform[i]);
         }
     }
-    /*private void checkPowerUpCollision() {
-        //if(powerUp instance of flash) {
-            if (flash.getCollisionBox().intersects(ball.getBallCollision()) && flash.getState() == true) {
-                flash.applyPowerUp();
-            }
-        //}
-    }
-    */
-
     public void addBall() {
         ballCount = 2;
     }
