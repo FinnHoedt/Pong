@@ -26,7 +26,7 @@ public class Collision {
         this.ball = ball;
         this.score = score;
         this.game = game;
-        //PowerUp
+
         this.flash = flash;
         this.split = split;
         this.grow = grow;

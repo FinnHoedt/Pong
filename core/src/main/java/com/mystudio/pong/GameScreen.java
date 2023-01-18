@@ -37,23 +37,13 @@ public class GameScreen extends BasicGameScreen {
 
     @Override
     public void initialise(GameContainer gc) {
-        //init = false;
         score = new Score();
-        //score.initialise();
-        //ball.initialise();
         leftPlatform = new LeftPlatform();
-        //leftPlatform.initialise();
         rightPlatform = new RightPlatform();
-        //rightPlatform.initialise();
         flash = new Flash();
-        flash.initialise();
         split = new SplitBall(this);
-        split.initialise();
         grow = new BiggerPlatform();
-        grow.initialise();
         collision = new Collision(leftPlatform, rightPlatform, ball, score,flash, split, grow, this);
-        //collision = new Collision(leftPlatform, rightPlatform, ball, score);
-
 
     }
 
@@ -65,9 +55,6 @@ public class GameScreen extends BasicGameScreen {
      */
     @Override
     public void update(GameContainer gc, ScreenManager<? extends org.mini2Dx.core.screen.GameScreen> screenManager, float delta) {
-        /*if (init) {
-            this.initialise(gc);
-        }*/
         for(int i = 0; i< ballCount; i++) {
             ball[i].update();
         }
@@ -156,6 +143,9 @@ public class GameScreen extends BasicGameScreen {
         score.initialise();
         leftPlatform.initialise();
         rightPlatform.initialise();
+        flash.initialise();
+        split.initialise();
+        grow.initialise();
     }
 
     public void addBall() {

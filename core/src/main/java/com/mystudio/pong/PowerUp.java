@@ -11,8 +11,8 @@ public abstract class PowerUp implements GameObject{//vielleicht sollte es doch 
 
     protected Sprite sprite;
     protected float xPosition, yPosition;
-    protected float width = 100;
-    protected float height = 100;
+    protected float width;
+    protected float height;
     protected Random rand;
     protected CollisionBox box;
     protected boolean active;
@@ -21,6 +21,8 @@ public abstract class PowerUp implements GameObject{//vielleicht sollte es doch 
     //Objekt fuer die Verwendung vorzubereiten
     @Override
     public void initialise() {
+        width = 70;
+        height = 70;
         active = false;
         box = new CollisionBox(10, 10, width, height); // wird geupdatet
         waitForPowerUp();// wird mit Anfang Spiel gestartet NICHT MIT GAMESCREEN !!! ÄNDERN
