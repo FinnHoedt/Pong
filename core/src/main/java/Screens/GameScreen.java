@@ -29,6 +29,7 @@ public class GameScreen extends BasicGameScreen {
     private BiggerPlatform grow;
     private int ballCount = 1;
     //private boolean init;
+    private Settings settings;
 
     /**
      * Generates a new ball, score, a left and right platform and a collision class
@@ -44,7 +45,7 @@ public class GameScreen extends BasicGameScreen {
         split = new SplitBall(this);
         grow = new BiggerPlatform();
         collision = new Collision(leftPlatform, rightPlatform, ball, score,flash, split, grow, this);
-
+        settings = Settings.getSettings();
     }
 
     /**
@@ -142,7 +143,9 @@ public class GameScreen extends BasicGameScreen {
         ball[0].raiseSpeed(2);
         score.initialise();
         leftPlatform.initialise();
+        leftPlatform.changeKeybinds(settings.getLeftPlatformUp(), settings.getLeftPlatformDown());
         rightPlatform.initialise();
+        rightPlatform.changeKeybinds(settings.getRightPlatformUp(), settings.getRightPlatformDown());
         flash.initialise();
         split.initialise();
         grow.initialise();

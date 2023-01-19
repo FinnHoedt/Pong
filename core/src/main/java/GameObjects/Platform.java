@@ -1,7 +1,10 @@
 package GameObjects;
 
 import GameObjects.GameObject;
+import Screens.OptionScreen;
 import com.badlogic.gdx.Gdx;
+import com.mystudio.pong.Settings;
+import org.graalvm.compiler.nodes.calc.IntegerDivRemNode;
 import org.mini2Dx.core.engine.geom.CollisionBox;
 import org.mini2Dx.core.graphics.Graphics;
 
@@ -11,12 +14,14 @@ import org.mini2Dx.core.graphics.Graphics;
 public abstract class Platform implements GameObject {
     protected float xPosition, yPosition, width, height;
     protected CollisionBox box;
+    public Settings settings;
     protected int keyUP;
     protected int keyDown;
 
     public Platform() {
         width = 10;
         height = 100;
+        settings = Settings.getSettings();
     }
 
     /**
@@ -121,4 +126,11 @@ public abstract class Platform implements GameObject {
         box.setHeight(height);
     }
 
+    public int getKeyUp(){
+        return keyUP;
+    }
+
+    public void setKeyUp(int keyUP){
+        this.keyUP = keyUP;
+    }
 }

@@ -1,6 +1,7 @@
 package Screens;
 
 import GameObjects.ColorPicker;
+import GameObjects.RightPlatform;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetManager;
@@ -8,6 +9,7 @@ import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.ClasspathFileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.utils.Timer;
 import com.mystudio.pong.Pong;
 import com.mystudio.pong.Settings;
 import com.mystudio.pong.Sounds;
@@ -23,9 +25,15 @@ import org.mini2Dx.core.screen.transition.FadeOutTransition;
 import org.mini2Dx.ui.UiContainer;
 import org.mini2Dx.ui.UiThemeLoader;
 import org.mini2Dx.ui.element.*;
+import org.mini2Dx.ui.element.Button;
+import org.mini2Dx.ui.element.Checkbox;
+import org.mini2Dx.ui.element.Label;
 import org.mini2Dx.ui.event.ActionEvent;
 import org.mini2Dx.ui.listener.ActionListener;
 import org.mini2Dx.ui.style.UiTheme;
+
+import java.awt.*;
+import java.util.HashMap;
 
 /**
  * OptionScreen of application
@@ -49,12 +57,18 @@ public class OptionScreen extends BasicGameScreen {
     private Label playerOneText;
     private Label playerTwoText;
     private Label colorText;
+    private Label keyUpPlayer1Text, keyDownPlayer1Text, keyUpPlayer2Text, keyDownPlayer2Text;
     private Sounds sounds;
     private Settings settings;
     private ColorPicker colorPickerLeft;
     private ColorPicker colorPickerRight;
-    private  Button colorPickerLeftButton;
+    private Button colorPickerLeftButton;
     private Button colorPickerRightButton;
+    private Button keyUpPlayer1PickerButton, keyDownPlayer1PickerButton, keyUpPlayer2PickerButton, keyDownPlayer2PickerButton;
+    private Button[] key__PickerButton ;
+    private RightPlatform rightPlatform;
+    private boolean isButtonU1pressed, isButtonD1pressed, isButtonU2pressed, isButtonD2pressed;
+    private boolean[] isButton_pressed;
 
 
     /**
@@ -82,6 +96,14 @@ public class OptionScreen extends BasicGameScreen {
         colorPickerRight = new ColorPicker(920,435,70,20);
 
         uiSetup(uiContainer);
+
+        rightPlatform = new RightPlatform();
+
+        key__PickerButton = new Button[]{keyUpPlayer1PickerButton, keyDownPlayer1PickerButton, keyUpPlayer2PickerButton, keyDownPlayer2PickerButton};
+        isButton_pressed = new boolean[]{isButtonU1pressed, isButtonD1pressed, isButtonU2pressed, isButtonD2pressed};
+        for(int i=0; i<isButton_pressed.length; i++) {
+            isButton_pressed[i] = false;
+        }
     }
     /**
      * Updates OptionScreen and waits until theme is loaded
@@ -104,6 +126,17 @@ public class OptionScreen extends BasicGameScreen {
         exitGameScreen(screenManager);
         leftColorPickerEvent();
         rightColorPickerEvent();
+        key__PickerEvents();
+
+        if(isButton_pressed[0]){
+            changeU1();
+        } else if (isButton_pressed[1]) {
+            changeD1();
+        } else if (isButton_pressed[2]) {
+            changeU2();
+        } else if (isButton_pressed[3]) {
+            changeD2();
+        }
     }
     /**
      * Interpolates OptionScreen
@@ -194,6 +227,46 @@ public class OptionScreen extends BasicGameScreen {
         downText.setColor(Color.WHITE);
         uiContainer.add(downText);
 
+        keyUpPlayer1Text = new Label(630,360,1,1);
+        keyUpPlayer1Text.setText(Input.Keys.toString(settings.getLeftPlatformUp()));
+        keyUpPlayer1Text.setVisibility(Visibility.VISIBLE);
+        keyUpPlayer1Text.setColor(Color.WHITE);
+        uiContainer.add(keyUpPlayer1Text);
+
+        keyDownPlayer1Text = new Label(630,390,1,1);
+        keyDownPlayer1Text.setText(Input.Keys.toString(settings.getLeftPlatformDown()));
+        keyDownPlayer1Text.setVisibility(Visibility.VISIBLE);
+        keyDownPlayer1Text.setColor(Color.WHITE);
+        uiContainer.add(keyDownPlayer1Text);
+
+        keyUpPlayer2Text = new Label(930,360,1,1);
+        keyUpPlayer2Text.setText(Input.Keys.toString(settings.getRightPlatformUp()));
+        keyUpPlayer2Text.setVisibility(Visibility.VISIBLE);
+        keyUpPlayer2Text.setColor(Color.WHITE);
+        uiContainer.add(keyUpPlayer2Text);
+
+        keyDownPlayer2Text = new Label(930,390,1,1);
+        keyDownPlayer2Text.setText(Input.Keys.toString(settings.getRightPlatformDown()));
+        keyDownPlayer2Text.setVisibility(Visibility.VISIBLE);
+        keyDownPlayer2Text.setColor(Color.WHITE);
+        uiContainer.add(keyDownPlayer2Text);
+
+        keyUpPlayer1PickerButton = new Button(600, 360-5, 20, 10);
+        keyUpPlayer1PickerButton.setVisibility(Visibility.VISIBLE);
+        uiContainer.add(keyUpPlayer1PickerButton);
+
+        keyDownPlayer1PickerButton = new Button(600, 390-5, 20, 10);
+        keyDownPlayer1PickerButton.setVisibility(Visibility.VISIBLE);
+        uiContainer.add(keyDownPlayer1PickerButton);
+
+        keyUpPlayer2PickerButton = new Button(900, 360-5, 20, 10);
+        keyUpPlayer2PickerButton.setVisibility(Visibility.VISIBLE);
+        uiContainer.add(keyUpPlayer2PickerButton);
+
+        keyDownPlayer2PickerButton = new Button(900, 390-5, 20, 10);
+        keyDownPlayer2PickerButton.setVisibility(Visibility.VISIBLE);
+        uiContainer.add(keyDownPlayer2PickerButton);
+
         playerOneText = new Label(600,310,1,1);
         playerOneText.setText("Player 1");
         playerOneText.setVisibility(Visibility.VISIBLE);
@@ -279,6 +352,66 @@ public class OptionScreen extends BasicGameScreen {
         });
     }
 
+    private void key__PickerEvents(){
+        for(int i=0; i < key__PickerButton.length; i++){
+            final int finalI = i;
+            key__PickerButton[i].addActionListener(new ActionListener() {
+                @Override
+                public void onActionBegin(ActionEvent event) {
+                    keyPickerButtonEvent(finalI);
+                }
+                @Override
+                public void onActionEnd(ActionEvent event) {
+
+                }
+            });
+        }
+    }
+    private void keyPickerButtonEvent(final int button){
+        for(int i=0; i<isButton_pressed.length; i++){
+            isButton_pressed[i] = false;
+
+        }
+        isButton_pressed[button] = true;
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                isButton_pressed[button] = false;
+            }
+        }, 4);
+    }
+
+    private void changeU1(){
+        settings.setLeftPlatformUp(checkKeyPress(settings.getLeftPlatformUp()));
+        keyUpPlayer1Text.setText(Input.Keys.toString(settings.getLeftPlatformUp()));
+    }
+    private void changeD1(){
+        settings.setLeftPlatformDown(checkKeyPress(settings.getLeftPlatformDown()));
+        keyDownPlayer1Text.setText(Input.Keys.toString(settings.getLeftPlatformDown()));
+    }
+    private void changeU2(){
+        settings.setRightPlatformUp(checkKeyPress(settings.getRightPlatformUp()));
+        keyUpPlayer2Text.setText(Input.Keys.toString(settings.getRightPlatformUp()));
+    }
+    private void changeD2(){
+        settings.setRightPlatformDown(checkKeyPress(settings.getRightPlatformDown()));
+        keyDownPlayer2Text.setText(Input.Keys.toString(settings.getRightPlatformDown()));
+    }
+
+
+    private int checkKeyPress(int currentKey){
+
+        int newKey = currentKey;
+        for(int i=19; i<=54; i++){
+            if(Gdx.input.isKeyPressed(i)){
+                newKey = i;
+                for(int j=0; j<isButton_pressed.length; j++) {
+                    isButton_pressed[j] = false;
+                }
+            }
+        }
+        return newKey;
+    }
     private void leftColorPickerEvent() {
         colorPickerLeftButton.addActionListener(new ActionListener() {
             @Override
