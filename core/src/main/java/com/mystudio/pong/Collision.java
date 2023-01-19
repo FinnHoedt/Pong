@@ -166,6 +166,7 @@ public class Collision {
      */
     public void addBall() {
         ballCount = 2;
+        platformCollision[1] = true;
     }
     /**
      * removes the second ball
