@@ -33,6 +33,7 @@ import org.mini2Dx.ui.listener.ActionListener;
 import org.mini2Dx.ui.style.UiTheme;
 
 import java.awt.*;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -123,7 +124,7 @@ public class OptionScreen extends BasicGameScreen {
         volumeSliderValue();
         musicCheckBoxEvent();
         soundsCheckboxEvent();
-        exitGameScreen(screenManager);
+        exitOptionScreen(screenManager);
         leftColorPickerEvent();
         rightColorPickerEvent();
         key__PickerEvents();
@@ -295,7 +296,7 @@ public class OptionScreen extends BasicGameScreen {
     }
 
     /**
-     * Changes volume when slider is used
+     * Changes volume when slider is used to slider value
      */
     private void volumeSliderValue(){
         volumeSlider.addActionListener(new ActionListener() {
@@ -312,6 +313,9 @@ public class OptionScreen extends BasicGameScreen {
         });
     }
 
+    /**
+     * Toggles music when musicCheckbox is used
+     */
     private void musicCheckBoxEvent() {
         musicCheckBox.addActionListener(new ActionListener() {
             @Override
@@ -332,6 +336,9 @@ public class OptionScreen extends BasicGameScreen {
         });
     }
 
+    /**
+     * Toggles sound when soundCheckBox is used
+     */
     private void soundsCheckboxEvent() {
         soundCheckBox.addActionListener(new ActionListener() {
             @Override
@@ -352,6 +359,9 @@ public class OptionScreen extends BasicGameScreen {
         });
     }
 
+    /**
+     *
+     */
     private void key__PickerEvents(){
         for(int i=0; i < key__PickerButton.length; i++){
             final int finalI = i;
@@ -368,10 +378,7 @@ public class OptionScreen extends BasicGameScreen {
         }
     }
     private void keyPickerButtonEvent(final int button){
-        for(int i=0; i<isButton_pressed.length; i++){
-            isButton_pressed[i] = false;
-
-        }
+        Arrays.fill(isButton_pressed, false);
         isButton_pressed[button] = true;
         Timer.schedule(new Timer.Task() {
             @Override
@@ -405,13 +412,15 @@ public class OptionScreen extends BasicGameScreen {
         for(int i=19; i<=54; i++){
             if(Gdx.input.isKeyPressed(i)){
                 newKey = i;
-                for(int j=0; j<isButton_pressed.length; j++) {
-                    isButton_pressed[j] = false;
-                }
+                Arrays.fill(isButton_pressed, false);
             }
         }
         return newKey;
     }
+
+    /**
+     * Changes ColorPicker color of leftColorPicker when Button is pressed
+     */
     private void leftColorPickerEvent() {
         colorPickerLeftButton.addActionListener(new ActionListener() {
             @Override
@@ -427,6 +436,9 @@ public class OptionScreen extends BasicGameScreen {
         });
     }
 
+    /**
+     * Changes ColorPicker color of rightColorPicker when Button is pressed
+     */
     private void rightColorPickerEvent() {
         colorPickerRightButton.addActionListener(new ActionListener() {
             @Override
@@ -442,14 +454,21 @@ public class OptionScreen extends BasicGameScreen {
         });
     }
 
-
-    private void exitGameScreen(ScreenManager screenManager) {
+    /**
+     * Exits OptionScreen when Escape is pressed
+     * @param screenManager The {@link ScreenManager} of the game
+     */
+    private void exitOptionScreen(ScreenManager screenManager) {
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
             screenManager.enterGameScreen(MainScreen.ID, new FadeOutTransition(), new FadeInTransition());
             //init = true;
         }
     }
 
+    /**
+     * Renders ColorPicker
+     * @param g The {@link Graphics} context available for rendering
+     */
     private void renderColorPicker(Graphics g) {
         colorPickerLeft.render(g);
         colorPickerRight.render(g);
