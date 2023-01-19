@@ -7,7 +7,7 @@ import org.mini2Dx.core.graphics.Sprite;
 
 import java.util.Random;
 
-public abstract class PowerUp implements GameObject {//vielleicht sollte es doch eher ein Interface sein
+public abstract class PowerUp implements GameObject {
 
     protected Sprite sprite;
     protected float xPosition, yPosition;
@@ -18,29 +18,28 @@ public abstract class PowerUp implements GameObject {//vielleicht sollte es doch
     protected boolean active;
     protected int delay;
 
-    //Objekt fuer die Verwendung vorzubereiten
-    @Override
-    public void initialise() {
+    public PowerUp() {
         width = 70;
         height = 70;
-        active = false;
-        box = new CollisionBox(10, 10, width, height); // wird geupdatet
-        waitForPowerUp();// wird mit Anfang Spiel gestartet NICHT MIT GAMESCREEN !!! ÄNDERN
+        box = new CollisionBox(10, 10, width, height);
     }
 
-    //internen Zustand eines Objekts zu aktualisieren}
+    @Override
+    public void initialise() {
+        active = false;
+        waitForPowerUp();
+    }
+
     @Override
     public void update() {
         box.preUpdate();
     }
 
-    //Animation eines Objekts auf dem Bildschirm
     @Override
     public void interpolate(float alpha) {
         box.interpolate(null, alpha);
     }
 
-    // Zeichnen des Objekts auf einem Bildschirm
     @Override
     public void render(Graphics g) {
         if (active) {
@@ -65,19 +64,19 @@ public abstract class PowerUp implements GameObject {//vielleicht sollte es doch
      * makes PowerUp-Sprite appear at a random space on the GameScreen
      */
     protected void spawn() {
-        active = true; //sichtbar machen
+        active = true;
         rand = new Random();
-        xPosition = 70 + rand.nextFloat() * (1020 - 70);// xpos zwischen 70 und 1020
-        yPosition = 20 + rand.nextFloat() * (500 - 20); // ypos zwischen 20 und 500
+        xPosition = 70 + rand.nextFloat() * (1020 - 70);
+        yPosition = 20 + rand.nextFloat() * (500 - 20);
 
         sprite.setPosition(xPosition, yPosition);
-        box = new CollisionBox(xPosition, yPosition, width, height);
+        box.set(xPosition, yPosition, width, height);
     }
 
     /**
      applies the PowerUps unique Power then disappears again
      */
-    public void applyPowerUp() {} // individuell für Unterklassen -> passt nicht hierhin
+    public void applyPowerUp() {}
 
     /**
      * @return Collisionbox from PowerUp Flash

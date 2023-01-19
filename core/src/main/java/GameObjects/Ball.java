@@ -1,7 +1,9 @@
 package GameObjects;
 
+import Screens.GameScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.mystudio.pong.Collision;
 import org.mini2Dx.core.engine.geom.CollisionCircle;
 import org.mini2Dx.core.graphics.Graphics;
 
@@ -11,11 +13,15 @@ public class Ball implements GameObject{
 
     private CollisionCircle ballCollision;
     private Random rand;
-
-    //private Sprite sprite;
     private float ballPosX, ballPosY, ballDirection, ballPlusX, ballPlusY, ballSpeedStart, ballDiameter;
     private float ballSpeed;
     boolean gameStart, lastPoint;
+    private Collision collision;
+
+    public Ball(Platform platformA, Platform platformB, SpawnManager manager, Game game) {
+        collision = new Collision(platformA, platformB, this,  manager, game);
+
+    }
 
     /**
      * ball is initialized
@@ -31,7 +37,7 @@ public class Ball implements GameObject{
         ballDirection = -1f;
         rand = new Random();
         ballCollision = new CollisionCircle(ballPosX, ballPosY, ballDiameter);
-
+        collision.setPlatformCollision();
         //sprite = new Sprite(new Texture(Gdx.files.internal("pongBall.png")));
     }
 
@@ -45,7 +51,6 @@ public class Ball implements GameObject{
         ballCollision.set(ballPosX, ballPosY);
         speedDirection();
         randomBallDirection();
-
     }
 
     /**
@@ -53,8 +58,12 @@ public class Ball implements GameObject{
      */
     @Override
     public void update() {
+        collision.checkCollision();
         ballCollision.preUpdate();
-        ballStart();
+        //ballStart();
+        if (gameStart) {
+            calcNewPos();
+        }
     }
 
     /**
@@ -72,20 +81,6 @@ public class Ball implements GameObject{
     public void render(Graphics g) {
         g.fillCircle(ballCollision.getRenderX(), ballCollision.getRenderY(), ballCollision.getRenderRadius());
         //g.drawSprite(sprite, ballCollision.getRenderX(), ballCollision.getRenderY());
-    }
-
-    /**
-     * test if space is pressed to start the game
-     */
-    public void ballStart(){
-        if(!gameStart) {
-            if(Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-                gameStart = true;
-            }
-        }
-        if(gameStart) {
-            calcNewPos();
-        }
     }
 
     /**
@@ -184,7 +179,7 @@ public class Ball implements GameObject{
         return ballSpeed;
     }
 
-    public void setGameStartTrue() {
-        gameStart = true;
+    public void setGameStart(Boolean gameStart) {
+        this.gameStart = gameStart;
     }
 }

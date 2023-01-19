@@ -11,9 +11,9 @@ import org.mini2Dx.core.graphics.Sprite;
  */
 public class SplitBall extends PowerUp{
 
-    private GameScreen game;
+    private Game game;
 
-    public SplitBall(GameScreen game){
+    public SplitBall(Game game){
         sprite = new Sprite(new Texture(Gdx.files.internal("assets/axe.png")));
         delay = 0;
         this.game = game;
@@ -24,13 +24,13 @@ public class SplitBall extends PowerUp{
      * in this case the ball is duplicated
      * @see Ball
      */
-    public void applyPowerUp(Ball[] ball) {
+    public void applyPowerUp() {
         game.addBall();
-        ball[1].getBallCollision().set(ball[0].getBallCollision().getX(), ball[0].getBallCollision().getY());
-        ball[1].setBallDirection(-ball[0].getBallDirection());
-        ball[1].setBallSpeed(ball[0].getBallSpeed()/2);
-
         active = false;
         waitForPowerUp();
     }
+
+
+
+
 }

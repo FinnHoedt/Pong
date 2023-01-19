@@ -11,31 +11,24 @@ import org.mini2Dx.core.engine.geom.CollisionBox;
 public class Collision {
 
     private Platform platformA, platformB;
-    private Ball[] ball;
-    private int ballCount = 1;
-    private Score score;
-    private CollisionBox borderTop;
-    private CollisionBox borderBottom;
-    private Flash flash; private SplitBall split; private BiggerPlatform grow;
-    private Boolean [] platformCollision = {true, true};
-    private Platform [] lastPlatform = new Platform[2];
-    private GameScreen game;
+    private Ball ball;
+    private Flash flash;
+    private SplitBall split;
+    private BiggerPlatform grow;
+    private Boolean platformCollision = true;
+    private Platform lastPlatform;
+    private Game game;
     private Sounds sounds;
 
-    public Collision(Platform platformA, Platform platformB, Ball[] ball, Score score, Flash flash, SplitBall split, BiggerPlatform grow, GameScreen game) {
+    public Collision(Platform platformA, Platform platformB, Ball ball, SpawnManager manager, Game game) {
         this.platformA = platformA;
         this.platformB = platformB;
         this.ball = ball;
-        this.score = score;
         this.game = game;
-
-        this.flash = flash;
-        this.split = split;
-        this.grow = grow;
-        lastPlatform[0] = platformA;
-        lastPlatform[1] = platformA;
-        borderTop = new CollisionBox(0, 0, Gdx.graphics.getWidth(),0);
-        borderBottom = new CollisionBox(0, Gdx.graphics.getHeight(), Gdx.graphics.getWidth(),0);
+        this.flash = manager.getFlash();
+        this.split = manager.getSplit();
+        this.grow = manager.getGrow();
+        lastPlatform = platformA;
         sounds = Sounds.getSounds();
         sounds.soundsSetUp();
     }
@@ -44,34 +37,27 @@ public class Collision {
      * check collisions
      */
     public void checkCollision() {
-        for(int i = 0; i< ballCount; i++) {
-            checkScoreCollision(i);
-            checkPlatformCollision(i);
-            checkBorderCollision(i);
-            checkFlashCollision(i);
-            checkSplitCollision(i);
-            checkGrowCollision(i);
-            checkBallX(i);
-
-        }
+        checkScoreCollision();
+        checkPlatformCollision();
+        checkBorderCollision();
+        checkFlashCollision();
+        checkSplitCollision();
+        checkGrowCollision();
+        checkBallX();
     }
 
     /**
      * check collision with left and right border
      * increase score
      */
-    private void checkScoreCollision(int i) {
-        if(ball[i].getBallCollision().getX() < 0) {
-            score.upRightScore();
-            ball[0].setLastPoint(true);
-            ball[0].ballReset();
-            removeBall();
+    private void checkScoreCollision() {
+        if(ball.getBallCollision().getX() < 0) {
+            ball.setLastPoint(true);
+            game.upRightScore();
             sounds.playPlayerScores();
-        } else if(ball[i].getBallCollision().getX() > Gdx.graphics.getWidth()) {
-            score.upLeftScore();
-            ball[0].setLastPoint(false);
-            ball[0].ballReset();
-            removeBall();
+        } else if(ball.getBallCollision().getX() > Gdx.graphics.getWidth()) {
+            ball.setLastPoint(false);
+            game.upLeftScore();
             sounds.playPlayerScores();
         }
     }
@@ -79,33 +65,32 @@ public class Collision {
     /**
      * sets Boolean platformCollision true when ball is in center
      */
-    private void checkBallX(int i) {
-        float ballX = ball[i].getBallCollision().getX();
+    private void checkBallX() {
+        float ballX = ball.getBallCollision().getX();
         float width = Gdx.graphics.getWidth()/2;
-        if(ballX >= width -50 && ballX <= width + 50 && !platformCollision[i]) {
-            platformCollision[i] = true;
+        if(ballX >= width -50 && ballX <= width + 50 && !platformCollision) {
+            platformCollision = true;
         }
     }
-
 
     /**
      * checks collision with platforms if Boolean platformCollision is true
      */
-    private void checkPlatformCollision(int i) {
-        if(platformCollision[i]) {
-            checkPlatformA(i);
-            checkPlatformB(i);
+    private void checkPlatformCollision() {
+        if(platformCollision) {
+            checkPlatformA();
+            checkPlatformB();
         }
     }
 
     /**
      * check collision with platform A
      */
-    private void checkPlatformA(int i) {
-        if (platformA.getCollisionBox().intersects(ball[i].getBallCollision())) {
-            ball[i].changeHorizontalDirection();
-            platformCollision[i] = false;
-            lastPlatform[i] = platformA;
+    private void checkPlatformA() {
+        if (platformA.getCollisionBox().intersects(ball.getBallCollision())) {
+            ball.changeHorizontalDirection();
+            platformCollision = false;
+            lastPlatform = platformA;
             sounds.playHitPaddle();
         }
     }
@@ -113,11 +98,11 @@ public class Collision {
     /**
      * check collision with platform B
      */
-    private void checkPlatformB(int i) {
-        if(platformB.getCollisionBox().intersects(ball[i].getBallCollision())) {
-            ball[i].changeHorizontalDirection();
-            platformCollision[i] = false;
-            lastPlatform[i] = platformB;
+    private void checkPlatformB() {
+        if(platformB.getCollisionBox().intersects(ball.getBallCollision())) {
+            ball.changeHorizontalDirection();
+            platformCollision = false;
+            lastPlatform = platformB;
             sounds.playHitPaddle();
         }
     }
@@ -125,37 +110,30 @@ public class Collision {
     /**
      * check collision with top and bottom border
      */
-    private void checkBorderCollision(int i) {
-        if (borderTop.intersects(ball[i].getBallCollision())) {
-            ball[i].changeVerticalDirection();
-            sounds.playHitWall();
-        } else if (borderBottom.intersects(ball[i].getBallCollision())) {
-            ball[i].changeVerticalDirection();
+    private void checkBorderCollision() {
+        if (ball.getBallCollision().getY() - 10 <= 0 || ball.getBallCollision().getY() + 10 >= 580) {
+            ball.changeVerticalDirection();
             sounds.playHitWall();
         }
-    }
-    private void checkFlashCollision(int i) {
-        if (flash.getCollisionBox().intersects(ball[i].getBallCollision()) && flash.getState()) { //Collission nur wenn sichtbar
-            flash.applyPowerUp(ball[i]);
-        }
-    }
-    private void checkSplitCollision(int i) {
-        if (split.getCollisionBox().intersects(ball[i].getBallCollision()) && split.getState()) { //Collission nur wenn sichtbar
-            split.applyPowerUp(ball);
-        }
-    }
-    private void checkGrowCollision(int i) {
-        if (grow.getCollisionBox().intersects(ball[i].getBallCollision()) && grow.getState()) { //Collission nur wenn sichtbar
-            grow.applyPowerUp(lastPlatform[i]);
-        }
-    }
-    public void addBall() {
-        ballCount = 2;
     }
 
-    public void removeBall() {
-        ballCount = 1;
-        platformCollision[1] = true;
-        game.removeBall();
+    private void checkFlashCollision() {
+        if (flash.getCollisionBox().intersects(ball.getBallCollision()) && flash.getState()) {
+            flash.applyPowerUp(ball);
+        }
+    }
+    private void checkSplitCollision() {
+        if (split.getCollisionBox().intersects(ball.getBallCollision()) && split.getState()) {
+            split.applyPowerUp();
+        }
+    }
+    private void checkGrowCollision() {
+        if (grow.getCollisionBox().intersects(ball.getBallCollision()) && grow.getState()) {
+            grow.applyPowerUp(lastPlatform);
+        }
+    }
+
+    public void setPlatformCollision() {
+        platformCollision = true;
     }
 }

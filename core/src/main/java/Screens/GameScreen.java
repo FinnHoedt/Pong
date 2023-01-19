@@ -19,33 +19,16 @@ import org.mini2Dx.core.screen.transition.FadeOutTransition;
  */
 public class GameScreen extends BasicGameScreen {
     public static int ID = 3;
-    private Ball ball[] = {new Ball(), new Ball()};
-    private Score score;
-    private LeftPlatform leftPlatform;
-    private RightPlatform rightPlatform;
-    private Collision collision;
-    private Flash flash;
-    private SplitBall split;
-    private BiggerPlatform grow;
-    private int ballCount = 1;
-
-    private ComputerPlayer pc;
+    private Game game;
 
     /**
      * Generates a new ball, score, a left and right platform and a collision class
      * @param gc The {@link GameContainer} of the game
      */
-
     @Override
     public void initialise(GameContainer gc) {
-        score = new Score();
-        leftPlatform = new LeftPlatform();
-        rightPlatform = new RightPlatform();
-        flash = new Flash();
-        split = new SplitBall(this);
-        grow = new BiggerPlatform();
-        collision = new Collision(leftPlatform, rightPlatform, ball, score,flash, split, grow, this);
-        //pc = new ComputerPlayer(ball, rightPlatform, this);
+        game = new Game();
+        game.initialise();
     }
 
     /**
@@ -56,17 +39,8 @@ public class GameScreen extends BasicGameScreen {
      */
     @Override
     public void update(GameContainer gc, ScreenManager<? extends org.mini2Dx.core.screen.GameScreen> screenManager, float delta) {
-        for(int i = 0; i< ballCount; i++) {
-            ball[i].update();
-        }
-        leftPlatform.update();
-        rightPlatform.update();
-        flash.update();
-        split.update();
-        grow.update();
-        collision.checkCollision();
+        game.update();
         exitGameScreen(screenManager);
-        //pc.update();
     }
 
     /**
@@ -76,11 +50,7 @@ public class GameScreen extends BasicGameScreen {
      */
     @Override
     public void interpolate(GameContainer gc, float alpha) {
-        for(int i = 0; i< ballCount; i++) {
-            ball[i].interpolate(alpha);
-        }
-        leftPlatform.interpolate(alpha);
-        rightPlatform.interpolate(alpha);
+        game.interpolate(alpha);
     }
 
     /**
@@ -91,15 +61,7 @@ public class GameScreen extends BasicGameScreen {
     @Override
     public void render(GameContainer gc, Graphics g) {
         generateHyphen(g);
-        score.render(g);
-        for(int i = 0; i< ballCount; i++) {
-            ball[i].render(g);
-        }
-        leftPlatform.render(g);
-        rightPlatform.render(g);
-        flash.render(g);
-        split.render(g);
-        grow.render(g);
+        game.render(g);
     }
 
     /**
@@ -137,30 +99,7 @@ public class GameScreen extends BasicGameScreen {
 
     @Override
     public void preTransitionIn(Transition transitionIn) {
-        for(int i = 0; i< ballCount; i++) {
-            ball[i].initialise();
-        }
-        ball[0].raiseSpeed(2);
-        score.initialise();
-        leftPlatform.initialise();
-        rightPlatform.initialise();
-        flash.initialise();
-        split.initialise();
-        grow.initialise();
+        game.preTransitionIn();
     }
 
-    public void addBall() {
-        ballCount = 2;
-        ball[1].initialise();
-        ball[1].setGameStartTrue();
-        collision.addBall();
-    }
-
-    public void removeBall() {
-        ballCount = 1;
-    }
-
-    public int getBallCount() {
-        return ballCount;
-    }
 }
