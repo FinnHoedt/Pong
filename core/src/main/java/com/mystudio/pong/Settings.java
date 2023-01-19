@@ -24,7 +24,7 @@ public class Settings {
         rightPlatformUp = 19;
         rightPlatformDown = 20;
         leftPlatformColor = Color.WHITE;
-        rightPlatformColor = Color.BLACK;
+        rightPlatformColor = Color.WHITE;
     }
 
     public static Settings getSettings(){

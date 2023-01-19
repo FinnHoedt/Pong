@@ -1,7 +1,9 @@
 package GameObjects;
 
-import GameObjects.GameObject;
+
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.mystudio.pong.Settings;
 import org.mini2Dx.core.engine.geom.CollisionBox;
 import org.mini2Dx.core.graphics.Graphics;
 
@@ -11,12 +13,15 @@ import org.mini2Dx.core.graphics.Graphics;
 public abstract class Platform implements GameObject {
     protected float xPosition, yPosition, width, height;
     protected CollisionBox box;
+    public Settings settings;
     protected int keyUP;
     protected int keyDown;
+    public Color color;
 
     public Platform() {
         width = 10;
         height = 100;
+        settings = Settings.getSettings();
     }
 
     /**
@@ -53,6 +58,7 @@ public abstract class Platform implements GameObject {
      */
     @Override
     public void render(Graphics g) {
+        g.setColor(color);
         g.fillRect(box.getRenderX(), box.getRenderY(), box.getRenderWidth(), box.getRenderHeight());
     }
 
@@ -121,4 +127,7 @@ public abstract class Platform implements GameObject {
         box.setHeight(height);
     }
 
+    public void changeColor(Color color) {
+        this.color = color;
+    }
 }
