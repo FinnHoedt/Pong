@@ -12,10 +12,12 @@ import org.mini2Dx.core.graphics.Sprite;
 public class SplitBall extends PowerUp{
 
     private GameScreen game;
-
+    /**
+     Constructor sets the Sprite and delay
+     */
     public SplitBall(GameScreen game){
         sprite = new Sprite(new Texture(Gdx.files.internal("assets/axe.png")));
-        delay = 0;
+        delay = 40;
         this.game = game;
     }
 

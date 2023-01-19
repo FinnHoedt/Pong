@@ -2,14 +2,16 @@ package GameObjects;
 
 import com.badlogic.gdx.graphics.Color;
 import org.mini2Dx.core.graphics.Graphics;
+import java.util.ArrayList;
+import java.util.Arrays;
 
-import java.lang.reflect.Array;
-
+/**
+ * ColorPicker through which you can change color of Platforms
+ */
 public class ColorPicker implements GameObject {
 
-    private Color[] colorArray;
+    private ArrayList<Color> colorArray;
     int i;
-
     float x;
     float y;
     float width;
@@ -20,7 +22,7 @@ public class ColorPicker implements GameObject {
         this.y = y;
         this.width = width;
         this.height = height;
-        colorArray = new Color[]{Color.WHITE, Color.GOLD, Color.BLUE, Color.GREEN};
+        colorArray = new ArrayList<Color>(Arrays.asList(Color.WHITE, Color.GOLD, Color.BLUE, Color.GREEN));
         i = 0;
     }
 
@@ -39,21 +41,32 @@ public class ColorPicker implements GameObject {
 
     }
 
+    /**
+     * Renders ColorPicker
+     * @param g The {@link Graphics} context available for rendering
+     */
     @Override
     public void render(Graphics g) {
-        g.setColor(colorArray[i]);
+        g.setColor(colorArray.get(i));
         g.fillRect(x,y,width,height);
     }
 
+    /**
+     * Steps through Array of Color
+     */
     public void upArray() {
-        if(i == colorArray.length - 1) {
+        if(i == colorArray.size() - 1) {
             i = 0;
         } else {
             i++;
         }
     }
 
+    /**
+     * Returns current ArrayColor
+     * @return color current Color
+     */
     public Color getColorArray() {
-        return colorArray[i];
+        return colorArray.get(i);
     }
 }
