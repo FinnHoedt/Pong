@@ -1,10 +1,8 @@
 package GameObjects;
 
-import GameObjects.GameObject;
-import Screens.OptionScreen;
+
 import com.badlogic.gdx.Gdx;
 import com.mystudio.pong.Settings;
-import org.graalvm.compiler.nodes.calc.IntegerDivRemNode;
 import org.mini2Dx.core.engine.geom.CollisionBox;
 import org.mini2Dx.core.graphics.Graphics;
 
@@ -124,13 +122,5 @@ public abstract class Platform implements GameObject {
     public void resetHeight() {
         box.setY(box.getY() - ((height - box.getHeight()) / 2));
         box.setHeight(height);
-    }
-
-    public int getKeyUp(){
-        return keyUP;
-    }
-
-    public void setKeyUp(int keyUP){
-        this.keyUP = keyUP;
     }
 }
