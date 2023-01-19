@@ -420,6 +420,7 @@ public class OptionScreen extends BasicGameScreen {
             public void onActionBegin(ActionEvent event) {
                 colorPickerLeft.upArray();
                 settings.setLeftPlatformColor(colorPickerLeft.getColorArray());
+
             }
 
             @Override
@@ -437,7 +438,7 @@ public class OptionScreen extends BasicGameScreen {
             @Override
             public void onActionBegin(ActionEvent event) {
                 colorPickerRight.upArray();
-                settings.setLeftPlatformColor(colorPickerRight.getColorArray());
+                settings.setRightPlatformColor(colorPickerRight.getColorArray());
             }
 
             @Override

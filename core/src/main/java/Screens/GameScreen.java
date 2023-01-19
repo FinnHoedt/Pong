@@ -144,8 +144,10 @@ public class GameScreen extends BasicGameScreen {
         score.initialise();
         leftPlatform.initialise();
         leftPlatform.changeKeybinds(settings.getLeftPlatformUp(), settings.getLeftPlatformDown());
+        leftPlatform.changeColor(settings.getLeftPlatformColor());
         rightPlatform.initialise();
         rightPlatform.changeKeybinds(settings.getRightPlatformUp(), settings.getRightPlatformDown());
+        rightPlatform.changeColor(settings.getRightPlatformColor());
         flash.initialise();
         split.initialise();
         grow.initialise();
