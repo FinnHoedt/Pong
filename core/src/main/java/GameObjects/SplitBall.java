@@ -15,7 +15,7 @@ public class SplitBall extends PowerUp{
 
     public SplitBall(GameScreen game){
         sprite = new Sprite(new Texture(Gdx.files.internal("assets/axe.png")));
-        delay = 0;
+        delay = 40;
         this.game = game;
     }
 

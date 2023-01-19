@@ -13,7 +13,7 @@ public class BiggerPlatform extends PowerUp{
 
     public BiggerPlatform() {
         sprite = new Sprite(new Texture(Gdx.files.internal("assets/Grow.png")));
-        delay = 25;
+        delay = 30;
     }
 
     /**

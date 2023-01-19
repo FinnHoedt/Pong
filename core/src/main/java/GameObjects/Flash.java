@@ -13,7 +13,7 @@ public class Flash extends PowerUp {
 
     public Flash(){
         sprite = new Sprite(new Texture(Gdx.files.internal("assets/PixelFlashGross.png")));
-        delay = 7;
+        delay = 10;
     }
 
     /**
