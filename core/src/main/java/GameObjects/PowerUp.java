@@ -58,7 +58,7 @@ public abstract class PowerUp implements GameObject {//vielleicht sollte es doch
             public void run() {
                 spawn();
             }
-        }, 10 + rand.nextFloat() * delay);
+        }, 20 + rand.nextFloat() * delay);
     }
 
     /**
@@ -77,7 +77,7 @@ public abstract class PowerUp implements GameObject {//vielleicht sollte es doch
     /**
      applies the PowerUps unique Power then disappears again
      */
-    public void applyPowerUp() {} // individuell für Unterklassen -> passt nicht hierhin
+    public void applyPowerUp() {} // individuell für Unterklassen
 
     /**
      * @return Collisionbox from PowerUp Flash
