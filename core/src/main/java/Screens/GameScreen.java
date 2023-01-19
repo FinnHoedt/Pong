@@ -20,15 +20,18 @@ import org.mini2Dx.core.screen.transition.FadeOutTransition;
 public class GameScreen extends BasicGameScreen {
     public static int ID = 3;
     private Game game;
+    private Settings settings;
 
     /**
      * Generates a new ball, score, a left and right platform and a collision class
      * @param gc The {@link GameContainer} of the game
      */
+
     @Override
     public void initialise(GameContainer gc) {
         game = new Game();
         game.initialise();
+        settings = Settings.getSettings();
     }
 
     /**
@@ -102,4 +105,8 @@ public class GameScreen extends BasicGameScreen {
         game.preTransitionIn();
     }
 
+    public void removeBall() {
+        ballCount = 1;
+        collision.removeBall();
+    }
 }

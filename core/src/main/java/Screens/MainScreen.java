@@ -32,7 +32,6 @@ public class MainScreen extends BasicGameScreen {
     private TextButton startButton;
     private TextButton settingsButton;
     private TextButton quitButton;
-
     private Sounds sounds;
 
     /**

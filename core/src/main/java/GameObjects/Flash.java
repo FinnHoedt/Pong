@@ -10,10 +10,12 @@ import org.mini2Dx.core.graphics.Sprite;
  * @see PowerUp
  */
 public class Flash extends PowerUp {
-
+    /**
+        Constructor sets the Sprite and delay
+     */
     public Flash(){
         sprite = new Sprite(new Texture(Gdx.files.internal("assets/PixelFlashGross.png")));
-        delay = 7;
+        delay = 10;
     }
 
     /**
@@ -22,7 +24,7 @@ public class Flash extends PowerUp {
      * @see Ball
      */
     public void applyPowerUp(Ball ball) {
-        ball.raiseSpeed(3);//Ball wird schneller. Neuer Ball ist wieder normal schnell
+        ball.raiseSpeed(3);
         active = false;
         //waitForPowerUp();
     }

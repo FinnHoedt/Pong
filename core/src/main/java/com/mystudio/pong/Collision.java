@@ -75,6 +75,7 @@ public class Collision {
         }
     }
 
+
     /**
      * checks collision with platforms if Boolean platformCollision is true
      */
@@ -123,17 +124,20 @@ public class Collision {
         if (flash.getCollisionBox().intersects(ball.getBallCollision()) && flash.getState()) {
             flash.applyPowerUp(ball);
             spawnManager.addPowerUp(flash);
+            sounds.playFlashSound();
         }
     }
     private void checkSplitCollision() {
         if (split.getCollisionBox().intersects(ball.getBallCollision()) && split.getState()) {
             split.applyPowerUp();
+            sounds.playSplitBallSound();
         }
     }
     private void checkGrowCollision() {
         if (grow.getCollisionBox().intersects(ball.getBallCollision()) && grow.getState()) {
             grow.applyPowerUp(lastPlatform);
             spawnManager.addPowerUp(grow);
+            sounds.playBiggerPlatformSound();
         }
     }
 
