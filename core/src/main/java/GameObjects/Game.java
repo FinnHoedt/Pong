@@ -3,6 +3,7 @@ package GameObjects;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.mystudio.pong.ComputerPlayer;
+import com.mystudio.pong.Settings;
 import org.mini2Dx.core.graphics.Graphics;
 
 public class Game implements GameObject{
@@ -11,7 +12,7 @@ public class Game implements GameObject{
     private Score score;
     private LeftPlatform leftPlatform;
     private RightPlatform rightPlatform;
-    private SpawnManager manager;
+    private SpawnManager spawnManager;
     private int ballCount = 1;
     private boolean gameStart;
     private ComputerPlayer pc;
@@ -22,10 +23,10 @@ public class Game implements GameObject{
         score = new Score();
         leftPlatform = new LeftPlatform();
         rightPlatform = new RightPlatform();
-        manager = new SpawnManager(this);
-        manager.initialise();
-        ball[0] = new Ball(leftPlatform, rightPlatform, manager, this);
-        ball[1] = new Ball(leftPlatform, rightPlatform, manager, this);
+        spawnManager = new SpawnManager(this);
+        spawnManager.initialise();
+        ball[0] = new Ball(leftPlatform, rightPlatform, spawnManager, this);
+        ball[1] = new Ball(leftPlatform, rightPlatform, spawnManager, this);
         pc = new ComputerPlayer(ball, leftPlatform, rightPlatform, this);
     }
 
@@ -36,10 +37,10 @@ public class Game implements GameObject{
         }
         leftPlatform.update();
         rightPlatform.update();
-        manager.update();
+        spawnManager.update();
         gameStart();
         pc.update();
-        //pc.update2();
+        pc.update2();
     }
 
     @Override
@@ -59,16 +60,20 @@ public class Game implements GameObject{
         }
         leftPlatform.render(g);
         rightPlatform.render(g);
-        manager.render(g);
+        spawnManager.render(g);
     }
 
-    public void preTransitionIn() {
+    public void preTransitionIn(Settings settings) {
         for(int i = 0; i< ballCount; i++) {
             ball[i].initialise();
         }
         score.initialise();
         leftPlatform.initialise();
+        leftPlatform.changeKeybinds(settings.getLeftPlatformUp(), settings.getLeftPlatformDown());
+        leftPlatform.changeColor(settings.getLeftPlatformColor());
         rightPlatform.initialise();
+        rightPlatform.changeKeybinds(settings.getRightPlatformUp(), settings.getRightPlatformDown());
+        rightPlatform.changeColor(settings.getRightPlatformColor());
 
     }
 
@@ -86,10 +91,10 @@ public class Game implements GameObject{
         ballCount = 1;
         gameStart = false;
         ball[0].ballReset();
-        manager.initialise();
+        spawnManager.initialise();
         leftPlatform.resetHeight();
         rightPlatform.resetHeight();
-        manager.setSpawn(gameStart);
+        spawnManager.setSpawn(gameStart);
     }
 
     public void addBall() {
@@ -106,7 +111,7 @@ public class Game implements GameObject{
             if(Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
                 gameStart = true;
                 ball[0].setGameStart(true);
-                manager.setSpawn(gameStart);
+                spawnManager.setSpawn(gameStart);
             }
         }
     }

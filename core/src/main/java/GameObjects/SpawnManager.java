@@ -27,6 +27,7 @@ public class SpawnManager implements GameObject{
 
     @Override
     public void initialise() {
+        spawn = false;
         flash.initialise();
         split.initialise();
         grow.initialise();

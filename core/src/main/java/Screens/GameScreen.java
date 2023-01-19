@@ -102,11 +102,7 @@ public class GameScreen extends BasicGameScreen {
 
     @Override
     public void preTransitionIn(Transition transitionIn) {
-        game.preTransitionIn();
+        game.preTransitionIn(settings);
     }
 
-    public void removeBall() {
-        ballCount = 1;
-        collision.removeBall();
-    }
 }
