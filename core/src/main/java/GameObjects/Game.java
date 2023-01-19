@@ -23,6 +23,7 @@ public class Game implements GameObject{
         leftPlatform = new LeftPlatform();
         rightPlatform = new RightPlatform();
         manager = new SpawnManager(this);
+        manager.initialise();
         ball[0] = new Ball(leftPlatform, rightPlatform, manager, this);
         ball[1] = new Ball(leftPlatform, rightPlatform, manager, this);
         pc = new ComputerPlayer(ball, leftPlatform, rightPlatform, this);
@@ -73,16 +74,22 @@ public class Game implements GameObject{
 
     public void upLeftScore() {
         score.upLeftScore();
-        ballCount = 1;
-        gameStart = false;
-        ball[0].ballReset();
+        resetGame();
     }
 
     public void upRightScore() {
         score.upRightScore();
+        resetGame();
+    }
+
+    private void resetGame() {
         ballCount = 1;
         gameStart = false;
         ball[0].ballReset();
+        manager.initialise();
+        leftPlatform.resetHeight();
+        rightPlatform.resetHeight();
+        manager.setSpawn(gameStart);
     }
 
     public void addBall() {
@@ -99,7 +106,7 @@ public class Game implements GameObject{
             if(Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
                 gameStart = true;
                 ball[0].setGameStart(true);
-                manager.initialise();
+                manager.setSpawn(gameStart);
             }
         }
     }

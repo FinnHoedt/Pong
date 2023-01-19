@@ -12,6 +12,8 @@ public class SpawnManager implements GameObject{
     private BiggerPlatform grow;
     ArrayList<PowerUp> powerUps = new ArrayList<PowerUp>();
     private Boolean spawn;
+    private Random random;
+    private Game game;
 
     public SpawnManager(Game game) {
         random = new Random();
@@ -45,7 +47,6 @@ public class SpawnManager implements GameObject{
 
     @Override
     public void interpolate(float alpha) {
-
     }
 
     @Override
@@ -88,5 +89,14 @@ public class SpawnManager implements GameObject{
 
     public BiggerPlatform getGrow() {
         return grow;
+    }
+
+    public void addPowerUp(PowerUp powerUp) {
+        powerUps.add(powerUp);
+        System.out.println(powerUps);
+    }
+
+    public void setSpawn(Boolean spawn) {
+        this.spawn = spawn;
     }
 }

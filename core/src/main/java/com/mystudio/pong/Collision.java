@@ -122,6 +122,7 @@ public class Collision {
     private void checkFlashCollision() {
         if (flash.getCollisionBox().intersects(ball.getBallCollision()) && flash.getState()) {
             flash.applyPowerUp(ball);
+            spawnManager.addPowerUp(flash);
         }
     }
     private void checkSplitCollision() {
@@ -132,6 +133,7 @@ public class Collision {
     private void checkGrowCollision() {
         if (grow.getCollisionBox().intersects(ball.getBallCollision()) && grow.getState()) {
             grow.applyPowerUp(lastPlatform);
+            spawnManager.addPowerUp(grow);
         }
     }
 

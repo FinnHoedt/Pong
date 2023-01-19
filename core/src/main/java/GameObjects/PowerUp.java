@@ -1,5 +1,6 @@
 package GameObjects;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Timer;
 import org.mini2Dx.core.engine.geom.CollisionBox;
 import org.mini2Dx.core.graphics.Graphics;
@@ -45,19 +46,6 @@ public abstract class PowerUp implements GameObject {
         if (active) {
             g.drawSprite(sprite);
         }
-    }
-
-    /**
-     * sets a Timer, which waits a random delay time before the PowerUp should appear on the Screen
-     */
-    public void waitForPowerUp() {
-        rand = new Random();
-        Timer.schedule(new Timer.Task() {
-            @Override
-            public void run() {
-                spawn();
-            }
-        }, 10 + rand.nextFloat() * delay);
     }
 
     /**
