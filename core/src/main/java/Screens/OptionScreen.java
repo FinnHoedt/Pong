@@ -1,7 +1,6 @@
 package Screens;
 
 import GameObjects.ColorPicker;
-import GameObjects.RightPlatform;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetManager;
@@ -32,19 +31,17 @@ import org.mini2Dx.ui.event.ActionEvent;
 import org.mini2Dx.ui.listener.ActionListener;
 import org.mini2Dx.ui.style.UiTheme;
 
-import java.awt.*;
+
 import java.util.Arrays;
-import java.util.HashMap;
+
 
 /**
  * OptionScreen of application
  */
 public class OptionScreen extends BasicGameScreen {
     public static int ID = 2;
-
     private AssetManager assetManager;
     private UiContainer uiContainer;
-
     private Label settingsText;
     private Label soundText;
     private Checkbox soundCheckBox;
@@ -66,9 +63,7 @@ public class OptionScreen extends BasicGameScreen {
     private Button colorPickerLeftButton;
     private Button colorPickerRightButton;
     private Button keyUpPlayer1PickerButton, keyDownPlayer1PickerButton, keyUpPlayer2PickerButton, keyDownPlayer2PickerButton;
-    private Button[] key__PickerButton ;
-    private RightPlatform rightPlatform;
-    private boolean isButtonU1pressed, isButtonD1pressed, isButtonU2pressed, isButtonD2pressed;
+    private Button[] key__PickerButton;
     private boolean[] isButton_pressed;
 
 
@@ -98,13 +93,11 @@ public class OptionScreen extends BasicGameScreen {
 
         uiSetup(uiContainer);
 
-        rightPlatform = new RightPlatform();
-
         key__PickerButton = new Button[]{keyUpPlayer1PickerButton, keyDownPlayer1PickerButton, keyUpPlayer2PickerButton, keyDownPlayer2PickerButton};
-        isButton_pressed = new boolean[]{isButtonU1pressed, isButtonD1pressed, isButtonU2pressed, isButtonD2pressed};
-        for(int i=0; i<isButton_pressed.length; i++) {
-            isButton_pressed[i] = false;
-        }
+
+        isButton_pressed = new boolean[4];
+
+        Arrays.fill(isButton_pressed, false);
     }
     /**
      * Updates OptionScreen and waits until theme is loaded
@@ -461,7 +454,6 @@ public class OptionScreen extends BasicGameScreen {
     private void exitOptionScreen(ScreenManager screenManager) {
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
             screenManager.enterGameScreen(MainScreen.ID, new FadeOutTransition(), new FadeInTransition());
-            //init = true;
         }
     }
 
