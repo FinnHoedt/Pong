@@ -21,20 +21,16 @@ public class Score implements GameObject {
      */
     @Override
     public void initialise() {
-        scoreLeft = 0;
-        scoreRight = 0;
+        scoreLeft = 100;
+        scoreRight = 10;
         generateFont();
     }
 
     @Override
-    public void update() {
-
-    }
+    public void update() {}
 
     @Override
-    public void interpolate(float alpha) {
-
-    }
+    public void interpolate(float alpha) {}
 
     /**
      * score is getting rendered
@@ -64,11 +60,8 @@ public class Score implements GameObject {
     public void drawScore(Graphics g) {
         g.setFont(gameFont);
         g.setColor(Color.WHITE);
-        if(scoreLeft < 10) {
-            g.drawString(Integer.toString(scoreLeft), (float) Gdx.graphics.getWidth()/2 - 50, 15);
-        } else {
-            g.drawString(Integer.toString(scoreLeft), (float) Gdx.graphics.getWidth()/2 - 77, 15);
-        }
+        int offset = String.valueOf(scoreLeft).length();
+        g.drawString(Integer.toString(scoreLeft), (float) Gdx.graphics.getWidth()/2 - (50 + 18*offset), 15);
         g.drawString(Integer.toString(scoreRight), (float) Gdx.graphics.getWidth()/2 + 26, 15);
     }
 
