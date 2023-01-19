@@ -62,7 +62,7 @@ public class Sounds {
 
     public void toggleSounds() {
         if(settings.getSound()) {
-            soundVolume = 1f;
+            soundVolume = .5f;
         } else {
             soundVolume = 0f;
         }
