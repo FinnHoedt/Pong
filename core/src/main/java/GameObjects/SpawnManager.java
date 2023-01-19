@@ -1,18 +1,26 @@
 package GameObjects;
 
+import com.badlogic.gdx.utils.Timer;
 import org.mini2Dx.core.graphics.Graphics;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class SpawnManager implements GameObject{
     private Flash flash;
     private SplitBall split;
     private BiggerPlatform grow;
+    ArrayList<PowerUp> powerUps = new ArrayList<PowerUp>();
     private Boolean spawn;
 
     public SpawnManager(Game game) {
+        random = new Random();
         spawn = false;
+        this.game = game;
         flash = new Flash();
         split = new SplitBall(game);
         grow = new BiggerPlatform();
+
     }
 
     @Override
@@ -20,6 +28,11 @@ public class SpawnManager implements GameObject{
         flash.initialise();
         split.initialise();
         grow.initialise();
+        powerUps.clear();
+        powerUps.add(flash);
+        powerUps.add(split);
+        powerUps.add(grow);
+        System.out.println(powerUps);
     }
 
     @Override
@@ -27,6 +40,7 @@ public class SpawnManager implements GameObject{
         flash.update();
         split.update();
         grow.update();
+        spawner();
     }
 
     @Override
@@ -39,6 +53,29 @@ public class SpawnManager implements GameObject{
         flash.render(g);
         split.render(g);
         grow.render(g);
+    }
+
+    private void spawner() {
+        if(spawn) {
+            spawn = false;
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    if(game.getGameStart()) {
+                        if (!powerUps.isEmpty()) {
+                            pickPowerUp().spawn();
+                        }
+                        spawn = true;
+                    }
+                }
+            }, 4 + random.nextFloat() * 4);
+        }
+    }
+
+    public PowerUp pickPowerUp() {
+        PowerUp currentPowerUp = powerUps.get(random.nextInt(powerUps.size()));
+        powerUps.remove(currentPowerUp);
+        return currentPowerUp;
     }
 
     public Flash getFlash() {

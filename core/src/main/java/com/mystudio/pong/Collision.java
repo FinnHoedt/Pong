@@ -17,12 +17,14 @@ public class Collision {
     private BiggerPlatform grow;
     private Boolean platformCollision = true;
     private Platform lastPlatform;
+    private SpawnManager spawnManager;
     private Game game;
     private Sounds sounds;
 
     public Collision(Platform platformA, Platform platformB, Ball ball, SpawnManager manager, Game game) {
         this.platformA = platformA;
         this.platformB = platformB;
+        this.spawnManager = manager;
         this.ball = ball;
         this.game = game;
         this.flash = manager.getFlash();

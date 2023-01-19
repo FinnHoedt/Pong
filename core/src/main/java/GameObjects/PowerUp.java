@@ -27,7 +27,7 @@ public abstract class PowerUp implements GameObject {
     @Override
     public void initialise() {
         active = false;
-        waitForPowerUp();
+        //waitForPowerUp();
     }
 
     @Override
@@ -66,11 +66,12 @@ public abstract class PowerUp implements GameObject {
     protected void spawn() {
         active = true;
         rand = new Random();
-        xPosition = 70 + rand.nextFloat() * (1020 - 70);
-        yPosition = 20 + rand.nextFloat() * (500 - 20);
+        xPosition = Gdx.graphics.getWidth()/2 - 300 + (rand.nextFloat() * 600);
+        yPosition = Gdx.graphics.getHeight()/2 - 150 + (rand.nextFloat() * 300);
 
         sprite.setPosition(xPosition, yPosition);
         box.set(xPosition, yPosition, width, height);
+        System.out.println("spawwwwwwwwwwwwwn");
     }
 
     /**

@@ -13,7 +13,7 @@ public class Game implements GameObject{
     private RightPlatform rightPlatform;
     private SpawnManager manager;
     private int ballCount = 1;
-    boolean gameStart;
+    private boolean gameStart;
     private ComputerPlayer pc;
 
     @Override
@@ -38,7 +38,7 @@ public class Game implements GameObject{
         manager.update();
         gameStart();
         pc.update();
-        pc.update2();
+        //pc.update2();
     }
 
     @Override
@@ -102,6 +102,10 @@ public class Game implements GameObject{
                 manager.initialise();
             }
         }
+    }
+
+    public Boolean getGameStart() {
+        return gameStart;
     }
 
     public int getBallCount() {

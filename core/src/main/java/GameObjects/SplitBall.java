@@ -27,7 +27,6 @@ public class SplitBall extends PowerUp{
     public void applyPowerUp() {
         game.addBall();
         active = false;
-        waitForPowerUp();
     }
 
 
