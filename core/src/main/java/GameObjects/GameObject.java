@@ -1,7 +1,9 @@
 package GameObjects;
 
 import org.mini2Dx.core.graphics.Graphics;
-
+/**
+ * Interface for Gameobjects
+ */
 public interface GameObject {
 
     public void initialise();

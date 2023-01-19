@@ -142,34 +142,39 @@ public class Collision {
             sounds.playHitWall();
         }
     }
+    /**
+     * check collision with Flash PowerUp
+     */
     private void checkFlashCollision(int i) {
         if (flash.getCollisionBox().intersects(ball[i].getBallCollision()) && flash.getState()) { //Collission nur wenn sichtbar
             flash.applyPowerUp(ball[i]);
         }
     }
+    /**
+     * check collision with Split PowerUp
+     */
     private void checkSplitCollision(int i) {
         if (split.getCollisionBox().intersects(ball[i].getBallCollision()) && split.getState()) { //Collission nur wenn sichtbar
             split.applyPowerUp(ball);
         }
     }
+    /**
+     * check collision with BiggerPlatform PowerUp
+     */
     private void checkGrowCollision(int i) {
         if (grow.getCollisionBox().intersects(ball[i].getBallCollision()) && grow.getState()) { //Collission nur wenn sichtbar
             grow.applyPowerUp(lastPlatform);
         }
     }
-    /*private void checkPowerUpCollision() {
-        //if(powerUp instance of flash) {
-            if (flash.getCollisionBox().intersects(ball.getBallCollision()) && flash.getState() == true) {
-                flash.applyPowerUp();
-            }
-        //}
-    }
-    */
-
+    /**
+     * adds a second Ball to the game
+     */
     public void addBall() {
         ballCount = 2;
     }
-
+    /**
+     * removes the second ball
+     */
     public void removeBall() {
         ballCount = 1;
     }

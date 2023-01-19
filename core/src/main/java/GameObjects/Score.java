@@ -21,8 +21,8 @@ public class Score implements GameObject {
      */
     @Override
     public void initialise() {
-        scoreLeft = 100;
-        scoreRight = 10;
+        scoreLeft = 0;
+        scoreRight = 0;
         generateFont();
     }
 
