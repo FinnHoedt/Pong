@@ -74,7 +74,7 @@ public class Game implements GameObject{
         rightPlatform.initialise();
         rightPlatform.changeKeybinds(settings.getRightPlatformUp(), settings.getRightPlatformDown());
         rightPlatform.changeColor(settings.getRightPlatformColor());
-
+        resetGame();
     }
 
     public void upLeftScore() {
