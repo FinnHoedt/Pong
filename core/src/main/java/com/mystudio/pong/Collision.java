@@ -145,16 +145,19 @@ public class Collision {
     private void checkFlashCollision(int i) {
         if (flash.getCollisionBox().intersects(ball[i].getBallCollision()) && flash.getState()) { //Collission nur wenn sichtbar
             flash.applyPowerUp(ball[i]);
+            sounds.playFlashSound();
         }
     }
     private void checkSplitCollision(int i) {
         if (split.getCollisionBox().intersects(ball[i].getBallCollision()) && split.getState()) { //Collission nur wenn sichtbar
             split.applyPowerUp(ball);
+            sounds.playSplitBallSound();
         }
     }
     private void checkGrowCollision(int i) {
         if (grow.getCollisionBox().intersects(ball[i].getBallCollision()) && grow.getState()) { //Collission nur wenn sichtbar
             grow.applyPowerUp(lastPlatform);
+            sounds.playBiggerPlatformSound();
         }
     }
     /*private void checkPowerUpCollision() {

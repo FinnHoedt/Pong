@@ -8,9 +8,8 @@ public class Sounds {
 
     public static Sounds sounds = new Sounds();
     private Music soundTrack;
-    private Sound hitPaddle;
-    private Sound hitWall;
-    private Sound playerScores;
+    private Sound hitPaddle, hitWall, playerScores;
+    private Sound flashSound, biggerPlatformSound, splitBallSound;
     private float soundVolume;
     private Settings settings;
 
@@ -31,9 +30,15 @@ public class Sounds {
         hitPaddle = Gdx.audio.newSound(Gdx.files.internal("sounds/hit_paddle_sound.mp3"));
         hitWall = Gdx.audio.newSound(Gdx.files.internal("sounds/hit_wall_sound.mp3"));
         playerScores = Gdx.audio.newSound(Gdx.files.internal("sounds/score_sound.mp3"));
+        flashSound = Gdx.audio.newSound(Gdx.files.internal("sounds/flash_sound.mp3"));
+        biggerPlatformSound = Gdx.audio.newSound(Gdx.files.internal("sounds/bigger_plattform_sound.mp3"));
+        splitBallSound = Gdx.audio.newSound(Gdx.files.internal("sounds/split_ball_sound.mp3"));
         hitPaddle.setVolume(1, soundVolume);
         hitWall.setVolume(1, soundVolume);
         playerScores.setVolume(1, soundVolume);
+        flashSound.setVolume(1, soundVolume);
+        biggerPlatformSound.setVolume(1, soundVolume);
+        splitBallSound.setVolume(1, soundVolume);
     }
 
     public void soundTrackSetUp() {
@@ -73,6 +78,15 @@ public class Sounds {
 
     public void playPlayerScores() {
         playerScores.play(soundVolume);
+    }
+    public void playFlashSound() {
+        flashSound.play(soundVolume);
+    }
+    public void playBiggerPlatformSound() {
+        biggerPlatformSound.play(soundVolume);
+    }
+    public void playSplitBallSound() {
+        splitBallSound.play(soundVolume);
     }
 
 }
