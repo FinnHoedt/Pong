@@ -1,10 +1,10 @@
-package Screens;
+package Game;
 
-import GameObjects.*;
+import Menu.MainScreen;
+import Menu.Settings;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
-import com.mystudio.pong.*;
 import org.mini2Dx.core.game.GameContainer;
 import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.screen.BasicGameScreen;

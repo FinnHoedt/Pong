@@ -1,9 +1,9 @@
-package GameObjects;
+package Game;
 
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.mystudio.pong.Settings;
+import Menu.Settings;
 import org.mini2Dx.core.engine.geom.CollisionBox;
 import org.mini2Dx.core.graphics.Graphics;
 

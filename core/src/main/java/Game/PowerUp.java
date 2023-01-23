@@ -1,7 +1,7 @@
-package GameObjects;
+package Game;
 
+import Game.GameObject;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.utils.Timer;
 import org.mini2Dx.core.engine.geom.CollisionBox;
 import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.graphics.Sprite;

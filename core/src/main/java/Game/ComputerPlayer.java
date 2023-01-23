@@ -1,7 +1,4 @@
-package com.mystudio.pong;
-
-import GameObjects.*;
-import Screens.GameScreen;
+package Game;
 
 public class ComputerPlayer {
     private Ball[] ball;

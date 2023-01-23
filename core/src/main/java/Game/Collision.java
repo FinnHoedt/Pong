@@ -1,9 +1,7 @@
-package com.mystudio.pong;
+package Game;
 
-import GameObjects.*;
-import Screens.GameScreen;
 import com.badlogic.gdx.Gdx;
-import org.mini2Dx.core.engine.geom.CollisionBox;
+import Menu.Sounds;
 
 /**
  * collision physics for ball

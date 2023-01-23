@@ -1,4 +1,4 @@
-package GameObjects;
+package Game;
 
 import com.badlogic.gdx.utils.Timer;
 import org.mini2Dx.core.graphics.Graphics;
@@ -6,7 +6,7 @@ import org.mini2Dx.core.graphics.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class SpawnManager implements GameObject{
+public class SpawnManager implements GameObject {
     private Flash flash;
     private SplitBall split;
     private BiggerPlatform grow;

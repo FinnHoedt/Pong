@@ -1,5 +1,6 @@
-package GameObjects;
+package Menu;
 
+import Game.GameObject;
 import com.badlogic.gdx.graphics.Color;
 import org.mini2Dx.core.graphics.Graphics;
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.Arrays;
 /**
  * ColorPicker through which you can change color of Platforms
  */
-public class ColorPicker implements GameObject {
+public class ColorPicker {
 
     private ArrayList<Color> colorArray;
     int i;
@@ -26,26 +27,10 @@ public class ColorPicker implements GameObject {
         i = 0;
     }
 
-    @Override
-    public void initialise() {
-
-    }
-
-    @Override
-    public void update() {
-
-    }
-
-    @Override
-    public void interpolate(float alpha) {
-
-    }
-
     /**
      * Renders ColorPicker
      * @param g The {@link Graphics} context available for rendering
      */
-    @Override
     public void render(Graphics g) {
         g.setColor(colorArray.get(i));
         g.fillRect(x,y,width,height);
