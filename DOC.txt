@@ -1,5 +1,5 @@
 /**
-* Initialisiert alle Screens des Games und startet den ersten Screen des Spieles.
+* Initialisiert alle Menu des Games und startet den ersten Screen des Spieles.
 *
 *@author MIB-D
 *@version 1.0
@@ -13,8 +13,8 @@ public class Pong extends ScreenBasedGame {
     public void initialise();
 
     /**
-    *Gibt die ID des ersten Screens wieder.
-    *@return int ID des ersten Screens
+    *Gibt die ID des ersten Menu wieder.
+    *@return int ID des ersten Menu
     */
     @Override
     public int getInitialScreenId();

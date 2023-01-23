@@ -1,14 +1,13 @@
-package GameObjects;
+package Game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.mystudio.pong.ComputerPlayer;
-import com.mystudio.pong.Settings;
+import Menu.Settings;
 import org.mini2Dx.core.graphics.Graphics;
 
-public class Game implements GameObject{
+public class Game implements GameObject {
 
-    private Ball [] ball = new Ball[2];
+    private Ball[] ball = new Ball[2];
     private Score score;
     private LeftPlatform leftPlatform;
     private RightPlatform rightPlatform;
@@ -40,7 +39,7 @@ public class Game implements GameObject{
         spawnManager.update();
         gameStart();
         pc.update();
-        pc.update2();
+        //pc.update2();
     }
 
     @Override

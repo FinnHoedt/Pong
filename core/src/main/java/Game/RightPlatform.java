@@ -1,5 +1,6 @@
-package GameObjects;
+package Game;
 
+import Game.Platform;
 import com.badlogic.gdx.Gdx;
 
 /**

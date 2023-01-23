@@ -1,4 +1,4 @@
-package GameObjects;
+package Game;
 
 import org.mini2Dx.core.graphics.Graphics;
 /**

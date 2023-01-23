@@ -1,15 +1,12 @@
-package GameObjects;
+package Game;
 
-import Screens.GameScreen;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.mystudio.pong.Collision;
 import org.mini2Dx.core.engine.geom.CollisionCircle;
 import org.mini2Dx.core.graphics.Graphics;
 
 import java.util.Random;
 
-public class Ball implements GameObject{
+public class Ball implements GameObject {
 
     private CollisionCircle ballCollision;
     private Random rand;
