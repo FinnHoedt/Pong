@@ -1,0 +1,44 @@
+repo_name: FinnHoedt/Pong
+report_id: bdec6b52db203c55c0517df148130650
+version: 0.1
+repo_type: Public
+timestamp: '2024-02-29T20:05:31+00:00'
+requested_by: FinnHoedt
+provider: github
+branch: master
+detected_tools_count: 3
+tools:
+- name: Java
+  description: A concurrent, class-based, object-oriented, language specifically designed
+    to have as few implementation dependencies as possible
+  website_url: https://www.java.com
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/995/K85ZWV2F.png
+  detection_source_url: https://github.com/FinnHoedt/Pong
+  detection_source: Repo Metadata
+- name: Git
+  description: Fast, scalable, distributed revision control system
+  website_url: http://git-scm.com/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Version Control System
+  image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/FinnHoedt/Pong
+  detection_source: Repo Metadata
+- name: Gradle
+  description: A powerful build system for the JVM
+  website_url: https://www.gradle.org/
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Java Build Tools
+  image_url: https://img.stackshare.io/service/975/gradlephant-social-black-bg.png
+  detection_source_url: https://github.com/FinnHoedt/Pong/blob/master/build.gradle
+  detection_source: build.gradle
+  last_updated_by: FinnHoedt
+  last_updated_on: 2022-12-08 13:11:53.000000000 Z
